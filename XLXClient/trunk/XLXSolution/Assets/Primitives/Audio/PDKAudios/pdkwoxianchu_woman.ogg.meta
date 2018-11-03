@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 25d9f6f4d90771c4d92eaae4f7c4e1d8
+timeCreated: 1530357043
+licenseType: Pro
+AudioImporter:
+  serializedVersion: 6
+  defaultSettings:
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+  platformSettingOverrides: {}
+  forceToMono: 1
+  normalize: 1
+  preloadAudioData: 1
+  loadInBackground: 1
+  3D: 1
+  userData: 
+  assetBundleName: audio_pdkaudios.xlx
+  assetBundleVariant: 

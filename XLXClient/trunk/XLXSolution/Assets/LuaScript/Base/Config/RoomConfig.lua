@@ -1,0 +1,235 @@
+--Export by excel config file, don't modify this file!
+--[[
+TemplateID(Column[A] Type[int] Desc[房间编号]
+ShowName(Column[B] Type[string] Desc[显示房间名]
+Type(Column[D] Type[int] Desc[房间类型]
+Level(Column[E] Type[int] Desc[房间等级]
+MaxPlayer(Column[F] Type[int] Desc[人数上限]
+UpBankerVIPLv(Column[G] Type[int] Desc[上庄VIP等级]
+UpBankerGold(Column[H] Type[int] Desc[上庄金币下限]
+DownBankerGold(Column[I] Type[int] Desc[庄家维持最低金币]
+BettingZX(Column[J] Type[array] Desc[投庄闲的上下限]
+BettingZXPair(Column[K] Type[array] Desc[投庄闲对子上下限]
+BettingLongHu(Column[L] Type[array] Desc[投注龙虎的上下限]
+BettingHe(Column[M] Type[array] Desc[投注和的上下限]
+BettingBaoZi(Column[N] Type[array] Desc[投注豹子的上下限]
+BettingJinHua(Column[O] Type[array] Desc[投注金花的上下限]
+CanUseChip(Column[P] Type[array] Desc[可用筹码]
+AutoSelectChip(Column[Q] Type[int] Desc[自动选择筹码]
+CenterOnChild(Column[R] Type[int] Desc[进入时居中的筹码索引]
+EnterLimit(Column[S] Type[int] Desc[入场金币下限]
+OutLimit(Column[T] Type[int] Desc[入场金币上限]
+BetLimit(Column[U] Type[int] Desc[投注金币限制]
+]]--
+
+data.RoomConfig =
+{
+    [1] =
+    {
+        TemplateID = 1,
+        ShowName = "001",
+        Type = 1,
+        Level = 1,
+        MaxPlayer = 35,
+        UpBankerVIPLv = 0,
+        UpBankerGold = 10000,
+        DownBankerGold = 5000,
+        BettingZX = { 0, 0 },
+        BettingZXPair = { 0, 0 },
+        BettingLongHu = { 1, 1500 },
+        BettingHe = { 0, 0 },
+        BettingBaoZi = { 1, 95 },
+        BettingJinHua = { 1, 190 },
+        CanUseChip = { 1, 2, 3, 4, 5, 6, 7 },
+        AutoSelectChip = 3,
+        CenterOnChild = 3,
+        EnterLimit = 1,
+        OutLimit = 50000,
+        BetLimit = 30,
+    },
+    [2] =
+    {
+        TemplateID = 2,
+        ShowName = "002",
+        Type = 1,
+        Level = 2,
+        MaxPlayer = 35,
+        UpBankerVIPLv = 0,
+        UpBankerGold = 50000,
+        DownBankerGold = 20000,
+        BettingZX = { 0, 0 },
+        BettingZXPair = { 0, 0 },
+        BettingLongHu = { 100, 15000 },
+        BettingHe = { 0, 0 },
+        BettingBaoZi = { 10, 950 },
+        BettingJinHua = { 10, 1900 },
+        CanUseChip = { 3, 4, 5, 6, 7, 8, 9, 10 },
+        AutoSelectChip = 5,
+        CenterOnChild = 5,
+        EnterLimit = 500,
+        OutLimit = 4500000,
+        BetLimit = 500,
+    },
+    [3] =
+    {
+        TemplateID = 3,
+        ShowName = "003",
+        Type = 1,
+        Level = 3,
+        MaxPlayer = 35,
+        UpBankerVIPLv = 0,
+        UpBankerGold = 500000,
+        DownBankerGold = 200000,
+        BettingZX = { 0, 0 },
+        BettingZXPair = { 0, 0 },
+        BettingLongHu = { 1000, 150000 },
+        BettingHe = { 0, 0 },
+        BettingBaoZi = { 100, 9500 },
+        BettingJinHua = { 100, 19000 },
+        CanUseChip = { 4, 5, 6, 7, 8, 9, 10 },
+        AutoSelectChip = 7,
+        CenterOnChild = 7,
+        EnterLimit = 1000,
+        OutLimit = 4500000,
+        BetLimit = 1000,
+    },
+    [4] =
+    {
+        TemplateID = 4,
+        ShowName = "001",
+        Type = 15,
+        Level = 1,
+        MaxPlayer = 35,
+        UpBankerVIPLv = 0,
+        UpBankerGold = 10000,
+        DownBankerGold = 5000,
+        BettingZX = { 0, 0 },
+        BettingZXPair = { 0, 0 },
+        BettingLongHu = { 1, 1500 },
+        BettingHe = { 1, 180 },
+        BettingBaoZi = { 0, 0 },
+        BettingJinHua = { 0, 0 },
+        CanUseChip = { 1, 2, 3, 4, 5, 6, 7 },
+        AutoSelectChip = 3,
+        CenterOnChild = 3,
+        EnterLimit = 1,
+        OutLimit = 50000,
+        BetLimit = 30,
+    },
+    [5] =
+    {
+        TemplateID = 5,
+        ShowName = "002",
+        Type = 15,
+        Level = 2,
+        MaxPlayer = 35,
+        UpBankerVIPLv = 0,
+        UpBankerGold = 50000,
+        DownBankerGold = 20000,
+        BettingZX = { 0, 0 },
+        BettingZXPair = { 0, 0 },
+        BettingLongHu = { 100, 15000 },
+        BettingHe = { 10, 1800 },
+        BettingBaoZi = { 0, 0 },
+        BettingJinHua = { 0, 0 },
+        CanUseChip = { 3, 4, 5, 6, 7, 8, 9, 10 },
+        AutoSelectChip = 5,
+        CenterOnChild = 5,
+        EnterLimit = 500,
+        OutLimit = 4500000,
+        BetLimit = 500,
+    },
+    [6] =
+    {
+        TemplateID = 6,
+        ShowName = "003",
+        Type = 15,
+        Level = 3,
+        MaxPlayer = 35,
+        UpBankerVIPLv = 0,
+        UpBankerGold = 500000,
+        DownBankerGold = 200000,
+        BettingZX = { 0, 0 },
+        BettingZXPair = { 0, 0 },
+        BettingLongHu = { 1000, 150000 },
+        BettingHe = { 100, 18000 },
+        BettingBaoZi = { 0, 0 },
+        BettingJinHua = { 0, 0 },
+        CanUseChip = { 4, 5, 6, 7, 8, 9, 10 },
+        AutoSelectChip = 7,
+        CenterOnChild = 7,
+        EnterLimit = 1000,
+        OutLimit = 4500000,
+        BetLimit = 1000,
+    },
+    [7] =
+    {
+        TemplateID = 7,
+        ShowName = "001",
+        Type = 16,
+        Level = 1,
+        MaxPlayer = 35,
+        UpBankerVIPLv = 0,
+        UpBankerGold = 0,
+        DownBankerGold = 0,
+        BettingZX = { 1, 1500 },
+        BettingZXPair = { 1, 150 },
+        BettingLongHu = { 0, 0 },
+        BettingHe = { 1, 200 },
+        BettingBaoZi = { 0, 0 },
+        BettingJinHua = { 0, 0 },
+        CanUseChip = { 1, 2, 3, 4, 5, 6, 7 },
+        AutoSelectChip = 3,
+        CenterOnChild = 3,
+        EnterLimit = 1,
+        OutLimit = 50000,
+        BetLimit = 30,
+    },
+    [8] =
+    {
+        TemplateID = 8,
+        ShowName = "002",
+        Type = 16,
+        Level = 2,
+        MaxPlayer = 35,
+        UpBankerVIPLv = 0,
+        UpBankerGold = 0,
+        DownBankerGold = 0,
+        BettingZX = { 100, 15000 },
+        BettingZXPair = { 10, 1500 },
+        BettingLongHu = { 0, 0 },
+        BettingHe = { 10, 2000 },
+        BettingBaoZi = { 0, 0 },
+        BettingJinHua = { 0, 0 },
+        CanUseChip = { 3, 4, 5, 6, 7, 8, 9 },
+        AutoSelectChip = 5,
+        CenterOnChild = 5,
+        EnterLimit = 500,
+        OutLimit = 4500000,
+        BetLimit = 500,
+    },
+    [9] =
+    {
+        TemplateID = 9,
+        ShowName = "003",
+        Type = 16,
+        Level = 3,
+        MaxPlayer = 35,
+        UpBankerVIPLv = 0,
+        UpBankerGold = 0,
+        DownBankerGold = 0,
+        BettingZX = { 1000, 150000 },
+        BettingZXPair = { 100, 15000 },
+        BettingLongHu = { 0, 0 },
+        BettingHe = { 100, 20000 },
+        BettingBaoZi = { 0, 0 },
+        BettingJinHua = { 0, 0 },
+        CanUseChip = { 5, 6, 7, 8, 9, 10 },
+        AutoSelectChip = 7,
+        CenterOnChild = 7,
+        EnterLimit = 1000,
+        OutLimit = 4500000,
+        BetLimit = 1000,
+    },
+}
+

@@ -1,0 +1,1 @@
+*****运行Demo需要将该文件夹:[TmpResources]修改为[Resources]*****

@@ -1,0 +1,4615 @@
+fileFormatVersion: 2
+guid: e45874c6dc7e55b48aa117c24ddaeab3
+timeCreated: 1532410531
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: animation_emoji_0
+    21300002: animation_emoji_1
+    21300004: animation_emoji_2
+    21300006: animation_emoji_3
+    21300008: animation_emoji_4
+    21300010: animation_emoji_5
+    21300012: animation_emoji_6
+    21300014: animation_emoji_7
+    21300016: animation_emoji_8
+    21300018: animation_emoji_9
+    21300020: animation_emoji_10
+    21300022: animation_emoji_11
+    21300024: animation_emoji_12
+    21300026: animation_emoji_13
+    21300028: animation_emoji_14
+    21300030: animation_emoji_15
+    21300032: animation_emoji_16
+    21300034: animation_emoji_17
+    21300036: animation_emoji_18
+    21300038: animation_emoji_19
+    21300040: animation_emoji_20
+    21300042: animation_emoji_21
+    21300044: animation_emoji_22
+    21300046: animation_emoji_23
+    21300048: animation_emoji_24
+    21300050: animation_emoji_25
+    21300052: animation_emoji_26
+    21300054: animation_emoji_27
+    21300056: animation_emoji_28
+    21300058: animation_emoji_29
+    21300060: animation_emoji_30
+    21300062: animation_emoji_31
+    21300064: animation_emoji_32
+    21300066: animation_emoji_33
+    21300068: animation_emoji_34
+    21300070: animation_emoji_35
+    21300072: animation_emoji_36
+    21300074: animation_emoji_37
+    21300076: animation_emoji_38
+    21300078: animation_emoji_39
+    21300080: animation_emoji_40
+    21300082: animation_emoji_41
+    21300084: animation_emoji_42
+    21300086: animation_emoji_43
+    21300088: animation_emoji_44
+    21300090: animation_emoji_45
+    21300092: animation_emoji_46
+    21300094: animation_emoji_47
+    21300096: animation_emoji_48
+    21300098: animation_emoji_49
+    21300100: animation_emoji_50
+    21300102: animation_emoji_51
+    21300104: animation_emoji_52
+    21300106: animation_emoji_53
+    21300108: animation_emoji_54
+    21300110: animation_emoji_55
+    21300112: animation_emoji_56
+    21300114: animation_emoji_57
+    21300116: animation_emoji_58
+    21300118: animation_emoji_59
+    21300120: animation_emoji_60
+    21300122: animation_emoji_61
+    21300124: animation_emoji_62
+    21300126: animation_emoji_63
+    21300128: animation_emoji_64
+    21300130: animation_emoji_65
+    21300132: animation_emoji_66
+    21300134: animation_emoji_67
+    21300136: animation_emoji_68
+    21300138: animation_emoji_69
+    21300140: animation_emoji_70
+    21300142: animation_emoji_71
+    21300144: animation_emoji_72
+    21300146: animation_emoji_73
+    21300148: animation_emoji_74
+    21300150: animation_emoji_75
+    21300152: animation_emoji_76
+    21300154: animation_emoji_77
+    21300156: animation_emoji_78
+    21300158: animation_emoji_79
+    21300160: animation_emoji_80
+    21300162: animation_emoji_81
+    21300164: animation_emoji_82
+    21300166: animation_emoji_83
+    21300168: animation_emoji_84
+    21300170: animation_emoji_85
+    21300172: animation_emoji_86
+    21300174: animation_emoji_87
+    21300176: animation_emoji_88
+    21300178: animation_emoji_89
+    21300180: animation_emoji_90
+    21300182: animation_emoji_91
+    21300184: animation_emoji_92
+    21300186: animation_emoji_93
+    21300188: animation_emoji_94
+    21300190: animation_emoji_95
+    21300192: animation_emoji_96
+    21300194: animation_emoji_97
+    21300196: animation_emoji_98
+    21300198: animation_emoji_99
+    21300200: animation_emoji_100
+    21300202: animation_emoji_101
+    21300204: animation_emoji_102
+    21300206: animation_emoji_103
+    21300208: animation_emoji_104
+    21300210: animation_emoji_105
+    21300212: animation_emoji_106
+    21300214: animation_emoji_107
+    21300216: animation_emoji_108
+    21300218: animation_emoji_109
+    21300220: animation_emoji_110
+    21300222: animation_emoji_111
+    21300224: animation_emoji_112
+    21300226: animation_emoji_113
+    21300228: animation_emoji_114
+    21300230: animation_emoji_115
+    21300232: animation_emoji_116
+    21300234: animation_emoji_117
+    21300236: animation_emoji_118
+    21300238: animation_emoji_119
+    21300240: animation_emoji_120
+    21300242: animation_emoji_121
+    21300244: animation_emoji_122
+    21300246: animation_emoji_123
+    21300248: animation_emoji_124
+    21300250: animation_emoji_125
+    21300252: animation_emoji_126
+    21300254: animation_emoji_127
+    21300256: animation_emoji_128
+    21300258: animation_emoji_129
+    21300260: animation_emoji_130
+    21300262: animation_emoji_131
+    21300264: animation_emoji_132
+    21300266: animation_emoji_133
+    21300268: animation_emoji_134
+    21300270: animation_emoji_135
+    21300272: animation_emoji_136
+    21300274: animation_emoji_137
+    21300276: animation_emoji_138
+    21300278: animation_emoji_139
+    21300280: animation_emoji_140
+    21300282: animation_emoji_141
+    21300284: animation_emoji_142
+    21300286: animation_emoji_143
+    21300288: animation_emoji_144
+    21300290: animation_emoji_145
+    21300292: animation_emoji_146
+    21300294: animation_emoji_147
+    21300296: animation_emoji_148
+    21300298: animation_emoji_149
+    21300300: animation_emoji_150
+    21300302: animation_emoji_151
+    21300304: animation_emoji_152
+    21300306: animation_emoji_153
+    21300308: animation_emoji_154
+    21300310: animation_emoji_155
+    21300312: animation_emoji_156
+    21300314: animation_emoji_157
+    21300316: animation_emoji_158
+    21300318: animation_emoji_159
+    21300320: animation_emoji_160
+    21300322: animation_emoji_161
+    21300324: animation_emoji_162
+    21300326: animation_emoji_163
+    21300328: animation_emoji_164
+    21300330: animation_emoji_165
+    21300332: animation_emoji_166
+    21300334: animation_emoji_167
+    21300336: animation_emoji_168
+    21300338: animation_emoji_169
+    21300340: animation_emoji_170
+    21300342: animation_emoji_171
+    21300344: animation_emoji_172
+    21300346: animation_emoji_173
+    21300348: animation_emoji_174
+    21300350: animation_emoji_175
+    21300352: animation_emoji_176
+    21300354: animation_emoji_177
+    21300356: animation_emoji_178
+    21300358: animation_emoji_179
+    21300360: animation_emoji_180
+    21300362: animation_emoji_181
+    21300364: animation_emoji_182
+    21300366: animation_emoji_183
+    21300368: animation_emoji_184
+    21300370: animation_emoji_185
+    21300372: animation_emoji_186
+    21300374: animation_emoji_187
+    21300376: animation_emoji_188
+    21300378: animation_emoji_189
+    21300380: animation_emoji_190
+    21300382: animation_emoji_191
+    21300384: animation_emoji_192
+    21300386: animation_emoji_193
+    21300388: animation_emoji_194
+    21300390: animation_emoji_195
+    21300392: animation_emoji_196
+    21300394: animation_emoji_197
+    21300396: animation_emoji_198
+    21300398: animation_emoji_199
+    21300400: animation_emoji_200
+    21300402: animation_emoji_201
+    21300404: animation_emoji_202
+    21300406: animation_emoji_203
+    21300408: animation_emoji_204
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: animation_emoji_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_10
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_11
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_12
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_13
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_14
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 960
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 896
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_16
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 896
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_17
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 896
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_18
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 896
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_19
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 896
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_20
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 896
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_21
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 896
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_22
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 896
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_23
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 896
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_24
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 896
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 832
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_26
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 832
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_27
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 832
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_28
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 832
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_29
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 832
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_30
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 832
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_31
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 832
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_32
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 832
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_33
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 832
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_34
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_35
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 768
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_36
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 768
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_37
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 768
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_38
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 768
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_39
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 768
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_40
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 768
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_41
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 768
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_42
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_43
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 768
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_44
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 768
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_45
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 768
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_46
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_47
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 704
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_48
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 704
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_49
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 704
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_50
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 704
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_51
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 704
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_52
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 704
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_53
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 704
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_54
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 704
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_55
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 704
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_56
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 704
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_57
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 704
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_58
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 704
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_59
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 704
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_61
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_62
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_63
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_64
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_65
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_66
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_67
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_68
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_69
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_70
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_71
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_72
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_73
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_74
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_75
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 640
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_76
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_77
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_78
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_79
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_80
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_81
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_82
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_83
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_84
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_85
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_86
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_87
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_88
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_89
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_90
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_91
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 576
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_92
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_93
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_94
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_95
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_96
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_97
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_98
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_99
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_100
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_101
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_102
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_103
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_104
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_105
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_106
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_107
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_108
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_109
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_110
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_111
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_112
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_113
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_114
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_115
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_116
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_117
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_118
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_119
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_120
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_121
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_122
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_123
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_124
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_125
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_126
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_127
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_128
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_129
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_130
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_131
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_132
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_133
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_134
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_135
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_136
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_137
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_138
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_139
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_140
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_141
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_142
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_143
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_144
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_145
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_146
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_147
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_148
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_149
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_150
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_151
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_152
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_153
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_154
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_155
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_156
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_157
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_158
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_159
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_160
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_161
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_162
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_163
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_164
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_165
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_166
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_167
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_168
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_169
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_170
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_171
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_172
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_173
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_174
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_175
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_176
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_177
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_178
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_179
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_180
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_181
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_182
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_183
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_184
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_185
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_186
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_187
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_188
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_189
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_190
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_191
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_192
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_193
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_194
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_195
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_196
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_197
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_198
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_199
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_200
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_201
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: animation_emoji_202
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline:
+    - - {x: -297, y: -447}
+      - {x: -316, y: -458}
+      - {x: -316, y: -503}
+      - {x: -300, y: -512}
+      - {x: -277, y: -512}
+      - {x: -258, y: -496}
+      - {x: -258, y: -454}
+      - {x: -267, y: -447}
+    - - {x: -233, y: -447}
+      - {x: -252, y: -457}
+      - {x: -252, y: -503}
+      - {x: -231, y: -512}
+      - {x: -204, y: -512}
+      - {x: -194, y: -495}
+      - {x: -194, y: -454}
+      - {x: -203, y: -447}
+    - - {x: -164, y: -447}
+      - {x: -188, y: -457}
+      - {x: -188, y: -501}
+      - {x: -170, y: -512}
+      - {x: -149, y: -512}
+      - {x: -130, y: -496}
+      - {x: -130, y: -454}
+      - {x: -138, y: -447}
+    - - {x: 22, y: -447}
+      - {x: 4, y: -458}
+      - {x: 4, y: -502}
+      - {x: 21, y: -512}
+      - {x: 43, y: -512}
+      - {x: 62, y: -496}
+      - {x: 62, y: -454}
+      - {x: 53, y: -447}
+    - - {x: -76, y: -447}
+      - {x: -99, y: -447}
+      - {x: -124, y: -460}
+      - {x: -124, y: -492}
+      - {x: -119, y: -511}
+      - {x: -75, y: -511}
+      - {x: -66, y: -490}
+      - {x: -66, y: -455}
+      - {x: -70, y: -451}
+    - - {x: -41, y: -447}
+      - {x: -62, y: -460}
+      - {x: -62, y: -490}
+      - {x: -60, y: -493}
+      - {x: -50, y: -501}
+      - {x: -39, y: -509}
+      - {x: -35, y: -511}
+      - {x: -23, y: -511}
+      - {x: -2, y: -493}
+      - {x: -2, y: -456}
+      - {x: -7, y: -447}
+    - - {x: -325, y: -452}
+      - {x: -332, y: -448}
+      - {x: -363, y: -448}
+      - {x: -380, y: -453}
+      - {x: -380, y: -495}
+      - {x: -376, y: -510}
+      - {x: -335, y: -510}
+      - {x: -327, y: -506}
+      - {x: -322, y: -490}
+      - {x: -322, y: -456}
+    - - {x: 84, y: -448}
+      - {x: 68, y: -458}
+      - {x: 68, y: -504}
+      - {x: 90, y: -510}
+      - {x: 117, y: -510}
+      - {x: 126, y: -501}
+      - {x: 126, y: -448}
+    - - {x: -496, y: -451}
+      - {x: -508, y: -464}
+      - {x: -508, y: -490}
+      - {x: -498, y: -507}
+      - {x: -462, y: -507}
+      - {x: -450, y: -503}
+      - {x: -450, y: -457}
+      - {x: -452, y: -451}
+    - - {x: -428, y: -448}
+      - {x: -444, y: -465}
+      - {x: -444, y: -501}
+      - {x: -435, y: -507}
+      - {x: -394, y: -507}
+      - {x: -386, y: -494}
+      - {x: -386, y: -451}
+      - {x: -390, y: -448}
+    - - {x: 156, y: -448}
+      - {x: 132, y: -460}
+      - {x: 132, y: -495}
+      - {x: 145, y: -507}
+      - {x: 173, y: -507}
+      - {x: 190, y: -493}
+      - {x: 190, y: -448}
+    - - {x: 220, y: -448}
+      - {x: 196, y: -459}
+      - {x: 196, y: -496}
+      - {x: 203, y: -507}
+      - {x: 243, y: -507}
+      - {x: 254, y: -502}
+      - {x: 254, y: -454}
+      - {x: 248, y: -448}
+    - - {x: 264, y: -451}
+      - {x: 260, y: -452}
+      - {x: 260, y: -498}
+      - {x: 274, y: -507}
+      - {x: 311, y: -507}
+      - {x: 318, y: -489}
+      - {x: 318, y: -452}
+      - {x: 317, y: -451}
+    - - {x: -500, y: -386}
+      - {x: -509, y: -402}
+      - {x: -509, y: -438}
+      - {x: -497, y: -446}
+      - {x: -471, y: -446}
+      - {x: -452, y: -435}
+      - {x: -452, y: -400}
+      - {x: -465, y: -386}
+    - - {x: -435, y: -386}
+      - {x: -445, y: -398}
+      - {x: -445, y: -426}
+      - {x: -438, y: -442}
+      - {x: -432, y: -446}
+      - {x: -407, y: -446}
+      - {x: -388, y: -436}
+      - {x: -388, y: -395}
+      - {x: -407, y: -386}
+    - - {x: -370, y: -386}
+      - {x: -381, y: -403}
+      - {x: -381, y: -432}
+      - {x: -370, y: -446}
+      - {x: -340, y: -446}
+      - {x: -324, y: -434}
+      - {x: -324, y: -396}
+      - {x: -344, y: -386}
+    - - {x: -306, y: -386}
+      - {x: -317, y: -403}
+      - {x: -317, y: -432}
+      - {x: -306, y: -446}
+      - {x: -276, y: -446}
+      - {x: -260, y: -434}
+      - {x: -260, y: -396}
+      - {x: -280, y: -386}
+    - - {x: -250, y: -386}
+      - {x: -253, y: -400}
+      - {x: -253, y: -425}
+      - {x: -252, y: -431}
+      - {x: -231, y: -446}
+      - {x: -222, y: -446}
+      - {x: -210, y: -443}
+      - {x: -196, y: -436}
+      - {x: -196, y: -393}
+      - {x: -203, y: -386}
+    - - {x: -189, y: -386}
+      - {x: -189, y: -436}
+      - {x: -169, y: -446}
+      - {x: -158, y: -446}
+      - {x: -146, y: -443}
+      - {x: -132, y: -436}
+      - {x: -132, y: -393}
+      - {x: -139, y: -386}
+    - - {x: -125, y: -386}
+      - {x: -125, y: -436}
+      - {x: -105, y: -446}
+      - {x: -94, y: -446}
+      - {x: -82, y: -443}
+      - {x: -68, y: -436}
+      - {x: -68, y: -393}
+      - {x: -75, y: -386}
+    - - {x: -61, y: -386}
+      - {x: -61, y: -436}
+      - {x: -41, y: -446}
+      - {x: -30, y: -446}
+      - {x: -18, y: -443}
+      - {x: -4, y: -436}
+      - {x: -4, y: -393}
+      - {x: -11, y: -386}
+    - - {x: 7, y: -386}
+      - {x: 3, y: -399}
+      - {x: 3, y: -433}
+      - {x: 17, y: -446}
+      - {x: 44, y: -446}
+      - {x: 60, y: -438}
+      - {x: 60, y: -400}
+      - {x: 49, y: -386}
+    - - {x: 79, y: -386}
+      - {x: 67, y: -402}
+      - {x: 67, y: -430}
+      - {x: 84, y: -446}
+      - {x: 104, y: -446}
+      - {x: 124, y: -436}
+      - {x: 124, y: -394}
+      - {x: 105, y: -386}
+    - - {x: 143, y: -386}
+      - {x: 131, y: -402}
+      - {x: 131, y: -430}
+      - {x: 148, y: -446}
+      - {x: 168, y: -446}
+      - {x: 188, y: -436}
+      - {x: 188, y: -394}
+      - {x: 169, y: -386}
+    - - {x: 207, y: -386}
+      - {x: 195, y: -402}
+      - {x: 195, y: -430}
+      - {x: 212, y: -446}
+      - {x: 232, y: -446}
+      - {x: 252, y: -436}
+      - {x: 252, y: -394}
+      - {x: 233, y: -386}
+    - - {x: 271, y: -386}
+      - {x: 259, y: -402}
+      - {x: 259, y: -430}
+      - {x: 276, y: -446}
+      - {x: 296, y: -446}
+      - {x: 316, y: -436}
+      - {x: 316, y: -394}
+      - {x: 297, y: -386}
+    - - {x: 335, y: -386}
+      - {x: 323, y: -402}
+      - {x: 323, y: -430}
+      - {x: 340, y: -446}
+      - {x: 360, y: -446}
+      - {x: 380, y: -436}
+      - {x: 380, y: -394}
+      - {x: 361, y: -386}
+    - - {x: 128, y: -325}
+      - {x: 128, y: -372}
+      - {x: 148, y: -384}
+      - {x: 190, y: -384}
+      - {x: 190, y: -341}
+      - {x: 174, y: -325}
+    - - {x: -249, y: -325}
+      - {x: -256, y: -330}
+      - {x: -256, y: -368}
+      - {x: -232, y: -382}
+      - {x: -210, y: -382}
+      - {x: -194, y: -360}
+      - {x: -194, y: -337}
+      - {x: -198, y: -325}
+    - - {x: 194, y: -372}
+      - {x: 212, y: -382}
+      - {x: 245, y: -382}
+      - {x: 254, y: -373}
+      - {x: 254, y: -341}
+      - {x: 246, y: -325}
+      - {x: 199, y: -325}
+      - {x: 194, y: -327}
+    - - {x: 263, y: -325}
+      - {x: 258, y: -331}
+      - {x: 258, y: -370}
+      - {x: 266, y: -382}
+      - {x: 309, y: -382}
+      - {x: 318, y: -368}
+      - {x: 318, y: -343}
+      - {x: 306, y: -325}
+    - - {x: 329, y: -325}
+      - {x: 321, y: -331}
+      - {x: 321, y: -365}
+      - {x: 328, y: -382}
+      - {x: 366, y: -382}
+      - {x: 382, y: -370}
+      - {x: 382, y: -342}
+      - {x: 376, y: -328}
+      - {x: 365, y: -325}
+    - - {x: -459, y: -325}
+      - {x: -508, y: -325}
+      - {x: -511, y: -327}
+      - {x: -511, y: -373}
+      - {x: -494, y: -381}
+      - {x: -460, y: -381}
+      - {x: -454, y: -375}
+      - {x: -450, y: -361}
+      - {x: -450, y: -337}
+    - - {x: -446, y: -325}
+      - {x: -447, y: -326}
+      - {x: -447, y: -359}
+      - {x: -440, y: -381}
+      - {x: -401, y: -381}
+      - {x: -386, y: -364}
+      - {x: -386, y: -325}
+    - - {x: -378, y: -325}
+      - {x: -383, y: -328}
+      - {x: -383, y: -364}
+      - {x: -373, y: -381}
+      - {x: -333, y: -381}
+      - {x: -322, y: -367}
+      - {x: -322, y: -333}
+      - {x: -329, y: -325}
+    - - {x: -318, y: -325}
+      - {x: -319, y: -328}
+      - {x: -319, y: -375}
+      - {x: -316, y: -381}
+      - {x: -268, y: -381}
+      - {x: -258, y: -379}
+      - {x: -258, y: -328}
+      - {x: -262, y: -325}
+    - - {x: -190, y: -325}
+      - {x: -193, y: -330}
+      - {x: -193, y: -357}
+      - {x: -185, y: -381}
+      - {x: -148, y: -381}
+      - {x: -130, y: -363}
+      - {x: -130, y: -342}
+      - {x: -136, y: -325}
+    - - {x: -126, y: -325}
+      - {x: -129, y: -330}
+      - {x: -129, y: -357}
+      - {x: -121, y: -381}
+      - {x: -83, y: -381}
+      - {x: -66, y: -364}
+      - {x: -66, y: -337}
+      - {x: -79, y: -325}
+    - - {x: -8, y: -326}
+      - {x: -15, y: -325}
+      - {x: -63, y: -325}
+      - {x: -65, y: -327}
+      - {x: -65, y: -373}
+      - {x: -48, y: -381}
+      - {x: -14, y: -381}
+      - {x: -8, y: -375}
+      - {x: -2, y: -361}
+      - {x: -2, y: -337}
+    - - {x: 4, y: -325}
+      - {x: -1, y: -328}
+      - {x: -1, y: -368}
+      - {x: 1, y: -381}
+      - {x: 42, y: -381}
+      - {x: 62, y: -366}
+      - {x: 62, y: -342}
+      - {x: 49, y: -325}
+    - - {x: 113, y: -325}
+      - {x: 63, y: -325}
+      - {x: 63, y: -374}
+      - {x: 81, y: -381}
+      - {x: 116, y: -381}
+      - {x: 124, y: -375}
+      - {x: 126, y: -372}
+      - {x: 126, y: -340}
+    - - {x: -449, y: -280}
+      - {x: -449, y: -310}
+      - {x: -421, y: -322}
+      - {x: -387, y: -322}
+      - {x: -387, y: -271}
+      - {x: -389, y: -258}
+      - {x: -434, y: -258}
+      - {x: -439, y: -263}
+    - - {x: -375, y: -258}
+      - {x: -383, y: -265}
+      - {x: -383, y: -303}
+      - {x: -370, y: -322}
+      - {x: -323, y: -322}
+      - {x: -321, y: -316}
+      - {x: -321, y: -270}
+      - {x: -335, y: -258}
+    - - {x: -314, y: -258}
+      - {x: -321, y: -262}
+      - {x: -321, y: -309}
+      - {x: -301, y: -319}
+      - {x: -277, y: -322}
+      - {x: -265, y: -322}
+      - {x: -258, y: -316}
+      - {x: -258, y: -283}
+      - {x: -264, y: -258}
+    - - {x: -113, y: -260}
+      - {x: -128, y: -275}
+      - {x: -128, y: -296}
+      - {x: -125, y: -303}
+      - {x: -113, y: -322}
+      - {x: -66, y: -322}
+      - {x: -66, y: -275}
+      - {x: -81, y: -260}
+    - - {x: 1, y: -308}
+      - {x: 22, y: -322}
+      - {x: 59, y: -322}
+      - {x: 63, y: -315}
+      - {x: 63, y: -274}
+      - {x: 48, y: -260}
+      - {x: 7, y: -260}
+      - {x: 1, y: -274}
+    - - {x: 64, y: -296}
+      - {x: 80, y: -322}
+      - {x: 122, y: -322}
+      - {x: 126, y: -314}
+      - {x: 126, y: -269}
+      - {x: 124, y: -266}
+      - {x: 108, y: -260}
+      - {x: 74, y: -260}
+      - {x: 64, y: -271}
+    - - {x: 138, y: -260}
+      - {x: 129, y: -272}
+      - {x: 129, y: -310}
+      - {x: 137, y: -322}
+      - {x: 191, y: -322}
+      - {x: 191, y: -278}
+      - {x: 180, y: -260}
+    - - {x: -239, y: -260}
+      - {x: -257, y: -265}
+      - {x: -257, y: -306}
+      - {x: -237, y: -319}
+      - {x: -228, y: -321}
+      - {x: -197, y: -321}
+      - {x: -194, y: -310}
+      - {x: -194, y: -270}
+      - {x: -209, y: -260}
+    - - {x: -186, y: -260}
+      - {x: -190, y: -265}
+      - {x: -190, y: -299}
+      - {x: -177, y: -320}
+      - {x: -128, y: -320}
+      - {x: -128, y: -261}
+      - {x: -133, y: -260}
+    - - {x: 267, y: -258}
+      - {x: 257, y: -267}
+      - {x: 256, y: -280}
+      - {x: 256, y: -304}
+      - {x: 275, y: -319}
+      - {x: 301, y: -320}
+      - {x: 311, y: -320}
+      - {x: 318, y: -315}
+      - {x: 318, y: -270}
+      - {x: 312, y: -258}
+    - - {x: -497, y: -260}
+      - {x: -511, y: -276}
+      - {x: -511, y: -300}
+      - {x: -491, y: -319}
+      - {x: -454, y: -319}
+      - {x: -449, y: -318}
+      - {x: -449, y: -281}
+      - {x: -463, y: -260}
+    - - {x: -50, y: -260}
+      - {x: -64, y: -272}
+      - {x: -64, y: -297}
+      - {x: -51, y: -319}
+      - {x: -3, y: -319}
+      - {x: -2, y: -312}
+      - {x: -2, y: -275}
+      - {x: -17, y: -260}
+    - - {x: 204, y: -258}
+      - {x: 191, y: -263}
+      - {x: 191, y: -308}
+      - {x: 211, y: -319}
+      - {x: 249, y: -319}
+      - {x: 253, y: -306}
+      - {x: 253, y: -279}
+      - {x: 243, y: -258}
+    - - {x: 329, y: -260}
+      - {x: 318, y: -270}
+      - {x: 318, y: -299}
+      - {x: 330, y: -319}
+      - {x: 377, y: -319}
+      - {x: 380, y: -305}
+      - {x: 380, y: -274}
+      - {x: 370, y: -260}
+    - - {x: 390, y: -260}
+      - {x: 385, y: -268}
+      - {x: 385, y: -313}
+      - {x: 405, y: -319}
+      - {x: 447, y: -319}
+      - {x: 447, y: -274}
+      - {x: 432, y: -260}
+    - - {x: -55, y: -197}
+      - {x: -61, y: -207}
+      - {x: -61, y: -247}
+      - {x: -42, y: -254}
+      - {x: -14, y: -254}
+      - {x: -3, y: -240}
+      - {x: -3, y: -211}
+      - {x: -7, y: -197}
+    - - {x: 200, y: -196}
+      - {x: 196, y: -209}
+      - {x: 196, y: -243}
+      - {x: 201, y: -250}
+      - {x: 212, y: -254}
+      - {x: 240, y: -254}
+      - {x: 252, y: -237}
+      - {x: 252, y: -205}
+      - {x: 241, y: -196}
+    - - {x: 258, y: -196}
+      - {x: 258, y: -247}
+      - {x: 280, y: -254}
+      - {x: 304, y: -254}
+      - {x: 316, y: -240}
+      - {x: 316, y: -209}
+      - {x: 313, y: -196}
+    - - {x: 331, y: -196}
+      - {x: 322, y: -209}
+      - {x: 322, y: -233}
+      - {x: 330, y: -249}
+      - {x: 340, y: -254}
+      - {x: 371, y: -254}
+      - {x: 380, y: -238}
+      - {x: 380, y: -201}
+      - {x: 372, y: -196}
+    - - {x: -494, y: -194}
+      - {x: -510, y: -206}
+      - {x: -510, y: -239}
+      - {x: -507, y: -250}
+      - {x: -498, y: -253}
+      - {x: -467, y: -253}
+      - {x: -451, y: -238}
+      - {x: -451, y: -206}
+      - {x: -467, y: -194}
+    - - {x: -438, y: -194}
+      - {x: -446, y: -206}
+      - {x: -446, y: -245}
+      - {x: -434, y: -253}
+      - {x: -398, y: -253}
+      - {x: -387, y: -236}
+      - {x: -387, y: -197}
+      - {x: -395, y: -194}
+    - - {x: -382, y: -207}
+      - {x: -382, y: -233}
+      - {x: -379, y: -249}
+      - {x: -375, y: -253}
+      - {x: -336, y: -253}
+      - {x: -323, y: -243}
+      - {x: -323, y: -209}
+      - {x: -324, y: -207}
+      - {x: -337, y: -194}
+      - {x: -366, y: -194}
+      - {x: -372, y: -195}
+    - - {x: -309, y: -194}
+      - {x: -318, y: -198}
+      - {x: -318, y: -236}
+      - {x: -300, y: -253}
+      - {x: -269, y: -253}
+      - {x: -261, y: -251}
+      - {x: -259, y: -237}
+      - {x: -259, y: -198}
+      - {x: -262, y: -194}
+    - - {x: -252, y: -194}
+      - {x: -254, y: -196}
+      - {x: -254, y: -251}
+      - {x: -249, y: -253}
+      - {x: -194, y: -253}
+      - {x: -194, y: -199}
+      - {x: -205, y: -194}
+    - - {x: -185, y: -195}
+      - {x: -190, y: -211}
+      - {x: -190, y: -242}
+      - {x: -179, y: -253}
+      - {x: -137, y: -253}
+      - {x: -131, y: -233}
+      - {x: -131, y: -204}
+      - {x: -138, y: -195}
+    - - {x: -123, y: -196}
+      - {x: -125, y: -204}
+      - {x: -125, y: -242}
+      - {x: -112, y: -253}
+      - {x: -84, y: -253}
+      - {x: -67, y: -245}
+      - {x: -67, y: -207}
+      - {x: -69, y: -196}
+    - - {x: 9, y: -194}
+      - {x: 2, y: -199}
+      - {x: 2, y: -236}
+      - {x: 8, y: -252}
+      - {x: 9, y: -253}
+      - {x: 48, y: -253}
+      - {x: 61, y: -244}
+      - {x: 61, y: -201}
+      - {x: 45, y: -194}
+    - - {x: 74, y: -194}
+      - {x: 66, y: -205}
+      - {x: 66, y: -241}
+      - {x: 76, y: -253}
+      - {x: 112, y: -253}
+      - {x: 125, y: -243}
+      - {x: 125, y: -199}
+      - {x: 114, y: -194}
+    - - {x: 132, y: -197}
+      - {x: 132, y: -246}
+      - {x: 146, y: -253}
+      - {x: 178, y: -253}
+      - {x: 188, y: -243}
+      - {x: 188, y: -197}
+    - - {x: -505, y: -132}
+      - {x: -508, y: -141}
+      - {x: -508, y: -183}
+      - {x: -496, y: -188}
+      - {x: -461, y: -188}
+      - {x: -450, y: -176}
+      - {x: -450, y: -132}
+    - - {x: -424, y: -132}
+      - {x: -444, y: -138}
+      - {x: -444, y: -180}
+      - {x: -440, y: -188}
+      - {x: -386, y: -188}
+      - {x: -386, y: -136}
+      - {x: -397, y: -132}
+    - - {x: -377, y: -132}
+      - {x: -380, y: -138}
+      - {x: -380, y: -184}
+      - {x: -369, y: -188}
+      - {x: -332, y: -188}
+      - {x: -322, y: -173}
+      - {x: -322, y: -134}
+      - {x: -332, y: -132}
+    - - {x: -311, y: -132}
+      - {x: -316, y: -139}
+      - {x: -316, y: -183}
+      - {x: -303, y: -188}
+      - {x: -268, y: -188}
+      - {x: -258, y: -175}
+      - {x: -258, y: -135}
+      - {x: -268, y: -132}
+    - - {x: -241, y: -132}
+      - {x: -251, y: -142}
+      - {x: -251, y: -178}
+      - {x: -234, y: -188}
+      - {x: -200, y: -188}
+      - {x: -194, y: -174}
+      - {x: -194, y: -140}
+      - {x: -203, y: -132}
+    - - {x: -175, y: -132}
+      - {x: -187, y: -142}
+      - {x: -187, y: -179}
+      - {x: -170, y: -188}
+      - {x: -136, y: -188}
+      - {x: -130, y: -174}
+      - {x: -130, y: -140}
+      - {x: -140, y: -132}
+    - - {x: -111, y: -132}
+      - {x: -123, y: -142}
+      - {x: -123, y: -179}
+      - {x: -106, y: -188}
+      - {x: -72, y: -188}
+      - {x: -66, y: -174}
+      - {x: -66, y: -140}
+      - {x: -76, y: -132}
+    - - {x: -41, y: -132}
+      - {x: -59, y: -143}
+      - {x: -59, y: -179}
+      - {x: -40, y: -188}
+      - {x: -13, y: -188}
+      - {x: -2, y: -180}
+      - {x: -2, y: -146}
+      - {x: -8, y: -132}
+    - - {x: -190, y: -88}
+      - {x: -190, y: -115}
+      - {x: -180, y: -126}
+      - {x: -141, y: -126}
+      - {x: -130, y: -122}
+      - {x: -130, y: -86}
+      - {x: -137, y: -68}
+      - {x: -168, y: -68}
+      - {x: -178, y: -69}
+    - - {x: 69, y: -68}
+      - {x: 66, y: -75}
+      - {x: 66, y: -124}
+      - {x: 74, y: -126}
+      - {x: 117, y: -126}
+      - {x: 126, y: -119}
+      - {x: 126, y: -89}
+      - {x: 120, y: -68}
+    - - {x: -427, y: -68}
+      - {x: -443, y: -73}
+      - {x: -443, y: -116}
+      - {x: -435, y: -123}
+      - {x: -403, y: -123}
+      - {x: -386, y: -116}
+      - {x: -386, y: -83}
+      - {x: -401, y: -68}
+    - - {x: -461, y: -68}
+      - {x: -492, y: -68}
+      - {x: -506, y: -72}
+      - {x: -507, y: -78}
+      - {x: -507, y: -103}
+      - {x: -506, y: -114}
+      - {x: -495, y: -122}
+      - {x: -470, y: -122}
+      - {x: -460, y: -120}
+      - {x: -453, y: -111}
+      - {x: -453, y: -84}
+      - {x: -456, y: -72}
+    - - {x: -338, y: -68}
+      - {x: -367, y: -68}
+      - {x: -379, y: -81}
+      - {x: -379, y: -117}
+      - {x: -365, y: -122}
+      - {x: -332, y: -122}
+      - {x: -325, y: -114}
+      - {x: -325, y: -80}
+      - {x: -328, y: -71}
+    - - {x: -302, y: -68}
+      - {x: -321, y: -79}
+      - {x: -321, y: -120}
+      - {x: -314, y: -122}
+      - {x: -258, y: -122}
+      - {x: -255, y: -119}
+      - {x: -255, y: -77}
+      - {x: -264, y: -68}
+    - - {x: -250, y: -68}
+      - {x: -255, y: -73}
+      - {x: -255, y: -117}
+      - {x: -254, y: -122}
+      - {x: -200, y: -122}
+      - {x: -193, y: -119}
+      - {x: -193, y: -73}
+      - {x: -205, y: -68}
+    - - {x: -108, y: -68}
+      - {x: -123, y: -75}
+      - {x: -123, y: -119}
+      - {x: -111, y: -122}
+      - {x: -81, y: -122}
+      - {x: -69, y: -115}
+      - {x: -69, y: -79}
+      - {x: -78, y: -68}
+    - - {x: -45, y: -68}
+      - {x: -60, y: -81}
+      - {x: -60, y: -112}
+      - {x: -56, y: -122}
+      - {x: -7, y: -122}
+      - {x: -4, y: -121}
+      - {x: -4, y: -81}
+      - {x: -17, y: -68}
+    - - {x: 7, y: -68}
+      - {x: 2, y: -72}
+      - {x: 2, y: -112}
+      - {x: 6, y: -122}
+      - {x: 59, y: -122}
+      - {x: 62, y: -117}
+      - {x: 62, y: -75}
+      - {x: 47, y: -68}
+    - - {x: 133, y: -68}
+      - {x: 127, y: -78}
+      - {x: 127, y: -122}
+      - {x: 256, y: -122}
+      - {x: 256, y: -84}
+      - {x: 249, y: -68}
+    - - {x: 264, y: -68}
+      - {x: 260, y: -83}
+      - {x: 260, y: -110}
+      - {x: 268, y: -122}
+      - {x: 308, y: -122}
+      - {x: 316, y: -105}
+      - {x: 316, y: -82}
+      - {x: 303, y: -68}
+    - - {x: -503, y: -4}
+      - {x: -510, y: -21}
+      - {x: -510, y: -50}
+      - {x: -498, y: -60}
+      - {x: -493, y: -61}
+      - {x: -464, y: -61}
+      - {x: -450, y: -54}
+      - {x: -450, y: -21}
+      - {x: -456, y: -4}
+    - - {x: -432, y: -3}
+      - {x: -446, y: -24}
+      - {x: -446, y: -45}
+      - {x: -433, y: -58}
+      - {x: -427, y: -61}
+      - {x: -407, y: -61}
+      - {x: -402, y: -60}
+      - {x: -386, y: -46}
+      - {x: -386, y: -21}
+      - {x: -401, y: -3}
+    - - {x: -368, y: -2}
+      - {x: -382, y: -15}
+      - {x: -382, y: -43}
+      - {x: -377, y: -61}
+      - {x: -333, y: -61}
+      - {x: -322, y: -52}
+      - {x: -322, y: -23}
+      - {x: -329, y: -2}
+    - - {x: -305, y: -4}
+      - {x: -318, y: -19}
+      - {x: -318, y: -39}
+      - {x: -316, y: -48}
+      - {x: -311, y: -61}
+      - {x: -264, y: -61}
+      - {x: -258, y: -56}
+      - {x: -258, y: -17}
+      - {x: -263, y: -4}
+    - - {x: -254, y: -47}
+      - {x: -253, y: -51}
+      - {x: -243, y: -61}
+      - {x: -210, y: -61}
+      - {x: -194, y: -55}
+      - {x: -194, y: -20}
+      - {x: -202, y: -4}
+      - {x: -239, y: -4}
+      - {x: -254, y: -19}
+    - - {x: -179, y: -2}
+      - {x: -190, y: -14}
+      - {x: -190, y: -55}
+      - {x: -179, y: -61}
+      - {x: -134, y: -61}
+      - {x: -130, y: -56}
+      - {x: -130, y: -27}
+      - {x: -138, y: -2}
+    - - {x: -115, y: -2}
+      - {x: -126, y: -13}
+      - {x: -126, y: -56}
+      - {x: -111, y: -61}
+      - {x: -76, y: -61}
+      - {x: -66, y: -52}
+      - {x: -66, y: -28}
+      - {x: -74, y: -2}
+    - - {x: -42, y: -2}
+      - {x: -49, y: -4}
+      - {x: -62, y: -15}
+      - {x: -62, y: -41}
+      - {x: -55, y: -61}
+      - {x: -16, y: -61}
+      - {x: -2, y: -53}
+      - {x: -2, y: -22}
+      - {x: -9, y: -2}
+    - - {x: -48, y: 60}
+      - {x: -62, y: 52}
+      - {x: -62, y: 19}
+      - {x: -41, y: 2}
+      - {x: -21, y: 2}
+      - {x: -14, y: 3}
+      - {x: -2, y: 16}
+      - {x: -2, y: 44}
+      - {x: -8, y: 60}
+    - - {x: -458, y: 60}
+      - {x: -493, y: 60}
+      - {x: -508, y: 52}
+      - {x: -508, y: 9}
+      - {x: -493, y: 4}
+      - {x: -461, y: 4}
+      - {x: -453, y: 11}
+      - {x: -450, y: 21}
+      - {x: -450, y: 50}
+    - - {x: -444, y: 16}
+      - {x: -435, y: 4}
+      - {x: -401, y: 4}
+      - {x: -386, y: 11}
+      - {x: -386, y: 48}
+      - {x: -392, y: 60}
+      - {x: -435, y: 60}
+      - {x: -444, y: 55}
+    - - {x: -330, y: 57}
+      - {x: -340, y: 60}
+      - {x: -365, y: 60}
+      - {x: -380, y: 45}
+      - {x: -380, y: 9}
+      - {x: -364, y: 4}
+      - {x: -333, y: 4}
+      - {x: -322, y: 22}
+      - {x: -322, y: 40}
+    - - {x: -296, y: 60}
+      - {x: -305, y: 59}
+      - {x: -316, y: 45}
+      - {x: -316, y: 16}
+      - {x: -303, y: 4}
+      - {x: -275, y: 4}
+      - {x: -258, y: 8}
+      - {x: -258, y: 46}
+      - {x: -277, y: 60}
+    - - {x: -211, y: 60}
+      - {x: -243, y: 60}
+      - {x: -252, y: 53}
+      - {x: -252, y: 18}
+      - {x: -245, y: 4}
+      - {x: -205, y: 4}
+      - {x: -194, y: 10}
+      - {x: -194, y: 42}
+      - {x: -203, y: 57}
+    - - {x: -143, y: 61}
+      - {x: -182, y: 61}
+      - {x: -188, y: 48}
+      - {x: -188, y: 9}
+      - {x: -184, y: 4}
+      - {x: -131, y: 4}
+      - {x: -130, y: 7}
+      - {x: -130, y: 50}
+      - {x: -138, y: 59}
+    - - {x: -84, y: 61}
+      - {x: -121, y: 61}
+      - {x: -126, y: 59}
+      - {x: -126, y: 4}
+      - {x: -71, y: 4}
+      - {x: -66, y: 16}
+      - {x: -66, y: 52}
+      - {x: -74, y: 59}
+    - - {x: 41, y: 60}
+      - {x: 20, y: 60}
+      - {x: 4, y: 48}
+      - {x: 4, y: 18}
+      - {x: 18, y: 4}
+      - {x: 56, y: 4}
+      - {x: 62, y: 19}
+      - {x: 62, y: 50}
+      - {x: 49, y: 59}
+    - - {x: 69, y: 60}
+      - {x: 68, y: 56}
+      - {x: 68, y: 7}
+      - {x: 77, y: 4}
+      - {x: 117, y: 4}
+      - {x: 126, y: 17}
+      - {x: 126, y: 46}
+      - {x: 124, y: 60}
+    - - {x: 135, y: 60}
+      - {x: 132, y: 52}
+      - {x: 132, y: 4}
+      - {x: 182, y: 4}
+      - {x: 190, y: 13}
+      - {x: 190, y: 44}
+      - {x: 185, y: 60}
+    - - {x: 200, y: 60}
+      - {x: 196, y: 49}
+      - {x: 196, y: 4}
+      - {x: 241, y: 4}
+      - {x: 254, y: 21}
+      - {x: 254, y: 44}
+      - {x: 237, y: 60}
+    - - {x: -497, y: 123}
+      - {x: -510, y: 108}
+      - {x: -510, y: 73}
+      - {x: -495, y: 67}
+      - {x: -461, y: 67}
+      - {x: -450, y: 82}
+      - {x: -450, y: 109}
+      - {x: -460, y: 123}
+    - - {x: -435, y: 123}
+      - {x: -446, y: 113}
+      - {x: -446, y: 74}
+      - {x: -444, y: 67}
+      - {x: -402, y: 67}
+      - {x: -386, y: 73}
+      - {x: -386, y: 105}
+      - {x: -397, y: 123}
+    - - {x: -341, y: 123}
+      - {x: -365, y: 123}
+      - {x: -380, y: 109}
+      - {x: -380, y: 71}
+      - {x: -367, y: 67}
+      - {x: -336, y: 67}
+      - {x: -322, y: 81}
+      - {x: -322, y: 109}
+    - - {x: -300, y: 122}
+      - {x: -318, y: 116}
+      - {x: -318, y: 83}
+      - {x: -300, y: 67}
+      - {x: -261, y: 67}
+      - {x: -259, y: 76}
+      - {x: -259, y: 121}
+      - {x: -261, y: 122}
+    - - {x: -252, y: 122}
+      - {x: -254, y: 120}
+      - {x: -254, y: 81}
+      - {x: -248, y: 67}
+      - {x: -200, y: 67}
+      - {x: -194, y: 77}
+      - {x: -194, y: 122}
+    - - {x: -184, y: 122}
+      - {x: -190, y: 115}
+      - {x: -190, y: 86}
+      - {x: -181, y: 67}
+      - {x: -144, y: 67}
+      - {x: -131, y: 80}
+      - {x: -131, y: 118}
+      - {x: -142, y: 122}
+    - - {x: -117, y: 123}
+      - {x: -124, y: 109}
+      - {x: -124, y: 71}
+      - {x: -113, y: 67}
+      - {x: -68, y: 67}
+      - {x: -66, y: 73}
+      - {x: -66, y: 112}
+      - {x: -75, y: 123}
+    - - {x: -47, y: 123}
+      - {x: -62, y: 116}
+      - {x: -62, y: 80}
+      - {x: -56, y: 67}
+      - {x: -13, y: 67}
+      - {x: -2, y: 83}
+      - {x: -2, y: 117}
+      - {x: -9, y: 123}
+    - - {x: 12, y: 123}
+      - {x: 5, y: 114}
+      - {x: 5, y: 79}
+      - {x: 9, y: 67}
+      - {x: 56, y: 67}
+      - {x: 62, y: 81}
+      - {x: 62, y: 120}
+      - {x: 54, y: 123}
+    - - {x: 115, y: 123}
+      - {x: 83, y: 123}
+      - {x: 69, y: 118}
+      - {x: 69, y: 72}
+      - {x: 85, y: 67}
+      - {x: 113, y: 67}
+      - {x: 124, y: 77}
+      - {x: 126, y: 87}
+      - {x: 126, y: 113}
+    - - {x: 139, y: 123}
+      - {x: 133, y: 109}
+      - {x: 133, y: 77}
+      - {x: 145, y: 67}
+      - {x: 186, y: 67}
+      - {x: 190, y: 80}
+      - {x: 190, y: 119}
+      - {x: 184, y: 123}
+    - - {x: 214, y: 123}
+      - {x: 197, y: 117}
+      - {x: 197, y: 72}
+      - {x: 212, y: 67}
+      - {x: 243, y: 67}
+      - {x: 253, y: 75}
+      - {x: 253, y: 113}
+      - {x: 242, y: 123}
+    - - {x: 263, y: 122}
+      - {x: 258, y: 112}
+      - {x: 258, y: 83}
+      - {x: 260, y: 74}
+      - {x: 278, y: 67}
+      - {x: 307, y: 67}
+      - {x: 318, y: 79}
+      - {x: 318, y: 120}
+      - {x: 310, y: 122}
+    - - {x: 365, y: 122}
+      - {x: 332, y: 122}
+      - {x: 322, y: 105}
+      - {x: 322, y: 75}
+      - {x: 333, y: 67}
+      - {x: 372, y: 67}
+      - {x: 381, y: 82}
+      - {x: 381, y: 105}
+      - {x: 380, y: 111}
+    - - {x: 398, y: 67}
+      - {x: 443, y: 67}
+      - {x: 445, y: 68}
+      - {x: 445, y: 123}
+      - {x: 396, y: 123}
+      - {x: 389, y: 121}
+      - {x: 389, y: 77}
+    - - {x: 468, y: 123}
+      - {x: 453, y: 118}
+      - {x: 453, y: 74}
+      - {x: 465, y: 68}
+      - {x: 469, y: 67}
+      - {x: 497, y: 67}
+      - {x: 510, y: 81}
+      - {x: 510, y: 112}
+      - {x: 499, y: 123}
+    - - {x: -377, y: 191}
+      - {x: -379, y: 181}
+      - {x: -379, y: 140}
+      - {x: -360, y: 130}
+      - {x: -332, y: 130}
+      - {x: -325, y: 138}
+      - {x: -325, y: 172}
+      - {x: -331, y: 191}
+    - - {x: -119, y: 191}
+      - {x: -123, y: 168}
+      - {x: -123, y: 137}
+      - {x: -115, y: 130}
+      - {x: -84, y: 130}
+      - {x: -69, y: 136}
+      - {x: -69, y: 170}
+      - {x: -79, y: 191}
+    - - {x: 141, y: 191}
+      - {x: 140, y: 190}
+      - {x: 133, y: 174}
+      - {x: 133, y: 134}
+      - {x: 142, y: 130}
+      - {x: 180, y: 130}
+      - {x: 187, y: 144}
+      - {x: 187, y: 190}
+      - {x: 186, y: 191}
+    - - {x: 390, y: 190}
+      - {x: 389, y: 188}
+      - {x: 389, y: 137}
+      - {x: 408, y: 130}
+      - {x: 435, y: 130}
+      - {x: 443, y: 136}
+      - {x: 443, y: 175}
+      - {x: 440, y: 190}
+    - - {x: -507, y: 187}
+      - {x: -508, y: 186}
+      - {x: -508, y: 136}
+      - {x: -507, y: 131}
+      - {x: -467, y: 131}
+      - {x: -450, y: 145}
+      - {x: -450, y: 185}
+      - {x: -460, y: 187}
+    - - {x: -435, y: 187}
+      - {x: -446, y: 172}
+      - {x: -446, y: 145}
+      - {x: -429, y: 131}
+      - {x: -405, y: 131}
+      - {x: -397, y: 132}
+      - {x: -388, y: 143}
+      - {x: -388, y: 165}
+      - {x: -394, y: 187}
+    - - {x: -310, y: 191}
+      - {x: -315, y: 183}
+      - {x: -315, y: 144}
+      - {x: -310, y: 131}
+      - {x: -261, y: 131}
+      - {x: -261, y: 191}
+    - - {x: -252, y: 188}
+      - {x: -252, y: 144}
+      - {x: -247, y: 131}
+      - {x: -212, y: 131}
+      - {x: -196, y: 141}
+      - {x: -196, y: 179}
+      - {x: -208, y: 188}
+    - - {x: -182, y: 187}
+      - {x: -190, y: 165}
+      - {x: -190, y: 140}
+      - {x: -178, y: 132}
+      - {x: -170, y: 131}
+      - {x: -147, y: 131}
+      - {x: -132, y: 143}
+      - {x: -132, y: 170}
+      - {x: -137, y: 187}
+    - - {x: -18, y: 191}
+      - {x: -53, y: 191}
+      - {x: -59, y: 175}
+      - {x: -59, y: 141}
+      - {x: -47, y: 131}
+      - {x: -19, y: 131}
+      - {x: -5, y: 135}
+      - {x: -5, y: 167}
+      - {x: -6, y: 176}
+    - - {x: 9, y: 188}
+      - {x: 4, y: 180}
+      - {x: 4, y: 141}
+      - {x: 14, y: 131}
+      - {x: 45, y: 131}
+      - {x: 60, y: 136}
+      - {x: 60, y: 185}
+      - {x: 49, y: 188}
+    - - {x: 75, y: 187}
+      - {x: 66, y: 169}
+      - {x: 66, y: 142}
+      - {x: 75, y: 131}
+      - {x: 111, y: 131}
+      - {x: 124, y: 144}
+      - {x: 124, y: 167}
+      - {x: 113, y: 187}
+    - - {x: 241, y: 191}
+      - {x: 205, y: 191}
+      - {x: 197, y: 174}
+      - {x: 197, y: 139}
+      - {x: 209, y: 131}
+      - {x: 239, y: 131}
+      - {x: 251, y: 144}
+      - {x: 251, y: 167}
+      - {x: 244, y: 190}
+    - - {x: 271, y: 188}
+      - {x: 260, y: 179}
+      - {x: 260, y: 137}
+      - {x: 274, y: 131}
+      - {x: 310, y: 131}
+      - {x: 316, y: 135}
+      - {x: 316, y: 177}
+      - {x: 311, y: 188}
+    - - {x: 322, y: 137}
+      - {x: 328, y: 131}
+      - {x: 367, y: 131}
+      - {x: 380, y: 137}
+      - {x: 380, y: 177}
+      - {x: 375, y: 187}
+      - {x: 331, y: 187}
+      - {x: 322, y: 165}
+    - - {x: 461, y: 191}
+      - {x: 454, y: 175}
+      - {x: 453, y: 173}
+      - {x: 453, y: 142}
+      - {x: 466, y: 131}
+      - {x: 495, y: 131}
+      - {x: 507, y: 145}
+      - {x: 507, y: 169}
+      - {x: 502, y: 191}
+    - - {x: -504, y: 251}
+      - {x: -510, y: 237}
+      - {x: -510, y: 199}
+      - {x: -504, y: 195}
+      - {x: -467, y: 195}
+      - {x: -450, y: 202}
+      - {x: -450, y: 240}
+      - {x: -461, y: 251}
+    - - {x: -445, y: 251}
+      - {x: -446, y: 249}
+      - {x: -446, y: 203}
+      - {x: -438, y: 195}
+      - {x: -402, y: 195}
+      - {x: -386, y: 203}
+      - {x: -386, y: 245}
+      - {x: -402, y: 251}
+    - - {x: -375, y: 251}
+      - {x: -382, y: 248}
+      - {x: -382, y: 200}
+      - {x: -365, y: 195}
+      - {x: -325, y: 195}
+      - {x: -322, y: 199}
+      - {x: -322, y: 239}
+      - {x: -329, y: 251}
+    - - {x: -318, y: 251}
+      - {x: -318, y: 199}
+      - {x: -317, y: 195}
+      - {x: -269, y: 195}
+      - {x: -258, y: 206}
+      - {x: -258, y: 245}
+      - {x: -278, y: 251}
+    - - {x: -212, y: 251}
+      - {x: -241, y: 251}
+      - {x: -254, y: 238}
+      - {x: -254, y: 211}
+      - {x: -253, y: 209}
+      - {x: -243, y: 195}
+      - {x: -206, y: 195}
+      - {x: -194, y: 209}
+      - {x: -194, y: 238}
+    - - {x: -183, y: 251}
+      - {x: -190, y: 236}
+      - {x: -190, y: 198}
+      - {x: -180, y: 195}
+      - {x: -130, y: 195}
+      - {x: -130, y: 240}
+      - {x: -138, y: 251}
+    - - {x: -119, y: 251}
+      - {x: -126, y: 236}
+      - {x: -126, y: 198}
+      - {x: -116, y: 195}
+      - {x: -66, y: 195}
+      - {x: -66, y: 240}
+      - {x: -74, y: 251}
+    - - {x: -46, y: 251}
+      - {x: -62, y: 245}
+      - {x: -62, y: 209}
+      - {x: -52, y: 195}
+      - {x: -15, y: 195}
+      - {x: -2, y: 207}
+      - {x: -2, y: 242}
+      - {x: -12, y: 251}
+    - - {x: 14, y: 251}
+      - {x: 2, y: 237}
+      - {x: 2, y: 211}
+      - {x: 15, y: 198}
+      - {x: 22, y: 195}
+      - {x: 39, y: 195}
+      - {x: 46, y: 196}
+      - {x: 62, y: 212}
+      - {x: 62, y: 238}
+      - {x: 44, y: 251}
+    - - {x: 66, y: 201}
+      - {x: 72, y: 195}
+      - {x: 114, y: 195}
+      - {x: 126, y: 202}
+      - {x: 126, y: 245}
+      - {x: 125, y: 247}
+      - {x: 108, y: 251}
+      - {x: 72, y: 251}
+      - {x: 66, y: 240}
+    - - {x: 135, y: 251}
+      - {x: 130, y: 237}
+      - {x: 130, y: 202}
+      - {x: 141, y: 195}
+      - {x: 178, y: 195}
+      - {x: 190, y: 211}
+      - {x: 190, y: 237}
+      - {x: 172, y: 251}
+    - - {x: 207, y: 251}
+      - {x: 194, y: 245}
+      - {x: 194, y: 209}
+      - {x: 211, y: 195}
+      - {x: 235, y: 195}
+      - {x: 238, y: 196}
+      - {x: 254, y: 211}
+      - {x: 254, y: 238}
+      - {x: 245, y: 251}
+    - - {x: 266, y: 251}
+      - {x: 258, y: 241}
+      - {x: 258, y: 205}
+      - {x: 270, y: 195}
+      - {x: 301, y: 195}
+      - {x: 318, y: 202}
+      - {x: 318, y: 239}
+      - {x: 308, y: 251}
+    - - {x: -506, y: 264}
+      - {x: -498, y: 258}
+      - {x: -470, y: 258}
+      - {x: -452, y: 269}
+      - {x: -452, y: 311}
+      - {x: -456, y: 318}
+      - {x: -494, y: 318}
+      - {x: -510, y: 308}
+      - {x: -510, y: 276}
+    - - {x: -429, y: 316}
+      - {x: -446, y: 311}
+      - {x: -446, y: 273}
+      - {x: -441, y: 258}
+      - {x: -402, y: 258}
+      - {x: -388, y: 278}
+      - {x: -388, y: 304}
+      - {x: -401, y: 316}
+    - - {x: -367, y: 316}
+      - {x: -382, y: 310}
+      - {x: -382, y: 267}
+      - {x: -360, y: 258}
+      - {x: -335, y: 258}
+      - {x: -323, y: 264}
+      - {x: -323, y: 316}
+    - - {x: -296, y: 315}
+      - {x: -318, y: 308}
+      - {x: -318, y: 275}
+      - {x: -305, y: 258}
+      - {x: -262, y: 258}
+      - {x: -259, y: 259}
+      - {x: -259, y: 315}
+    - - {x: -48, y: 315}
+      - {x: -62, y: 313}
+      - {x: -62, y: 272}
+      - {x: -54, y: 259}
+      - {x: -47, y: 258}
+      - {x: -20, y: 258}
+      - {x: -4, y: 267}
+      - {x: -2, y: 277}
+      - {x: -2, y: 315}
+    - - {x: 169, y: 318}
+      - {x: 150, y: 318}
+      - {x: 130, y: 309}
+      - {x: 130, y: 289}
+      - {x: 131, y: 280}
+      - {x: 146, y: 258}
+      - {x: 166, y: 258}
+      - {x: 184, y: 264}
+      - {x: 190, y: 274}
+      - {x: 190, y: 306}
+      - {x: 189, y: 313}
+    - - {x: -206, y: 315}
+      - {x: -254, y: 315}
+      - {x: -254, y: 281}
+      - {x: -247, y: 259}
+      - {x: -210, y: 259}
+      - {x: -197, y: 266}
+      - {x: -195, y: 283}
+      - {x: -195, y: 311}
+    - - {x: -140, y: 315}
+      - {x: -181, y: 315}
+      - {x: -191, y: 313}
+      - {x: -191, y: 275}
+      - {x: -172, y: 259}
+      - {x: -148, y: 259}
+      - {x: -130, y: 272}
+      - {x: -130, y: 311}
+    - - {x: -117, y: 315}
+      - {x: -125, y: 314}
+      - {x: -125, y: 275}
+      - {x: -111, y: 259}
+      - {x: -83, y: 259}
+      - {x: -67, y: 271}
+      - {x: -67, y: 310}
+      - {x: -81, y: 315}
+    - - {x: 50, y: 315}
+      - {x: 18, y: 315}
+      - {x: 3, y: 310}
+      - {x: 3, y: 281}
+      - {x: 5, y: 269}
+      - {x: 20, y: 259}
+      - {x: 45, y: 259}
+      - {x: 61, y: 271}
+      - {x: 61, y: 314}
+    - - {x: 119, y: 315}
+      - {x: 88, y: 315}
+      - {x: 66, y: 312}
+      - {x: 66, y: 285}
+      - {x: 74, y: 260}
+      - {x: 83, y: 259}
+      - {x: 123, y: 259}
+      - {x: 126, y: 271}
+      - {x: 126, y: 314}
+    - - {x: 214, y: 316}
+      - {x: 194, y: 310}
+      - {x: 194, y: 267}
+      - {x: 209, y: 259}
+      - {x: 244, y: 259}
+      - {x: 254, y: 273}
+      - {x: 254, y: 305}
+      - {x: 241, y: 316}
+    - - {x: 299, y: 318}
+      - {x: 268, y: 318}
+      - {x: 259, y: 302}
+      - {x: 259, y: 267}
+      - {x: 262, y: 264}
+      - {x: 278, y: 259}
+      - {x: 304, y: 259}
+      - {x: 312, y: 264}
+      - {x: 317, y: 280}
+      - {x: 317, y: 307}
+    - - {x: -392, y: 330}
+      - {x: -389, y: 331}
+      - {x: -385, y: 340}
+      - {x: -385, y: 380}
+      - {x: -511, y: 380}
+      - {x: -511, y: 334}
+      - {x: -503, y: 322}
+      - {x: -388, y: 322}
+      - {x: -388, y: 329}
+      - {x: -391, y: 330}
+      - {x: -396, y: 330}
+    - - {x: -327, y: 330}
+      - {x: -325, y: 332}
+      - {x: -320, y: 338}
+      - {x: -320, y: 360}
+      - {x: -323, y: 373}
+      - {x: -340, y: 380}
+      - {x: -372, y: 380}
+      - {x: -382, y: 368}
+      - {x: -382, y: 327}
+      - {x: -359, y: 322}
+      - {x: -322, y: 322}
+      - {x: -323, y: 329}
+      - {x: -326, y: 330}
+      - {x: -331, y: 330}
+    - - {x: -199, y: 330}
+      - {x: -192, y: 334}
+      - {x: -192, y: 361}
+      - {x: -203, y: 380}
+      - {x: -241, y: 380}
+      - {x: -254, y: 366}
+      - {x: -254, y: 336}
+      - {x: -238, y: 322}
+      - {x: -196, y: 322}
+      - {x: -195, y: 329}
+      - {x: -198, y: 330}
+      - {x: -203, y: 330}
+    - - {x: -135, y: 330}
+      - {x: -133, y: 332}
+      - {x: -128, y: 338}
+      - {x: -128, y: 359}
+      - {x: -131, y: 373}
+      - {x: -148, y: 380}
+      - {x: -181, y: 380}
+      - {x: -190, y: 371}
+      - {x: -190, y: 342}
+      - {x: -181, y: 323}
+      - {x: -171, y: 322}
+      - {x: -132, y: 322}
+      - {x: -131, y: 329}
+      - {x: -134, y: 330}
+      - {x: -139, y: 330}
+    - - {x: -6, y: 330}
+      - {x: -4, y: 332}
+      - {x: 1, y: 341}
+      - {x: 1, y: 365}
+      - {x: -1, y: 374}
+      - {x: -14, y: 380}
+      - {x: -53, y: 380}
+      - {x: -61, y: 365}
+      - {x: -61, y: 330}
+      - {x: -56, y: 324}
+      - {x: -47, y: 322}
+      - {x: -2, y: 322}
+      - {x: -3, y: 328}
+      - {x: -5, y: 330}
+      - {x: -10, y: 330}
+    - - {x: 58, y: 330}
+      - {x: 65, y: 334}
+      - {x: 65, y: 361}
+      - {x: 54, y: 380}
+      - {x: 11, y: 380}
+      - {x: 2, y: 375}
+      - {x: 2, y: 337}
+      - {x: 11, y: 322}
+      - {x: 60, y: 322}
+      - {x: 62, y: 329}
+      - {x: 59, y: 330}
+      - {x: 54, y: 330}
+    - - {x: -305, y: 380}
+      - {x: -318, y: 366}
+      - {x: -318, y: 337}
+      - {x: -303, y: 323}
+      - {x: -256, y: 323}
+      - {x: -256, y: 355}
+      - {x: -271, y: 380}
+    - - {x: -112, y: 380}
+      - {x: -125, y: 364}
+      - {x: -125, y: 344}
+      - {x: -123, y: 338}
+      - {x: -109, y: 323}
+      - {x: -65, y: 323}
+      - {x: -63, y: 328}
+      - {x: -63, y: 354}
+      - {x: -78, y: 380}
+    - - {x: -460, y: 444}
+      - {x: -499, y: 444}
+      - {x: -512, y: 432}
+      - {x: -512, y: 386}
+      - {x: -453, y: 386}
+      - {x: -449, y: 390}
+      - {x: -449, y: 425}
+      - {x: -453, y: 433}
+    - - {x: -434, y: 446}
+      - {x: -446, y: 438}
+      - {x: -446, y: 387}
+      - {x: -444, y: 386}
+      - {x: -385, y: 386}
+      - {x: -385, y: 441}
+      - {x: -399, y: 446}
+    - - {x: -79, y: 446}
+      - {x: -110, y: 446}
+      - {x: -126, y: 434}
+      - {x: -126, y: 386}
+      - {x: -68, y: 386}
+      - {x: -65, y: 391}
+      - {x: -65, y: 421}
+      - {x: -72, y: 441}
+    - - {x: 4, y: 446}
+      - {x: 2, y: 440}
+      - {x: 2, y: 386}
+      - {x: 60, y: 386}
+      - {x: 63, y: 390}
+      - {x: 63, y: 432}
+      - {x: 61, y: 446}
+    - - {x: -367, y: 443}
+      - {x: -382, y: 427}
+      - {x: -382, y: 414}
+      - {x: -379, y: 396}
+      - {x: -366, y: 387}
+      - {x: -336, y: 387}
+      - {x: -322, y: 392}
+      - {x: -322, y: 428}
+      - {x: -327, y: 443}
+    - - {x: -317, y: 396}
+      - {x: -309, y: 387}
+      - {x: -272, y: 387}
+      - {x: -258, y: 393}
+      - {x: -258, y: 425}
+      - {x: -268, y: 443}
+      - {x: -306, y: 443}
+      - {x: -317, y: 431}
+    - - {x: -247, y: 443}
+      - {x: -254, y: 424}
+      - {x: -254, y: 396}
+      - {x: -245, y: 390}
+      - {x: -232, y: 387}
+      - {x: -207, y: 387}
+      - {x: -194, y: 395}
+      - {x: -194, y: 423}
+      - {x: -202, y: 443}
+    - - {x: -183, y: 443}
+      - {x: -190, y: 430}
+      - {x: -190, y: 397}
+      - {x: -181, y: 387}
+      - {x: -130, y: 387}
+      - {x: -130, y: 437}
+      - {x: -138, y: 443}
+    - - {x: -46, y: 444}
+      - {x: -62, y: 435}
+      - {x: -63, y: 422}
+      - {x: -63, y: 390}
+      - {x: -59, y: 387}
+      - {x: -1, y: 387}
+      - {x: -1, y: 422}
+      - {x: -11, y: 444}
+    - - {x: 73, y: 444}
+      - {x: 65, y: 422}
+      - {x: 65, y: 387}
+      - {x: 127, y: 387}
+      - {x: 127, y: 421}
+      - {x: 117, y: 444}
+    - - {x: -465, y: 508}
+      - {x: -496, y: 508}
+      - {x: -509, y: 495}
+      - {x: -509, y: 467}
+      - {x: -495, y: 452}
+      - {x: -457, y: 452}
+      - {x: -451, y: 466}
+      - {x: -451, y: 498}
+      - {x: -461, y: 507}
+    - - {x: -445, y: 508}
+      - {x: -445, y: 470}
+      - {x: -440, y: 455}
+      - {x: -437, y: 452}
+      - {x: -399, y: 452}
+      - {x: -387, y: 459}
+      - {x: -387, y: 508}
+    - - {x: -337, y: 508}
+      - {x: -368, y: 508}
+      - {x: -381, y: 495}
+      - {x: -381, y: 467}
+      - {x: -367, y: 452}
+      - {x: -329, y: 452}
+      - {x: -323, y: 466}
+      - {x: -323, y: 498}
+      - {x: -333, y: 507}
+    - - {x: -273, y: 508}
+      - {x: -304, y: 508}
+      - {x: -317, y: 495}
+      - {x: -317, y: 467}
+      - {x: -303, y: 452}
+      - {x: -265, y: 452}
+      - {x: -259, y: 466}
+      - {x: -259, y: 498}
+      - {x: -269, y: 507}
+    - - {x: -248, y: 508}
+      - {x: -253, y: 497}
+      - {x: -253, y: 459}
+      - {x: -242, y: 452}
+      - {x: -195, y: 452}
+      - {x: -195, y: 503}
+      - {x: -196, y: 508}
+    - - {x: -189, y: 458}
+      - {x: -185, y: 452}
+      - {x: -131, y: 452}
+      - {x: -131, y: 508}
+      - {x: -187, y: 508}
+      - {x: -189, y: 500}
+    - - {x: -125, y: 458}
+      - {x: -121, y: 452}
+      - {x: -67, y: 452}
+      - {x: -67, y: 508}
+      - {x: -123, y: 508}
+      - {x: -125, y: 500}
+    - - {x: -61, y: 458}
+      - {x: -57, y: 452}
+      - {x: -3, y: 452}
+      - {x: -3, y: 508}
+      - {x: -59, y: 508}
+      - {x: -61, y: 500}
+    - - {x: 3, y: 472}
+      - {x: 9, y: 455}
+      - {x: 13, y: 452}
+      - {x: 52, y: 452}
+      - {x: 61, y: 455}
+      - {x: 61, y: 499}
+      - {x: 59, y: 508}
+      - {x: 8, y: 508}
+      - {x: 3, y: 499}
+    - - {x: 67, y: 472}
+      - {x: 73, y: 455}
+      - {x: 77, y: 452}
+      - {x: 116, y: 452}
+      - {x: 125, y: 455}
+      - {x: 125, y: 499}
+      - {x: 123, y: 508}
+      - {x: 72, y: 508}
+      - {x: 67, y: 499}
+    - - {x: 131, y: 472}
+      - {x: 137, y: 455}
+      - {x: 141, y: 452}
+      - {x: 180, y: 452}
+      - {x: 189, y: 455}
+      - {x: 189, y: 499}
+      - {x: 187, y: 508}
+      - {x: 136, y: 508}
+      - {x: 131, y: 499}
+    - - {x: 195, y: 472}
+      - {x: 201, y: 455}
+      - {x: 205, y: 452}
+      - {x: 244, y: 452}
+      - {x: 253, y: 455}
+      - {x: 253, y: 499}
+      - {x: 251, y: 508}
+      - {x: 200, y: 508}
+      - {x: 195, y: 499}
+    - - {x: 259, y: 472}
+      - {x: 265, y: 455}
+      - {x: 269, y: 452}
+      - {x: 308, y: 452}
+      - {x: 317, y: 455}
+      - {x: 317, y: 499}
+      - {x: 315, y: 508}
+      - {x: 264, y: 508}
+      - {x: 259, y: 499}
+    - - {x: 323, y: 472}
+      - {x: 329, y: 455}
+      - {x: 333, y: 452}
+      - {x: 372, y: 452}
+      - {x: 381, y: 455}
+      - {x: 381, y: 499}
+      - {x: 379, y: 508}
+      - {x: 328, y: 508}
+      - {x: 323, y: 499}
+    - - {x: 387, y: 472}
+      - {x: 393, y: 455}
+      - {x: 397, y: 452}
+      - {x: 436, y: 452}
+      - {x: 445, y: 455}
+      - {x: 445, y: 499}
+      - {x: 443, y: 508}
+      - {x: 392, y: 508}
+      - {x: 387, y: 499}
+  spritePackingTag: ChatMessages
+  userData: 
+  assetBundleName: texture_chatmessages.xlx
+  assetBundleVariant: 
