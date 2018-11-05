@@ -1,0 +1,158 @@
+<extend name="Base/base" />
+<block name="main">
+    <br>
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">代理名称</label>
+                <div class="layui-input-inline">
+                    <input name="nickname" value="{$row.nickname}" class="layui-input" type="text" id="nickname" autocomplete="off" lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">代理QQ</label>
+                <div class="layui-input-inline">
+                    <input name="qq" value="{$row.qq}" class="layui-input" type="text" id="qq" autocomplete="off" lay-verify="">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">代理微信</label>
+                <div class="layui-input-inline">
+                    <input name="wechat" value="{$row.wechat}" class="layui-input" type="text" id="wechat" autocomplete="off" lay-verify="">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">代理电话</label>
+                <div class="layui-input-inline">
+                    <input name="phone" value="{$row.phone}" class="layui-input" type="text" id="phone" autocomplete="off" lay-verify="required|number">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">权重</label>
+                <div class="layui-input-inline">
+                    <input name="weights" value="{$row.weights}" class="layui-input" type="text" id="weights" autocomplete="off" lay-verify="required|number">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">推荐标识</label>
+                <div class="layui-input-inline">
+                    <select name="recommend_label" lay-verify="required">
+                        <option {:xeq($row['recommend'], 0, 'selected')} value="0">无</option>
+                        <option {:xeq($row['recommend'], 1, 'selected')} value="1">HOT</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">状态</label>
+                <div class="layui-input-inline">
+                    <select  name="state" lay-verify="required">
+                        <option {:xeq($row['state'], 0, 'selected')} value="0">下架</option>
+                        <option {:xeq($row['state'], 1, 'selected')} value="1">上架</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">分组编号</label>
+                <div class="layui-input-inline">
+                    <input name="number" value="{$row.number}" class="layui-input" type="text" id="number" autocomplete="off" lay-verify="required|number">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">APK包</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" {:xeq($row['apkAll'], 1, 'checked')} name="apkAll" value="all" lay-filter="apkAll" lay-skin="primary" title="全部" >
+                    <foreach name="apk_list" key="key" item="vo" >
+                        <input type="checkbox" {:x_in_array($key, $row['apkid'], 'checked')} name="apk" value="{$key}" lay-skin="primary" title="{$vo}" >
+                    </foreach>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">代理姓名</label>
+                <div class="layui-input-inline">
+                    <input name="name" value="{$row.name}" class="layui-input" type="text" id="name" autocomplete="off" lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">代理密码</label>
+                <div class="layui-input-inline">
+                    <input name="psd" value="" class="layui-input" type="password" id="psd" autocomplete="off" >
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="hidden" name="id" value="{$row.id}">
+                <input type="hidden" name="account" value="{$row.accountid}">
+                <button class="layui-btn " lay-submit lay-filter="LAY-menu-add-submit">修改</button>
+            </div>
+        </div>
+
+    </form>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form;
+
+            form.on('checkbox(apkAll)', function(data){
+                $("input[name='apk']").prop("checked" ,function () {
+                    return  data.elem.checked;
+                })
+                form.render();
+            });
+
+            form.on('submit(LAY-menu-add-submit)', function(obj){
+                let postData = {
+                    id: $("input[name='id']").val(),
+                    account: $("input[name='account']").val(),
+                    nickname: $("input[name='nickname']").val(),
+                    qq: $("input[name='qq']").val(),
+                    wechat: $("input[name='wechat']").val(),
+                    phone: $("input[name='phone']").val(),
+                    weights: $("input[name='weights']").val(),
+                    recommend_label: $("select[name='recommend_label']").val(),
+                    state: $("select[name='state']").val(),
+                    number: $("input[name='number']").val(),
+                    name: $("input[name='name']").val(),
+                    psd: $("input[name='psd']").val(),
+                    //apk包id
+                    apkall: $('input[name="apkAll"]:checked').val(),
+                    apk: (function () {
+                        let carr = []
+                        $.each($('input[name="apk"]:checked'), function () {
+                            carr.push($(this).val())
+                        })
+                        return carr
+                    }())
+                }
+
+                $.post("{:U('configManagement/doProxyUpdate')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('更新成功', function(index, layero){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert(response.message)
+                    }
+                })
+                return false
+            })
+        });
+    </script>
+</block>

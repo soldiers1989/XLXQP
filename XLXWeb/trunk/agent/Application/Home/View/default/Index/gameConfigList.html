@@ -1,0 +1,49 @@
+<extend name="Base/base" />
+
+<block name="mainBlock">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <table class="layui-table" lay-data="{loading:true, cellMinWidth: 80, height:'full',page:true, id:'datalist'}" lay-filter="datalist">
+                <thead>
+                    <tr>
+                        <th lay-data="{field:'id'}">编号</th>
+                        <th lay-data="{field:'rate'}">增加频率</th>
+                        <th lay-data="{field:'ratio'}">增加万分比</th>
+                        <th lay-data="{field:'stime'}">增加时长</th>
+                        <th lay-data="{field:'run_time'}">执行时长</th>
+                        <th lay-data="{field:'expect_amount'}">期望增加金额</th>
+                        <th lay-data="{field:'now_amount'}">本次增加金额</th>
+                        <th lay-data="{field:'start_time'}">开始时间</th>
+                        <th lay-data="{field:'end_time'}">结束时间</th>
+                        <th lay-data="{field:'add_text'}">原因</th>
+                        <th lay-data="{field:'admin_name'}">操作人</th>
+                     </tr>
+                </thead>
+            </table>
+    </div>
+    </div>
+
+</block>
+
+<block name="scriptBlock">
+    <script>
+        layui.use(['jquery', 'table'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+
+            table.reload('datalist', {
+                where:{
+                    cid: "{:I('get.cid/d')}",
+                    gid: "{:I('get.gid/d')}"
+                },
+                url: '{:U("index/gameConfigList")}',
+                limits: [20,50,100],
+                done: function (data) {
+                    console.log(data)
+                }
+            })
+        });
+    </script>
+</block>

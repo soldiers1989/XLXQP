@@ -1,0 +1,150 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">平台</label>
+                    <div class="layui-input-inline">
+                        <select name="platform">
+                            <option value="">全平台</option>
+                            <foreach name="platform" key="key" item="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">APK包名</label>
+                    <div class="layui-input-inline">
+                        <select name="apk">
+                            <option value="">全APK包</option>
+                            <foreach name="apk" key="key" item="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">渠道</label>
+                    <div class="layui-input-inline">
+                        <select name="channel">
+                            <option value="">全渠道</option>
+                            <foreach name="channel" key="key" item="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">开始日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">截止日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                    <button class="layui-btn" data-type="execlExport">导出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'datetime', minWidth:120}">日期</th>
+            <th lay-data="{field:'chaZhiCreateTime'}">合计（创建时间）</th>
+            <th lay-data="{field:'chaZhiSuccessTime'}">合计（成功时间）</th>
+            <th lay-data="{field:'sendGoldNum'}">发送数量</th>
+            <th lay-data="{field:'recieveGoldNum'}">接收数量</th>
+            <th lay-data="{field:'chongZhiCreateTime'}">充值（创建时间）</th>
+            <th lay-data="{field:'chongZhiSuccessTime'}">充值（成功时间）</th>
+            <th lay-data="{field:'tiXianCreateTime'}">提现（创建时间）</th>
+            <th lay-data="{field:'tiXianSuccessTime'}">提现（出款时间）</th>
+        </tr>
+        </thead>
+    </table>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        platform: $('select[name="platform"]').val(),
+                        channel: $('select[name="channel"]').val(),
+                        apk: $('select[name="apk"]').val(),
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("recharge/dayAccountList")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("recharge/dayAccountList")}'+active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function(){
+                        layer.close(index);
+                    },300000);
+                },
+            }
+            active.reload();
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+
+        });
+    </script>
+</block>

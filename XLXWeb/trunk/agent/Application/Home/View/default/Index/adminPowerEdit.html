@@ -1,0 +1,123 @@
+<extend name="Base/base" />
+<block name="cssBlock">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/zTree/css/zTreeStyle/zTreeStyle.css"/>
+</block>
+<block name="mainBlock">
+    <div class="layui-card">
+    <div class="layui-form" lay-filter="layuiadmin-app-form-list" id="layuiadmin-app-form-list" style="padding: 20px 30px ">
+        <div >
+            <ul id="treeDemo" class="ztree"></ul>
+        </div>
+        <div class="layui-form-item">
+        <div class="layui-input-block">
+            <input type="hidden" id="aid" name="aid" value="{:I('get.id/d')}">
+            <button class="layui-btn" lay-submit lay-filter="LAY-menu-add-submit">修改权限</button>
+        </div>
+    </div>
+    </div>
+    </div>
+</block>
+
+<block name="scriptBlock">
+    <script src="__STATIC__/zTree/js/jquery-1.4.4.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="__STATIC__/zTree/js/jquery.ztree.all.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+
+        layui.use(['jquery', 'table', 'form'], function() {
+            var table = layui.table
+                , form = layui.form;
+
+            var setting = {
+                check: {
+                    enable: true
+                },
+                async: {
+                    enable: true,//采用异步加载
+                    dataFilter: ajaxDataFilter,    //预处理数据
+                    url : "{:U('index/getMenuList',array('aid'=>I('get.id/d')))}",
+                    dataType : "json"
+                },
+                data : {
+                    key : {
+                        title : "name",
+                        name : "name"
+                    },
+                    simpleData : {
+                        enable : true,
+                        idKey : "id",
+                        pIdKey : "parentid",
+                        rootPid : 0
+                    }
+                },
+                callback : {
+                    beforeClick: zTreeBeforeClick,
+                    onClick : zTreeOnClick,
+                    onAsyncSuccess: zTreeOnAsyncSuccess //异步加载完成调用
+                }
+            };
+            setting.check.chkboxType = { "Y" : "ps", "N" : "ps" };
+            function zTreeOnClick( event, treeId, treeNode) {
+                refreshLayers();
+                clearCheckedOldNodes();
+            }
+
+            var layers;
+            function refreshLayers() {
+                var treeObj=$.fn.zTree.getZTreeObj("treeDemo"),
+                    nodes=treeObj.getCheckedNodes(true),
+                    v="";
+                for(var i=0;i<nodes.length;i++){
+                    v += nodes[i].menu_id + ",";
+                    console.log(v)
+                }
+            }
+            //清理善后工作
+            function clearCheckedOldNodes() {
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+                    nodes = zTree.getChangeCheckedNodes();
+                for (var i=0, l=nodes.length; i<l; i++) {
+                    nodes[i].checkedOld = nodes[i].checked;
+                }
+            };
+
+            function zTreeBeforeClick() {
+
+            }
+
+            /* 获取返回的数据，进行预操作 */
+            function ajaxDataFilter(treeId, parentNode, responseData) {
+                console.log(responseData)
+                //responseData = responseData.jsonArray;
+                return responseData;
+            };
+            //异步加载完成时运行，此方法将所有的节点打开
+            function zTreeOnAsyncSuccess(event, treeId, msg) {
+                var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+                treeObj.expandAll(true);
+            }
+
+
+            $.fn.zTree.init($("#treeDemo"), setting, null);
+
+            $('.layui-btn').bind({
+                click: function () {
+                    var treeObj=$.fn.zTree.getZTreeObj("treeDemo"),
+                        nodes=treeObj.getCheckedNodes(true),
+                        idArr = new Array();
+                    for( var i=0; i<nodes.length; i++ ){
+                        if ( typeof(nodes[i].id) != 'undefined'){
+                            idArr.push(nodes[i].id)
+                        }
+                    }
+
+                    $.post('{:U("index/doPowerEdit")}', {ids: idArr, aid: $("#aid").val()}, (response) => {
+                        response.code == 0 &&  layer.alert( '修改成功!' )
+                    })
+                }
+            })
+        });
+
+    </script>
+</block>
+
+

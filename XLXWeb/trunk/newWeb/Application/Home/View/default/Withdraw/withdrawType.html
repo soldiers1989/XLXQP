@@ -1,0 +1,99 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <submit  class="layui-btn" data-type="addWithdrawType">新建提现类型</submit>
+            </div>
+            <hr>
+            <br>
+        </form>
+    </div>
+
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'type_id', minWidth:150}">提现类型ID</th>
+            <th lay-data="{field:'name', minWidth:150}">提现类型名称</th>
+            <th lay-data="{field:'operator'}">添加人</th>
+            <th lay-data="{field:'time', minWidth:160}">添加时间</th>
+            <th lay-data="{fixed: 'right', width:100, align:'center', toolbar: '#bar'}">名称修改</th>
+        </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-xs"  lay-event="amend">修改</a>
+    </script>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+
+            //监听工具条
+            table.on('tool(datalist)', function(obj){
+                var data = obj.data;
+                console.log(data);
+                if ( obj.event === 'amend' ) {
+                    layer.open({
+                        type: 2
+                        , title: '修改提现类型名称'
+                        , area: ['460px', '290px']
+                        ,shadeClose:true
+                        , shade: 0.8
+                        , maxmin: true
+                        , content: data.amendUrl
+                        , btn: ['关闭']
+                        , yes: function () {
+                            layer.closeAll();
+                        }
+                    });
+                }
+            });
+
+            var active = {
+                addWithdrawType: function(){
+                    layer.open({
+                        type: 2
+                        ,title: '新建提现类型'
+                        ,area: ['500px', '285px']
+                        , shadeClose: true
+                        , shade: 0.8
+                        ,maxmin: true
+                        ,content: '{:U("withdraw/addWithdrawType")}'
+                    });
+                },
+                reload: function () {
+                    table.reload('datalist', {
+                        url: '{:U("withdraw/withdrawType")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                }
+            }
+
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                    // return false;
+                }
+            })
+
+        });
+    </script>
+</block>

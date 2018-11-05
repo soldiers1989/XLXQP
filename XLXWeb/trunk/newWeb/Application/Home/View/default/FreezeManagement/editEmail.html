@@ -1,0 +1,151 @@
+<extend name="Base/base" />
+<block name="main">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>添加公告</legend>
+    </fieldset>
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">邮件类型</label>
+                <div class="layui-input-inline">
+                    <select name="type" lay-filter="m_parentid">
+                        <option value="1">系统邮件</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">渠道</label>
+            <div class="layui-input-block">
+                <input type="checkbox" {:xeq($row['channelAll'], 1, 'checked')} name="qudaoAll" value="all" lay-filter="qudaoAll" lay-skin="primary" title="全部" >
+                <foreach name="channel_list" key="key" item="vo">
+                    <input type="checkbox" {:x_in_array($key, $row['channelid'], 'checked')} name="qudao" value="{$key}" lay-skin="primary" title="{$vo}" >
+                </foreach>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">发送对象</label>
+            <div class="layui-input-block">
+                <input type="text" name="accountids" value="{$row.bk_accountid}"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="title"  value="{$row.bk_title}"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">内容</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" name="content" class="layui-textarea">{$row.bk_content}</textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">发送时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="sendTime" name="sendTime" value="{$row.bk_SendTime}"  ay-verify="date" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">失效时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="effectiveTime" name="effectiveTime" value="{$row.bk_EffectiveTime}"  ay-verify="date" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">发送道具</label>
+                <div class="layui-input-inline">
+                    <select name="propsType" lay-filter="m_parentid">
+                        <option value="1">金币</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">道具数量</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="sendGold"  value="{$row.bk_sendgold}" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn " lay-submit lay-filter="LAY-menu-add-submit">更新</button>
+                <input type="hidden" value="{$row.bk_id}" name="id" >
+            </div>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,laydate = layui.laydate
+                ,form = layui.form;
+
+            //日期
+            laydate.render({
+                elem: '#sendTime'
+                ,type: 'datetime'
+            });
+            laydate.render({
+                elem: '#effectiveTime'
+                ,type: 'datetime'
+            });
+
+            form.on('checkbox(qudaoAll)', function(data) {
+                $("input[name='qudao']").prop("checked" ,function () {
+                    return  data.elem.checked;
+                })
+                form.render();
+            });
+
+            form.on('submit(LAY-menu-add-submit)', function(obj){
+                let postData = {
+                    type: $("select[name='type']").val(),
+                    channelall: $('input[name="qudaoAll"]:checked').val(),
+                    channel: (function () {
+                        let carr = []
+                        $.each($('input[name="qudao"]:checked'), function () {
+                            carr.push($(this).val())
+                        })
+                        return carr
+                    }()),
+                    accountids: $('input[name="accountids"]').val(),
+                    title: $('input[name="title"]').val(),
+                    content: $("textarea[name='content']").val(),
+                    sendTime:  $("input[name='sendTime']").val(),
+                    effectiveTime: $("input[name='effectiveTime']").val(),
+                    propsType: $("select[name='propsType']").val(),
+                    sendGold: $("input[name='sendGold']").val(),
+                    id: $("input[name='id']").val()
+                }
+
+                $.post("{:U('FreezeManagement/doEditEmail')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('更新成功', function(index, layero){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert(response.message)
+                    }
+                })
+                return false
+            })
+        });
+    </script>
+</block>

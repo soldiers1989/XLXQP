@@ -1,0 +1,378 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家ID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="account" autocomplete="off" class="layui-input" value="{$account}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家昵称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="nickname" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">电话号码</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="phone" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">银行卡</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="bankcard" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">支付宝账号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="alipay" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'account', minWidth:150}">玩家ID</th>
+            <th lay-data="{field:'nickname', minWidth:150}">玩家昵称</th>
+            <th lay-data="{field:'phone', minWidth:150, style:'color: #00b5f9', event: 'editPhone'}">电话号码</th>
+            <th lay-data="{field:'bankname', minWidth:150, style:'color: #00b5f9', event: 'editBankName'}">银行名称</th>
+            <th lay-data="{field:'bankcard', minWidth:180, style:'color: #00b5f9', event: 'editBankcard'}">银行卡号</th>
+            <th lay-data="{field:'name', style:'color: #00b5f9', event: 'editName'}">持卡人姓名</th>
+            <th lay-data="{field:'province', style:'color: #00b5f9', event: 'editProvince'}">开户省份</th>
+            <th lay-data="{field:'city', style:'color: #00b5f9', event: 'editCity'}">开户城市</th>
+            <th lay-data="{field:'subbranch', minWidth:200, style:'color: #00b5f9', event: 'editSubbranch'}">开户支行</th>
+            <th lay-data="{field:'alipay', minWidth:200, style:'color: #00b5f9', event: 'editAlipay'}">支付宝账号</th>
+            <th lay-data="{field:'alipayName', style:'color: #00b5f9', event: 'editAlipayName'}">支付宝姓名</th>
+            <th lay-data="{field:'record', minWidth:500}">操作记录</th>
+            <th lay-data="{fixed: 'right', width:80, align:'center', toolbar: '#bar'}">操作</th>
+        </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-xs"  lay-event="paste">粘贴板</a>
+    </script>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+
+            var active = {
+                reload: function () {
+                    table.reload('datalist', {
+                        where: {
+                            account: (function () {
+                                let data_ = "";
+                                if ($('input[name="account"]').val() != "") {
+                                    var reg = new RegExp(/^\d{7}$/);
+                                    if ( reg.test($('input[name="account"]').val()) ) {
+                                        data_ = $('input[name="account"]').val();
+                                    }
+                                    else {
+                                        layer.alert('请输入正确的玩家ID');
+                                    }
+                                }
+                                return data_;
+                            }()),
+                            nickname: $('input[name="nickname"]').val(),
+                            name: $('input[name="name"]').val(),
+
+                            phone: (function () {
+                                let data_ = "";
+                                if ($('input[name="phone"]').val() != "") {
+                                    var reg = new RegExp(/^\d{11}$/);
+                                    if ( reg.test($('input[name="phone"]').val()) ) {
+                                        data_ = $('input[name="phone"]').val();
+                                    }
+                                    else {
+                                        layer.alert('请输入正确的电话号码');
+                                    }
+                                }
+                                return data_;
+                            }()),
+                            bankcard: (function () {
+                                let data_ = "";
+                                if ($('input[name="bankcard"]').val() != "") {
+                                    var reg = new RegExp(/^\d{16,19}$/);
+                                    if ( reg.test($('input[name="bankcard"]').val()) ) {
+                                        data_ = $('input[name="bankcard"]').val();
+                                    }
+                                    else {
+                                        layer.alert('请输入正确的银行卡号');
+                                    }
+                                }
+                                return data_;
+                            }()),
+                            alipay: $('input[name="alipay"]').val(),
+                        },
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("freezeManagement/userData")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                },
+                layToolEvent: function () {
+                    table.on('tool(datalist)', function (obj) {
+                        let data = obj.data
+
+                        if ( obj.event == 'editName' ){
+                            layer.prompt({title: '输入绑定的持卡人姓名，并确认', formType: 0}, function(pass, index){
+
+                                $.post("{:U('freezeManagement/doEditName')}", {id: data.account, editName: pass}, function (response) {
+                                    if( response.code == 0 ){
+                                        layer.msg('更改绑定成功', {icon: 1});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                    else {
+                                        layer.msg('更改失败', {icon: 2});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                })
+                            });
+                        }
+
+                        if (obj.event == 'editPhone') {
+                            layer.confirm('点击下面按钮进行操作', {
+                                    btn: ['解绑', '更换绑定电话号码']
+                                },
+                                function () {
+                                    layer.confirm('确定对：' + data.account + '（'+ data.nickname + '）' + '的玩家电话号码解绑', {
+                                        btn:['确认', '取消']
+                                    },
+                                    function () {
+                                        $.post("{:U('freezeManagement/doUntiedPhone')}", {id: data.account}, function(responseData){
+                                            if (responseData.code == 0 ) {
+                                                layer.msg('解绑成功', {icon: 1});
+                                                active.reload();
+                                                layer.close(index);
+
+                                            }
+                                            else {
+                                                layer.msg('解绑失败', {icon: 2});
+                                                active.reload();
+                                                layer.close(index);
+                                            }
+                                        })
+                                    })
+                                },
+                                function () {
+                                    layer.prompt({title: '输入绑定的电话号码，并确认', formType: 0}, function(pass, index){
+                                        var reg = new RegExp(/^\d{11}$/);
+                                        if(!reg.test(pass)) {
+                                            layer.msg('请输入正确的手机号码');
+                                            return false;
+                                        }
+                                        $.post("{:U('freezeManagement/doChangePhone')}", {id: data.account, editPhone: pass}, function (response) {
+                                            if( response.code == 0 )  {
+                                                layer.msg('更改绑定成功', {icon: 1});
+                                                active.reload();
+                                                layer.close(index);
+                                            }
+                                            else {
+                                                layer.msg('更改失败', {icon: 2});
+                                                active.reload();
+                                                layer.close(index);
+                                            }
+                                        })
+                                    });
+                                });
+                        }
+
+                        if ( obj.event == 'editBankName' ) {
+                            layer.prompt({title: '输入绑定的银行名称，并确认', formType: 0}, function(pass, index){
+                                $.post("{:U('freezeManagement/doEditBankName')}", {id: data.account, editBankName: pass}, function (response) {
+                                    if( response.code == 0 ){
+                                        layer.msg('更改绑定成功', {icon: 1});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                    else {
+                                        layer.msg('更改失败', {icon: 2});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                })
+                            });
+                        }
+
+                        if ( obj.event == 'editBankcard' ){
+                            layer.prompt({title: '输入绑定的银行卡号，并确认', formType: 0}, function(pass, index){
+                                var reg = new RegExp("[0-9]");
+                                if(!reg.test(pass)) {
+                                    layer.msg('只能输入数字');
+                                    return false;
+                                }
+                                $.post("{:U('freezeManagement/doEditBankcard')}", {id: data.account, editBankcard: pass}, function (response) {
+                                    if( response.code == 0 ){
+                                        layer.msg('更改绑定成功', {icon: 1});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                    else {
+                                        layer.msg('更改失败', {icon: 2});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                })
+                            });
+                        }
+
+                        if ( obj.event == 'editAlipay' ){
+                            layer.prompt({title: '输入绑定的支付宝账号，并确认', formType: 0}, function(pass, index){
+                                $.post("{:U('freezeManagement/doEditAlipay')}", {id: data.account, editAlipay: pass}, function (response) {
+                                    if( response.code == 0 ){
+                                        layer.msg('更改绑定成功', {icon: 1});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                    else {
+                                        layer.msg('更改失败', {icon: 2});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                })
+                            });
+                        }
+
+                        if ( obj.event == 'editAlipayName' ){
+                            layer.prompt({title: '输入绑定的支付宝姓名，并确认', formType: 0}, function(pass, index){
+                                $.post("{:U('freezeManagement/doEditAlipayName')}", {id: data.account, editAlipayName: pass}, function (response) {
+                                    if( response.code == 0 ){
+                                        layer.msg('更改绑定成功', {icon: 1});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                    else {
+                                        layer.msg('更改失败', {icon: 2});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                })
+                            });
+                        }
+
+                        if ( obj.event == 'editProvince' ){
+                            layer.prompt({title: '输入绑定的开户省份，并确认', formType: 0}, function(pass, index){
+                                $.post("{:U('freezeManagement/doEditProvince')}", {id: data.account, editProvince: pass}, function (response) {
+                                    if( response.code == 0 ) {
+                                        layer.msg('更改绑定成功', {icon: 1});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                    else {
+                                        layer.msg('更改失败', {icon: 2});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                })
+                            });
+                        }
+
+                        if ( obj.event == 'editCity' ){
+                            layer.prompt({title: '输入绑定的开户城市，并确认', formType: 0}, function(pass, index){
+                                $.post("{:U('freezeManagement/doEditCity')}", {id: data.account, editCity: pass}, function (response) {
+                                    if( response.code == 0 ){
+                                        layer.msg('更改绑定成功', {icon: 1});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                    else {
+                                        layer.msg('更改失败', {icon: 2});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                })
+                            });
+                        }
+
+                        if ( obj.event == 'editSubbranch' ){
+                            layer.prompt({title: '输入绑定的开户支行，并确认', formType: 0}, function(pass, index){
+                                $.post("{:U('freezeManagement/doEditSubbranch')}", {id: data.account, editSubbranch: pass}, function (response) {
+                                    if( response.code == 0 ){
+                                        layer.msg('更改绑定成功', {icon: 1});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                    else {
+                                        layer.msg('更改失败', {icon: 2});
+                                        active.reload();
+                                        layer.close(index);
+                                    }
+                                })
+                            });
+                        }
+
+                        //工具条-粘贴板
+                        if (obj.event === 'paste') {
+                            layer.open({
+                                type: 2
+                                , title: data.account + '(' + data.nickname + ')的用户资料'
+                                , area: ['500px', '695px']
+                                ,shadeClose: true
+                                , shade: 0.8
+                                , maxmin: true
+                                , content: data.pasteUrl
+                                , btn: ['关闭']
+                                , yes: function () {
+                                    layer.closeAll();
+                                }
+                            });
+                        }
+                    })
+                },
+                init: function () {
+                    active.reload();
+                    active.layToolEvent()
+                }
+            }
+            active.init();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+
+        });
+    </script>
+</block>

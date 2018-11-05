@@ -1,0 +1,65 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist',cellMinWidth: 120}" lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'bk_data'}">日期</th>
+            <th lay-data="{field:'bk_platform_id'}">平台</th>
+            <th lay-data="{field:'channel'}">注册渠道</th>
+            <th lay-data="{field:'bk_channel_id'}">设备新增</th>
+            <th lay-data="{field:'bk_reg_number'}">注册</th>
+            <th lay-data="{field:'bk_new_reg_number_rate'}">新增游戏率</th>
+            <th lay-data="{field:'bk_active_number'}">活跃人数</th>
+            <th lay-data="{field:'bk_payment_amount'}">充值金额</th>
+            <th lay-data="{field:'bk_payment_user_number'}">充值人数</th>
+            <th lay-data="{field:'bk_payment_number'}">充值次数</th>
+            <th lay-data="{field:'bk_arpu'}">ARPPU</th>
+            <th lay-data="{field:'bk_arpu'}">ARPU</th>
+            <th lay-data="{field:'bk_payment_rate'}">付费率</th>
+            <th lay-data="{field:'bk_new_payment_user_number'}">新增充值人数</th>
+            <th lay-data="{field:'bk_new_payment_amount'}">新增充值金额</th>
+
+            <th lay-data="{field:'bk_agent_payment_amount'}">线下充值金额</th>
+            <th lay-data="{field:'bk_agent_payment_user_number'}">线下充值人数</th>
+            <th lay-data="{field:'bk_new_agent_payment_amount'}">线下新增充值金额</th>
+            <th lay-data="{field:'bk_new_agent_payment_user_number'}">线下新增充值人数</th>
+            <th lay-data="{field:'bk_tixian_amount'}">提现金额</th>
+            <th lay-data="{field:'bk_tixian_user'}">提现人数</th>
+            <th lay-data="{field:'bk_new_tixian_amount'}">新增提现金额</th>
+            <th lay-data="{field:'bk_new_tixian_user'}">新增提现人数</th>
+            <th lay-data="{field:'bk_luichun1'}">次日留存率</th>
+            <th lay-data="{field:'bk_luichun2'}">3日留存率</th>
+            <th lay-data="{field:'bk_luichun6'}">7日留存率</th>
+        </tr>
+        </thead>
+    </table>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            let table = layui.table;
+            var active = {
+                searchData: function() {
+                    return {
+                        date: "{:I('get.date')}",
+                    }
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        url: '{:U("Daily/dayAllRegChanne")}',
+                        limits: limits,
+                        limit:limit,
+                        done: function (data) {
+                            //console.log(data)
+                        }
+                     })
+                },
+            }
+            active.reload();
+        });
+    </script>
+</block>

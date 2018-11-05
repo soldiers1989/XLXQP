@@ -1,0 +1,1 @@
+a:5:{i:0;s:17:"accountpurview_ID";i:1;s:12:"bk_AccountID";i:2;s:7:"menu_ID";s:3:"_pk";s:17:"accountpurview_ID";s:5:"_type";a:3:{s:17:"accountpurview_ID";s:16:"int(11) unsigned";s:12:"bk_AccountID";s:7:"int(11)";s:7:"menu_ID";s:16:"int(11) unsigned";}}

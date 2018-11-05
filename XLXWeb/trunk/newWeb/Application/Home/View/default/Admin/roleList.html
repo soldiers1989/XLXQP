@@ -1,0 +1,112 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <button class="layui-btn" data-type="addRole">添加</button>
+            </div>
+        </div>
+    </div>
+
+    <table class="layui-table" lay-data="{loading:true,height:'full',page:true, id:'datalist'}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'name'}">角色</th>
+                <th lay-data="{fixed: 'right',width: 180, align:'center', toolbar: '#bar'}"></th>
+            </tr>
+        </thead>
+    </table>
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-primary layui-btn-xs"  lay-event="powerRoleEdit">权限</a>
+        <a class="layui-btn layui-btn-primary layui-btn-xs"  lay-event="roleEdit">修改</a>
+        <a class="layui-btn layui-btn-primary layui-btn-xs"  lay-event="roleDel">删除</a>
+    </script>
+    <script type="text/html" id="switchTpl">
+        <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="forbidden" {{ d.forbidden == 1 ? 'checked' : '' }}>
+    </script>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+
+            active = {
+                addRole: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '添加角色',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['500px', '200px'],
+                        content:'{:U("admin/addRole")}' //iframe的url
+                    });
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        url: '{:U("admin/roleList")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                             //console.log(data)
+                        }
+                    })
+                },
+                toolEvent: function() {
+                    //监听是否显示操作
+                    table.on('tool(datalist)', function(obj){
+                        var data = obj.data;
+                        if( obj.event === 'powerRoleEdit'){
+                            layer.open({
+                                type: 2,
+                                title: '权限修改：'+data.name,
+                                area: ['1000px', '650px'],
+                                fixed: false, //不固定
+                                maxmin: true,
+                                content: data.powerRoleEditUrl
+                            });
+                        }
+                        if( obj.event === 'roleEdit' ){
+                            layer.open({
+                                type: 2,
+                                title: '修改角色名称：'+data.name,
+                                area: ['500px', '250px'],
+                                fixed: false, //不固定
+                                maxmin: true,
+                                content: data.editUrl
+                            });
+                        }
+                        if( obj.event === 'roleDel' ){
+                            layer.confirm('删除帐号', {
+                                btn: ['再次确认', '取消'] //按钮
+                            }, function(){
+                                $.post('{:U("admin/doRoleDel")}',{id: data.id}, function (re) {
+                                    if( re.code == 0 ){
+                                        layer.msg('删除成功!');
+                                        obj.del();
+                                    }
+                                })
+                            })
+                        }
+                    })
+                },
+                init: function () {
+                    this.reload();
+                    this.toolEvent();
+                    $('.searchTable .layui-btn').bind({
+                        click: function () {
+                            var type = $(this).data('type')
+                            active[type] ? active[type].call(this) : ""
+                        }
+                    })
+                }
+            }
+            active.init();
+        });
+    </script>
+</block>

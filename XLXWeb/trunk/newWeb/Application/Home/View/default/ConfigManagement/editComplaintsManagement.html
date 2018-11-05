@@ -1,0 +1,49 @@
+<extend name="Base/base"/>
+<block name="main">
+    <br>
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">处理结果</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea"  name="content" id="content" placeholder="请输入内容" lay-verify="required"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="hidden" name="id" value="{$row.bk_id}">
+                    <button class="layui-btn " lay-submit lay-filter="LAY-menu-add-submit">确定</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form;
+
+            form.on('submit(LAY-menu-add-submit)', function(obj){
+                let postData = {
+                    content: $("textarea[name='content']").val(),
+                    id: $("input[name='id']").val(),
+                }
+
+                $.post("{:U('configManagement/doComplaintsManagementUpdate')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('更新成功', function(index, layero){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert('更新失败')
+                    }
+                })
+                return false
+            })
+        });
+    </script>
+</block>

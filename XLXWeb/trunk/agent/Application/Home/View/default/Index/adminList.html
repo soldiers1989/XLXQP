@@ -1,0 +1,96 @@
+<extend name="Base/base" />
+
+<block name="mainBlock">
+    <div class="layui-card">
+        <div class="layui-card-body">
+        <div style="padding-bottom: 10px;">
+            <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="LAY-menu-admin-submit">添加</button>
+        </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',page:true, id:'datalist'}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'name'}">管理员账号</th>
+                <th lay-data="{field:'isdisplay',  templet: '#switchTpl',}">是否禁用</th>
+                <th lay-data="{fixed: 'right',align:'center', toolbar: '#bar'}">操作</th>
+            </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-primary layui-btn-xs"  lay-event="powerEdit">权限</a>
+        <a class="layui-btn layui-btn-primary layui-btn-xs"  lay-event="edit">改密</a>
+    </script>
+
+    <script type="text/html" id="switchTpl">
+        <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="forbidden" {{ d.lock == 1 ? 'checked' : '' }}>
+    </script>
+
+    </div>
+    </div>
+</block>
+
+<block name="scriptBlock">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+
+            table.reload('datalist', {
+                url: '{:U("index/adminList")}',
+                limits: [20,50,100],
+                done: function (data) {
+                    console.log(data)
+                }
+            })
+
+            //监听是否显示操作
+            form.on('switch(forbidden)', function(obj) {
+                let forbidden = obj.elem.checked ? 1 : 0
+                console.log(obj.value)
+                $.post("{:U('index/doAdminForbidden')}", { id: obj.value, lock: forbidden }, function ( response ) {
+                    response.code == 1 && layer.msg(response.message);
+                })
+                // layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+            });
+
+            form.on('submit(LAY-menu-admin-submit)', function(obj){
+                layer.open({
+                    type: 2,
+                    title: '管理员添加',
+                    area: ['500px', '300px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: "{:U('index/adminAdd')}"
+                });
+            })
+
+
+            table.on('tool(datalist)', function(obj){
+                var data = obj.data;
+                if(obj.event === 'powerEdit'){
+                    layer.open({
+                        type: 2,
+                        title: '权限修改',
+                        area: ['1000px', '650px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        content: data.power_edit_url
+                    });
+                }
+                if( obj.event === "edit" ){
+                    layer.open({
+                        type: 2,
+                        title: '管理员修改',
+                        area: ['500px', '300px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        content: data.edit_url
+                    });
+                }
+
+            })
+        });
+    </script>
+</block>

@@ -1,0 +1,374 @@
+<extend name="Base/base" />
+<block name="main">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>添加公告</legend>
+    </fieldset>
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">公告类型</label>
+                <div class="layui-input-inline">
+                    <select name="type" lay-verify="required" lay-filter="game">
+                        <option value="">请选择</option>
+                        <option value="1">登录公告</option>
+                        <option value="2">游戏公告</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="gameNotice layui-hide layui-inline">
+                <label class="layui-form-label">子类型</label>
+                <div class="layui-input-inline">
+                    <select name="gameType" lay-verify="" lay-filter="other">
+                        <option value="-1">请选择</option>
+                        <option value="1">新手公告</option>
+                        <option value="2">更新公告</option>
+                        <option value="3">违规公告</option>
+                        <option value="4">其他公告</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">优先级</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="priority"  autocomplete="off" class="layui-input" lay-verify="required|number">
+                </div>
+                <div class="layui-form-mid layui-word-aux">请输入自然数1-99，数值越大优先级越高</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">上架时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="onlineTime" name="onlineTime" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">下架时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="offlineTime" name="offlineTime" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">标题</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="title" autocomplete="off" class="layui-input" lay-verify="">
+                </div>
+            </div>
+            <div class="gameNotice layui-hide layui-inline">
+                <label class="layui-form-label">是否弹出</label>
+                <div class="layui-input-inline">
+                    <select name="isPop" lay-verify="" lay-filter="">
+                        <option value="-1">请选择</option>
+                        <option value="0">不弹出</option>
+                        <option value="1">弹出</option>
+                    </select>
+                </div>
+            </div>
+            <div class="gameNotice layui-hide layui-inline">
+                <label class="layui-form-label">公告角标</label>
+                <div class="layui-input-inline">
+                    <select name="label" lay-verify="" lay-filter="">
+                        <option value="-1">请选择</option>
+                        <option value="0">无</option>
+                        <option value="1">New</option>
+                        <option value="2">HOT</option>
+                    </select>
+                </div>
+            </div>
+            <div class="gameNotice layui-hide layui-inline">
+                <label class="layui-form-label">指定页面</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="webPage" autocomplete="off" class="layui-input" lay-verify="">
+                </div>
+                <div class="layui-form-mid layui-word-aux">无跳转页面可不填</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">内容颜色</label>
+                <div class="layui-input-inline">
+                    <select name="color" lay-verify="" lay-filter="">
+                        <option value="">请选择</option>
+                        <option value="1">红色</option>
+                        <option value="2">黄色</option>
+                        <option value="3">蓝色</option>
+                        <option value="4">绿色</option>
+                        <option value="5">黑色</option>
+                        <option value="6">白色</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">文字大小</label>
+                <div class="layui-input-inline">
+                    <select name="size" lay-verify="required" lay-filter="">
+                        <option value="">请选择</option>
+                        <option value="40">40px</option>
+                        <option value="41">41px</option>
+                        <option value="42">42px</option>
+                        <option value="43">43px</option>
+                        <option value="44">44px</option>
+                        <option value="45">45px</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">内容</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" name="content" class="layui-textarea" lay-verify=""></textarea>
+            </div>
+        </div>
+        <div class="picture layui-hide layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">Banner图</label>
+                <div class="layui-input-inline">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn layui-btn-normal" id="choiceBanner">选择文件</button>
+                        <div class="layui-upload-list">
+                            <img class="layui-upload-img" id="banner">
+                            <div id="describeBanner"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-input-inline">
+                    <button type="button" class="layui-btn" id="uploadBanner"><i class="layui-icon">&#xe67c;</i>开始上传</button>
+                </div>
+                <div class="layui-input-inline ">
+                    <input type="text" name="bannerName" id="bannerName" autocomplete="off" class="layui-input" placeholder="成功上传,将会返回文件名">
+                </div>
+                <div class="layui-form-mid layui-word-aux">图片命名规范参照:bannerxxx.jpg(xxx为自然数),请保持banner图跟内容图xxx数字一致</div>
+            </div>
+        </div>
+        <div class="picture layui-hide layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">内容图</label>
+                <div class="layui-input-inline">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn layui-btn-normal" id="choiceContent">选择文件</button>
+                        <div class="layui-upload-list">
+                            <img class="layui-upload-img" id="content">
+                            <div id="describeContent"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-input-inline">
+                    <button type="button" class="layui-btn" id="uploadContent"><i class="layui-icon">&#xe67c;</i>开始上传</button>
+                </div>
+                <div class="layui-input-inline ">
+                    <input type="text" name="contentName" id="contentName" autocomplete="off" class="layui-input" placeholder="成功上传,将会返回文件名">
+                </div>
+                <div class="layui-form-mid layui-word-aux">图片命名规范参照:contentxxx.jpg(xxx为自然数),请保持banner图跟内容图xxx数字一致</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">APK包</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="apkAll" value="all" lay-filter="apkAll" lay-skin="primary" title="全部" >
+                    <foreach name="apk_list" key="key" item="vo" >
+                        <input type="checkbox" name="apk" value="{$key}" lay-skin="primary" title="{$vo}" >
+                    </foreach>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">渠道</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="channelAll" value="all" lay-filter="channelAll" lay-skin="primary" title="全部" >
+                    <foreach name="channel_list" key="key" item="vo" >
+                        <input type="checkbox" name="channel" value="{$key}" lay-skin="primary" title="{$vo}" >
+                    </foreach>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn " lay-submit lay-filter="LAY-menu-add-submit">添加</button>
+            </div>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form', 'laydate', 'upload'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,laydate = layui.laydate
+                ,form = layui.form
+                ,upload = layui.upload;
+
+            //日期
+            laydate.render({
+                elem: '#onlineTime'
+                ,type: 'datetime'
+            });
+            laydate.render({
+                elem: '#offlineTime'
+                ,type: 'datetime'
+            });
+
+            form.on('select(game)', function(data){
+                if ( data.value == 2 ){
+                    $(".gameNotice").removeClass("layui-hide");
+                    $(".picture").removeClass("layui-hide")
+                }else{
+                    $(".gameNotice").addClass("layui-hide")
+                    $(".picture").addClass("layui-hide")
+                }
+                console.log(data);
+            });
+            
+            // 文件上传-banner图
+            upload.render({
+                elem: '#choiceBanner'
+                ,url: '{:U("FreezeManagement/uploadImages")}'
+                ,auto: false
+                ,bindAction: '#uploadBanner'
+                ,acceptMime: 'image/jpg'
+                ,exts: 'jpg'
+                ,choose: function (obj) {
+                    var files = obj.pushFile();
+                    obj.preview(function (index, file, result) {
+                        var name = file.name;
+                        var etc = name.substr(name.length - 4, 4);    // 后缀
+                        var format = name.substr(0,6);   // 格式
+                        var number = name.substring(6, name.length - 4); // 数字
+                        if ( etc != ".jpg" ) {
+                            return layer.msg('文件命名格式不对', {icon: 2});
+                        }
+                        if ( format != "banner" ) {
+                            return layer.msg('文件命名格式不对', {icon: 2});
+                        }
+                        if ( isNaN(number) ) {
+                            return layer.msg('文件命名格式不对', {icon: 2});
+                        }
+                        $('#banner').attr('src', result); // 图片链接
+                        $('#describeBanner').html('文件名:' + name);   // 文件名
+                    })
+                }
+                ,done: function(res){
+                    if (res.code == 0) {
+                        var imgName = $('#bannerName');
+                        imgName.attr("value", res.imgName);   // 文件路径
+                        layer.msg(res.message, {icon: 1});
+                    } else {
+                        layer.msg(res.message, {icon: 2});
+                    }
+                }
+                ,error: function(){
+                    //some code
+                }
+            });
+
+            // 文件上传-内容图
+            upload.render({
+                elem: '#choiceContent'
+                ,url: '{:U("FreezeManagement/uploadImages")}'
+                ,auto: false
+                ,bindAction: '#uploadContent'
+                ,acceptMime: 'image/jpg'
+                ,exts: 'jpg'
+                ,choose: function (obj) {
+                    var files = obj.pushFile();
+                    obj.preview(function (index, file, result) {
+                        var name = file.name;
+                        var etc = name.substr(name.length - 4, 4);    // 后缀
+                        var format = name.substr(0,7);   // 格式
+                        var number = name.substring(7, name.length - 4); // 数字
+                        if ( etc != ".jpg" ) {
+                            return layer.msg('文件命名格式不对', {icon: 2});
+                        }
+                        if ( format != "content" ) {
+                            return layer.msg('文件命名格式不对', {icon: 2});
+                        }
+                        if ( isNaN(number) ) {
+                            return layer.msg('文件命名格式不对', {icon: 2});
+                        }
+                        $('#content').attr('src', result); // 图片链接
+                        $('#describeContent').html('文件名:' + name);   // 文件名
+                    })
+                }
+                ,done: function(res){
+                    if (res.code == 0) {
+                        var imgName = $('#contentName');
+                        imgName.attr("value", res.imgName);   // 文件路径(文件名)
+                        layer.msg(res.message, {icon: 1});
+                    } else {
+                        layer.msg(res.message, {icon: 2});
+                    }
+                }
+                ,error: function(){
+                    //some code
+                }
+            });
+
+            form.on('checkbox(apkAll)', function(data){
+                $("input[name='apk']").prop("checked" ,function () {
+                    return  data.elem.checked;
+                })
+                form.render();
+            });
+
+            form.on('checkbox(channelAll)', function(data){
+                $("input[name='channel']").prop("checked" ,function () {
+                    return  data.elem.checked;
+                })
+                form.render();
+            });
+
+            form.on('submit(LAY-menu-add-submit)', function(obj){
+                let postData = {
+                    type: $("select[name='type']").val(),   // 公告类型
+                    gameType: $("select[name='gameType']").val(),   // 游戏公告子类型
+                    priority: $('input[name="priority"] ').val(), // 优先级
+                    onlineTime: $("input[name='onlineTime']").val(),    // 上架时间
+                    offlineTime: $("input[name='offlineTime']").val(),  // 下架时间
+                    title: $('input[name="title"] ').val(), // 标题
+                    isPop: $('select[name="isPop"] ').val(), // 公告角标
+                    label: $('select[name="label"] ').val(), // 公告角标
+                    webPage: $('input[name="webPage"] ').val(), // 指定页面
+                    color: $('select[name="color"]').val(),   // 内容颜色
+                    size: $('select[name="size"]').val(),  // 内容文字大小
+                    bannerName: $('input[name="bannerName"]').val(),    // banner图路径(文件名)
+                    contentName: $('input[name="contentName"]').val(),    // 内容图路径(文件名)
+                    content: $("textarea[name='content']").val(),   // 内容
+                    apkAll: $('input[name="apkAll"]:checked').val(),    // apk包 all
+                    apk: (function () {
+                        let carr = []
+                        $.each($('input[name="apk"]:checked'), function () {
+                            carr.push($(this).val())
+                        })
+                        return carr
+                    }()),   // apk
+                    channelAll: $('input[name="channelAll"]:checked').val(),  // 渠道 all
+                    channel: (function () {
+                        let carr = []
+                        $.each($('input[name="channel"]:checked'), function () {
+                            carr.push($(this).val())
+                        })
+                        return carr
+                    }())    // 渠道
+                }
+                $.post("{:U('FreezeManagement/doAddGongGao')}", postData , (response) => {
+                    console.log(response)
+                    if ( response.code == 0 ) {
+                        layer.alert('添加成功', function(index, layero){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else {
+                        layer.msg(response.message, {icon: 2})
+                    }
+                })
+                return false
+            })
+        });
+    </script>
+</block>

@@ -1,0 +1,62 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <form class="layui-form">
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:84px;">提现厂商ID</label>
+                    <div class="layui-input-inline">
+                        <input name="withdrawVendorID" class="layui-input" type="text" id="withdrawVendorID" autocomplete="off" lay-verify="required|number">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:84px;">提现厂商名称</label>
+                    <div class="layui-input-inline">
+                        <input name="withdrawVendorName" class="layui-input" type="text" id="withdrawVendorName" autocomplete="off" lay-verify="required">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-filter="withdrawVendor" lay-submit="">新建</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form;
+            //监听提交
+            form.on('submit(withdrawVendor)', function(obj){
+                let postData = {
+                    withdrawVendorID: $("input[name='withdrawVendorID']").val(),
+                    withdrawVendorName: $('input[name="withdrawVendorName"]').val()
+                }
+                $.post("{:U('withdraw/addWithdrawVendor')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('添加成功', function(index){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert(response.message)
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+</block>

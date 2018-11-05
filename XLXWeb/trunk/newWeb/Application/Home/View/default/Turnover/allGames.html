@@ -1,0 +1,170 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家ID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="account" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">开始日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">截止日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">游戏</label>
+                    <div class="layui-input-inline">
+                        <select name="game" lay-verify="">
+                            <option value="">请选择</option>
+                            <option value="9">牛牛</option>
+                            <option value="8">炸金花</option>
+                            <option value="11">推筒子</option>
+                            <option value="10">红包接龙</option>
+                            <option value="2">百人金花</option>
+                            <option value="3">龙虎斗</option>
+                            <option value="13">跑得快</option>
+                            <option value="4">百家乐</option>
+                            <option value="5">时时彩</option>
+                            <option value="7">幸运转盘</option>
+                            <option value="6">奔驰宝马</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">下线金额</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="minAmount" autocomplete="off" class="layui-input" lay-verify="number">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">上线金额</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="maxAmount" autocomplete="off" class="layui-input" lay-verify="number">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                    <button class="layui-btn" data-type="execlExport">导出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100,height:700, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'account', minWidth:150}">玩家ID</th>
+            <th lay-data="{field:'nickname', minWidth:150}">玩家昵称</th>
+            <th lay-data="{field:'game', minWidth:150}">游戏场景</th>
+            <th lay-data="{field:'vary'}">金币变化</th>
+            <th lay-data="{field:'reason'}">金币变化原因</th>
+            <th lay-data="{field:'balance'}">账号余额</th>
+            <th lay-data="{field:'time', minWidth:160}">时间</th>
+        </tr>
+        </thead>
+    </table>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        account: (function () {
+                            let data_ = "";
+                            if ($('input[name="account"]').val() != "") {
+                                var reg = new RegExp(/^\d{7}$/);
+                                if ( reg.test($('input[name="account"]').val()) ) {
+                                    data_ = $('input[name="account"]').val();
+                                }
+                                else {
+                                    layer.alert('请输入正确的玩家ID');
+                                }
+                            }
+                            return data_;
+                        }()),
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                        game: $('select[name="game"]').val(),
+                        minAmount: $('input[name="minAmount"]').val(),
+                        maxAmount: $('input[name="maxAmount"]').val(),
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("turnover/allGames")}',
+                        limits: [20,50,100,500,1000],
+                        limit: 20,
+                        done: function (data) {
+                            if (data.message == '') {
+                                layer.msg(data.message, {icon: 2});
+                            }
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("turnover/allGames")}'+active.formatSearchData() //iframe的url
+                    });
+                    // setTimeout(function(){
+                    //     layer.close(index);
+                    // },3000);
+                }
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

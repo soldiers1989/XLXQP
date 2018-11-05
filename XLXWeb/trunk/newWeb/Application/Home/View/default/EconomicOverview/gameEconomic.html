@@ -1,0 +1,156 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">开始日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">截止日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                    <button class="layui-btn" data-type="execlExport">导出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:150, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'time'}">日期</th>
+            <th lay-data="{field:'total_gold'}">总金币</th>
+            <th lay-data="{field:'active_gold'}">活跃金币</th>
+            <th lay-data="{field:'yuebao_stock'}">余额宝库存</th>
+            <th lay-data="{field:'yuebao_interest'}">总利息</th>
+            <th lay-data="{field:'tx_amount'}">提现金额</th>
+            <th lay-data="{field:'tx_tgy'}">推广员提取佣金</th>
+            <th lay-data="{field:'charge_grant'}">充值发放</th>
+            <th lay-data="{field:'xx_amount'}">线下冲值</th>
+            <th lay-data="{field:'sm_amount'}">官方扫码充值发放</th>
+            <th lay-data="{field:'charge_rebate'}">充值返利</th>
+            <th lay-data="{field:'register_grant'}">注册发放</th>
+            <th lay-data="{field:'bind_grant'}">绑定发放</th>
+            <th lay-data="{field:'fenxiang_grant'}">分享发放</th>
+            <th lay-data="{field:'backstage_grant'}">后台发放</th>
+            <th lay-data="{field:'proxy_rebate'}">推广员返利</th>
+            <th lay-data="{field:'backstage_recover'}">后台回收</th>
+            <th lay-data="{field:'system_recover'}">系统回收</th>
+            <th lay-data="{field:'game_choushui'}">游戏抽水</th>
+            <th lay-data="{field:'zhongYaZhu'}">总押注</th>
+        </tr>
+        </thead>
+    </table>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("economicOverview/gameEconomic")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            // console.log(data)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("economicOverview/gameEconomic")}'+active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function(){
+                        layer.close(index);
+                    },3000);
+                }
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+
+        /*
+        var active = {
+                reload: function () {
+                    table.reload('datalist', {
+                        where: {
+                            start_time: $('input[name="s_date"]').val(),
+                            end_time: $('input[name="e_date"]').val(),
+                        },
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("economicOverview/gameEconomic")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                           // console.log(data)
+                        }
+                    })
+                }
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+         */
+    </script>
+</block>

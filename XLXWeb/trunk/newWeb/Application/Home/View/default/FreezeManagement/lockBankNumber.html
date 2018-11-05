@@ -1,0 +1,151 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">银行卡号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Bankcard" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">状态</label>
+                    <div class="layui-input-inline">
+                        <select name="state" lay-filter="state">
+                            <option value="0">全部</option>
+                            <option value="2">冻结</option>
+                            <option value="1">解冻</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                    <button class="layui-btn" data-type="addInfo">添加银行卡号</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:50, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'number'}">编号</th>
+            <th lay-data="{field:'Bankcard', minWidth:330}">银行卡号</th>
+            <th lay-data="{field:'State_str'}">状态</th>
+            <th lay-data="{field:'FreezeReason'}">冻结原因</th>
+            <th lay-data="{field:'UnfreezeReason'}">解冻原因</th>
+            <th lay-data="{field:'Operator'}">后台操作人</th>
+            <th lay-data="{field:'Time', minWidth:160}">冻结时间</th>
+            <th lay-data="{fixed: 'right', width:80, align:'center', toolbar: '#bar'}">操作</th>
+        </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-danger layui-btn-xs"  lay-event="removeFreeze">解冻</a>
+    </script>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+
+            //监听工具条
+            table.on('tool(datalist)', function(obj){
+                var data = obj.data;
+                if ( obj.event === 'removeFreeze' ) {
+                    if( data.state == 1 ) {
+                        layer.alert('已经是解冻状态')
+                        return
+                    }
+                    layer.prompt({
+                        formType: 2
+                        ,title: '解冻银行卡：'+data.Bankcard
+                        ,value:'原因：'
+                    }, function(value, index){
+                        layer.close(index);
+                        //这里一般是发送修改的Ajax请求
+                        $.post("{:U('FreezeManagement/unBankNumber')}", {Bankcard: data.Bankcard, "nuLock": 1, 'cause':value }, function(responseData) {
+                            if (responseData.code == 0 ){
+                                obj.update({
+                                    State_str: '解冻',
+                                    state: 1
+                                })
+                                layer.msg('操作成功', {icon: 1});
+                            }
+                        })
+                    });
+
+                    // layer.confirm('真的要解冻该设备码么', function(index){
+                    //     obj.del();
+                    //     layer.close(index);
+                    //     // $.post("{:U('freezeManagement/doDeviceCode')}", {id: data.id}, (response) => {
+                    //     //     if ( response.code == 0 ) {
+                    //     //         layer.alert('解冻成功', function(index){
+                    //     //             location.reload()
+                    //     //             //按钮【按钮一】的回调
+                    //     //         })
+                    //     //     }else{
+                    //     //         layer.alert('解冻失败')
+                    //     //     }
+                    //     // })
+                    // });
+                }
+            });
+
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+            var active = {
+                reload: function () {
+                    table.reload('datalist', {
+                        where: {
+                            Bankcard: $('input[name="Bankcard"]').val(),
+                            state:  $('select[name="state"]').val()
+                        },
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("freezeManagement/lockBankNumber")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+
+                        }
+                    })
+                },
+                addInfo: function () {
+                    layer.open({
+                        type: 2,
+                        title: '添加银行卡号',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['780px', '80%'],
+                        content: '{:U("FreezeManagement/lockBankNumberAdd")}' //iframe的url
+                    });
+                }
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

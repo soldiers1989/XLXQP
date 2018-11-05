@@ -1,0 +1,107 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br >
+    <div class="searchTable">
+        <div class="layui-form">
+            <button class="layui-btn" data-type="execlExport">导出</button>
+        </div>
+    </div>
+
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist'}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'id'}">编号</th>
+                <th lay-data="{field:'senderid'}">发送人ID</th>
+                <th lay-data="{field:'senderName'}">发送人昵称</th>
+                <th lay-data="{field:'SendTime'}">发送时间</th>
+                <th lay-data="{field:'content'}">内容</th>
+                <th lay-data="{field:'receiverid'}">接收人ID</th>
+                <th lay-data="{field:'receivername'}">接收人昵称</th>
+                <th lay-data="{field:'receiveTime'}">阅读时间</th>
+                <th lay-data="{fixed: 'right', width:80, align:'center', toolbar: '#bar'}">操作</th>
+            </tr>
+        </thead>
+    </table>
+
+
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-danger layui-btn-xs"  lay-event="remove">删除</a>
+    </script>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+
+            var active = {
+                searchData: function() {
+                    return {
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData() ,
+                        url: '{:U("GameOverview/emailChat")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            //console.log(data)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("GameOverview/emailChat")}'+active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function(){
+                        layer.close(index);
+                    }, 3000);
+                }
+            }
+            active.reload();
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+
+            //监听工具条
+            table.on('tool(datalist)', function(obj){
+                var data = obj.data;
+                console.log(data);
+                if ( obj.event === 'remove' ) {
+                    layer.confirm('真的要删除么？', function(index){
+                        $.post("{:U('GameOverview/delEmail')}", {id: data.id}, (response) => {
+                            if ( response.code == 0 ) {
+                                obj.del();
+                                layer.close(index);
+                            }else{
+                                layer.alert('删除失败')
+                            }
+                        })
+                    });
+                }
+            });
+        });
+    </script>
+</block>

@@ -1,0 +1,176 @@
+<extend name="Base/base" />
+<block name="cssStyle">
+    <style>
+        .layui-form-label {
+            width: 85px;
+        }
+    </style>
+</block>
+<block name="main">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>添加支付通道</legend>
+    </fieldset>
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">支付通道名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="passName"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            addPay
+            <div class="layui-inline">
+                <label class="layui-form-label">支付类型</label>
+                <div class="layui-input-inline">
+                    <select name="type" lay-filter="PayTypeID">
+                        <foreach name="pay_list" key="key" item="vo" >
+                            <option value="{$key}">{$vo}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">商户信息索引</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="userIndex"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">支付厂商名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="FactName"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="layui-form-item">-->
+            <!--<div class="layui-inline">-->
+                <!--<label class="layui-form-label">商户ID</label>-->
+                <!--<div class="layui-input-inline">-->
+                    <!--<input type="text" name="MerchantID"  autocomplete="off" class="layui-input">-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="layui-inline">-->
+                <!--<label class="layui-form-label">商户账号</label>-->
+                <!--<div class="layui-input-inline">-->
+                    <!--<input type="text" name="MerchantName"  autocomplete="off" class="layui-input">-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">支付URL</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="ReqURL"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">APK包</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="apkAll" value="all" lay-filter="apkAll" lay-skin="primary" title="全部" >
+                <foreach name="apk_list" key="key" item="vo" >
+                    <input type="checkbox" name="apk[]" value="{$key}" lay-skin="primary" title="{$vo}" >
+                </foreach>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">单笔最小充值</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="PerPayMin"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">单笔最大充值</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="PerPayMax"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">支付最大充值</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="AllPayMax"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">优先级权重</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="Weight"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">定额通道开关</label>
+                <div class="layui-input-inline">
+                    <input type="checkbox" name="chargeListClose" value="1" lay-skin="switch" lay-text="开启|关闭">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">开关</label>
+                <div class="layui-input-inline">
+                    <input type="checkbox" name="State" value="1" lay-skin="switch" lay-text="开启|关闭">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="LAY-menu-add-submit">添加</button>
+            </div>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,laydate = layui.laydate
+                ,form = layui.form;
+
+            form.on('checkbox(apkAll)', function(data){
+                $("input[name='apk[]']").prop("checked" ,function () {
+                    return  data.elem.checked;
+                })
+                form.render();
+            });
+
+            form.on('submit(LAY-menu-add-submit)', function(obj){
+                let postData = {};
+                let t = $('form').serializeArray();
+                t.forEach(function (key,val) {
+                    postData[key.name] = key.value
+                })
+                $.post("{:U('system/doAddPay')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('添加成功', function(index, layero){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert(response.message)
+                    }
+                })
+                return false
+            })
+        });
+    </script>
+</block>

@@ -1,0 +1,130 @@
+<extend name="Base/base"/>
+<block name="cssStyle">
+    <style>
+        .layui-form-label {
+            width: 85px;
+        }
+    </style>
+</block>
+<block name="main">
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">APK包</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="apkAll" value="all" lay-filter="apkAll" lay-skin="primary" title="全部" >
+                    <foreach name="apkList" key="key" item="vo" >
+                        <input type="checkbox" name="apk" value="{$key}" lay-skin="primary" title="{$vo}" >
+                    </foreach>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">支付类型</label>
+                <div class="layui-input-inline">
+                    <select name="paymentType" lay-filter="paymentType" lay-verify="required">
+                        <option value="">请选择</option>
+                        <foreach name="paymentList" key="key" item="vo">
+                            <option value="{$key}">{$vo}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">充值范围</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="number" name="minAmount" autocomplete="off" class="layui-input" placeholder="请输入" lay-verify="required">
+                </div>
+                <div class="layui-form-mid">-</div>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="number" name="maxAmount" autocomplete="off" class="layui-input" placeholder="请输入" lay-verify="required">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">推荐金额</label>
+            <div class="layui-input-inline">
+                <input type="text" name="recommendAmount" autocomplete="off" class="layui-input" placeholder="请输入推荐金额" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">优先级</label>
+            <div class="layui-input-inline">
+                <input type="number" name="weight" autocomplete="off" class="layui-input" placeholder="请输入优先级" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">角标</label>
+            <div class="layui-input-block">
+                <input type="radio" name="label" value="1" title="推荐" checked="">
+                <input type="radio" name="label" value="0" title="无">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <input type="radio" name="state" value="1" title="开启" checked="">
+                <input type="radio" name="state" value="0" title="关闭">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-filter="submitAdd" lay-submit="">确定添加</button>
+            </div>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form;
+
+            // 选择所有apk
+            form.on('checkbox(apkAll)', function(data){
+                $("input[name='apk']").prop("checked" ,function () {
+                    return  data.elem.checked;
+                });
+                form.render();
+            });
+
+            //监听提交
+            form.on('submit(submitAdd)', function(obj){
+                let postData = {
+                    apkAll: $("input[name='apkAll']:checked").val(),
+                    apk: (function () {
+                        let carr = [];
+                        $.each($("input[name='apk']:checked"), function () {
+                            carr.push($(this).val())
+                        });
+                        return carr;
+                    }()),
+                    paymentType: $("select[name='paymentType']").val(),
+                    minAmount: $("input[name='minAmount']").val(),
+                    maxAmount: $("input[name='maxAmount']").val(),
+                    recommendAmount: $("input[name='recommendAmount']").val(),
+                    weight: $("input[name='weight']").val(),
+                    label: $("input[name='label']").val(),
+                    state: $("input[name='state']").val(),
+                };
+                $.post("{:U('configManagement/doAddPaymentEntrance')}", postData, (response) => {
+                    if (response.code == 0) {
+                        layer.msg('添加成功', {icon: 1}, function(index, layero){
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                        })
+                    }else {
+                        if (response.message == undefined || response.message == '') response.message = '添加失败';
+                        layer.msg(response.message, {icon: 2});
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+</block>

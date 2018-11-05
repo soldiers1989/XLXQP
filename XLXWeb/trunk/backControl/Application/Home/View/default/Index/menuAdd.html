@@ -1,0 +1,97 @@
+<extend name="Base/base" />
+<block name="mainBlock">
+    <div class="layui-card">
+        <div class="layui-form" lay-filter="layuiadmin-app-form-list" id="layuiadmin-app-form-list" style="padding: 20px 30px ">
+        <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单URL</label>
+            <div class="layui-input-block">
+                <input type="text" name="m_url" lay-verify="m_url" autocomplete="off" placeholder="请输入菜单URL" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单名称</label>
+            <div class="layui-input-block">
+                <div class="layui-input-inline">
+                <input type="text" name="m_name" lay-verify="m_name" autocomplete="off" placeholder="请输入菜单名称" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">上级分类</label>
+            <div class="layui-input-block">
+                <div class="layui-input-inline">
+                <select name="m_parentid" lay-filter="m_parentid">
+                    <option value=""></option>
+                    <foreach name="menu_list" item="vo">
+                        <option value="{$vo.id}">{$vo.name}</option>
+                        <foreach name="vo.childs" item="twoVo" >
+                            <option value="{$twoVo.id}"> &nbsp;&nbsp;- {$twoVo.name}</option>
+                            <!--<foreach name="twoVo.childs" item="threeVo" >-->
+                                <!--<option value="{$threeVo.menu_id}"> &nbsp;&nbsp;&nbsp;&nbsp;- {$threeVo.menu_name}</option>-->
+                            <!--</foreach>-->
+                        </foreach>
+                    </foreach>
+
+                </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否显示</label>
+            <div class="layui-input-block">
+                <input type="radio" name="m_isdisplay" value="1" title="显示" checked="">
+                <input type="radio" name="m_isdisplay" value="0" title="隐藏">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-block">
+                <div class="layui-input-inline">
+                <input type="text" name="m_sort" lay-verify="m_sort" autocomplete="off" placeholder="请输入排序" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn " lay-submit lay-filter="LAY-menu-add-submit">添加</button>
+            </div>
+        </div>
+    </form>
+    </div>
+    </div>
+</block>
+
+<block name="scriptBlock">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form;
+            form.on('submit(LAY-menu-add-submit)', function(obj){
+                let postData = {
+                    m_url: $("input[name='m_url']").val(),
+                    m_name: $("input[name='m_name']").val(),
+                    m_parentid: $("select[name='m_parentid']").val(),
+                    m_isdisplay: $('input[name="m_isdisplay"]:checked ').val(),
+                    m_sort: $("input[name='m_sort']").val()
+                }
+
+                $.post("{:U('index/doMenuAdd')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('添加成功', function(index, layero){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert('添加失败')
+                    }
+                })
+                return false
+            })
+        });
+    </script>
+</block>

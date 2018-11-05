@@ -1,0 +1,47 @@
+<extend name="Base/base" />
+<block name="main">
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色名称</label>
+            <div class="layui-input-block">
+                <div class="layui-input-inline">
+                    <input type="text" name="name" lay-verify="name" value="{$roleInfo.bk_name}" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input name="id" type="hidden" value="{$roleInfo.bk_id}">
+                <button class="layui-btn " lay-submit lay-filter="submitEdit">确认修改</button>
+            </div>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form;
+
+            form.on('submit(submitEdit)', function(obj){
+                let postData = {
+                    id: $("input[name='id']").val(),
+                    name: $("input[name='name']").val(),
+                };
+                $.post("{:U('system/doRoleNameEdit')}", postData , (response) => {
+                    if (response.code == 0) {
+                        layer.msg('更新成功,请勿重复点击', {icon: 1}, function(index, layero){
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                        })
+                    }else{
+                        layer.msg(response.message, {icon: 2})
+                    }
+                });
+                return false
+            })
+        });
+    </script>
+</block>

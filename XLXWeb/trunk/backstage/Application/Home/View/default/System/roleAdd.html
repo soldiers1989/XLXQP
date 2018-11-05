@@ -1,0 +1,46 @@
+<extend name="Base/base" />
+<block name="main">
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色名称</label>
+            <div class="layui-input-block">
+                <div class="layui-input-inline">
+                    <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入角色名称" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn " lay-submit lay-filter="submitAdd">确定添加</button>
+            </div>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form;
+
+            form.on('submit(submitAdd)', function(obj){
+                let postData = {
+                    name: $("input[name='name']").val()
+                };
+                $.post("{:U('system/doRoleAdd')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.msg('添加成功,请勿重复点击', {icon: 1}, function(index, layero){
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                        })
+                    }else{
+                        if (response.message == undefined || response.message == '') response.message = '添加失败';
+                        layer.msg(response.message, {icon: 2});
+                    }
+                });
+                return false
+            })
+        });
+    </script>
+</block>

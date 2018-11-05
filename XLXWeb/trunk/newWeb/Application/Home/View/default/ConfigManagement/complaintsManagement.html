@@ -1,0 +1,164 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">投诉ID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="account" lay-verify="number" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">开始日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">截止日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                    <button class="layui-btn" data-type="execlExport">导出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'number'}">编号</th>
+            <th lay-data="{field:'account', minWidth:150}">投诉人ID</th>
+            <th lay-data="{field:'nickname', minWidth:150}">投诉人昵称</th>
+            <th lay-data="{field:'time', minWidth:160}">投诉时间</th>
+            <th lay-data="{field:'content', minWidth:260}">投诉内容</th>
+            <th lay-data="{field:'state'}">状态</th>
+            <th lay-data="{field:'result', minWidth:260}">处理结果</th>
+            <th lay-data="{field:'operator'}">处理人</th>
+            <th lay-data="{field:'operate_time', minWidth:160}">处理时间</th>
+            <th lay-data="{fixed: 'right', width:65, align:'center', toolbar: '#bar'}">操作</th>
+        </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-xs"  lay-event="edit">编辑</a>
+    </script>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+
+            //监听工具条
+            table.on('tool(datalist)', function (obj) {
+                var data = obj.data;
+                console.log(data);
+                if (obj.event === 'edit') {
+                    layer.open({
+                        type: 2
+                        , title: '投诉管理编辑-' + data.account + '-' + data.number
+                        , area: ['800px', '340px']
+                        , shade: 0
+                        , maxmin: true
+                        , content: data.editUrl
+                        , btn: ['关闭']
+                        , yes: function () {
+                            layer.closeAll();
+                        }
+                    });
+                }
+            });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        account: (function () {
+                            let data_ = "";
+                            if ($('input[name="account"]').val() != "") {
+                                var reg = new RegExp(/^\d{7}$/);
+                                if ( reg.test($('input[name="account"]').val()) ) {
+                                    data_ = $('input[name="account"]').val();
+                                }
+                                else {
+                                    layer.alert('请输入正确的投诉ID');
+                                }
+                            }
+                            return data_;
+                        }()),
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("configManagement/complaintsManagement")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("configManagement/complaintsManagement")}'+active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function(){
+                        layer.close(index);
+                    },3000);
+                }
+
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+
+        });
+    </script>
+</block>

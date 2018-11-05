@@ -1,0 +1,195 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">代理游戏ID</label>
+                    <div class="layui-input-inline">
+                        <input name="account" class="layui-input" type="text" id="account" autocomplete="off"
+                               lay-verify="required|number">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">代理游戏名</label>
+                    <div class="layui-input-inline">
+                        <input name="GameNickname" class="layui-input" type="text" id="GameNickname" autocomplete="off"
+                               lay-verify="required">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">代理名称</label>
+                    <div class="layui-input-inline">
+                        <input name="nickname" class="layui-input" type="text" id="nickname" autocomplete="off"
+                               lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">代理QQ</label>
+                    <div class="layui-input-inline">
+                        <input name="qq" class="layui-input" type="text" id="qq" autocomplete="off"
+                               lay-verify="">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">代理微信</label>
+                    <div class="layui-input-inline">
+                        <input name="wechat" class="layui-input" type="text" id="wechat" autocomplete="off"
+                               lay-verify="">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">代理电话</label>
+                    <div class="layui-input-inline">
+                        <input name="phone" class="layui-input" type="text" id="phone" autocomplete="off"
+                               lay-verify="required|number">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">权重</label>
+                    <div class="layui-input-inline">
+                        <input name="weights" class="layui-input" type="text" id="weights" autocomplete="off"
+                               lay-verify="required|number">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">推荐标识</label>
+                    <div class="layui-input-inline">
+                        <select name="recommend_label" lay-verify="required">
+                            <option value="">请选择</option>
+                            <option value="0">无</option>
+                            <option value="1">HOT</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">状态</label>
+                    <div class="layui-input-inline">
+                        <select name="state" lay-verify="required">
+                            <option value="">请选择</option>
+                            <option value="1">上架</option>
+                            <option value="0">下架</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">分组编号</label>
+                    <div class="layui-input-inline">
+                        <input name="number" class="layui-input" type="text" id="number" autocomplete="off"
+                               lay-verify="required|number">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">APK包</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="apkAll" value="all" lay-filter="apkAll" lay-skin="primary" title="全部" >
+                        <foreach name="apk_list" key="key" item="vo" >
+                            <input type="checkbox" name="apk" value="{$key}" lay-skin="primary" title="{$vo}" >
+                        </foreach>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">代理姓名</label>
+                    <div class="layui-input-inline">
+                        <input name="name" class="layui-input" type="text" id="name" autocomplete="off"
+                               lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">代理用户名</label>
+                    <div class="layui-input-inline">
+                        <input name="Accound" class="layui-input" type="text" id="Accound" autocomplete="off"
+                               lay-verify="required">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">代理密码</label>
+                    <div class="layui-input-inline">
+                        <input name="Psd" class="layui-input" type="text" id="Psd" autocomplete="off"
+                               lay-verify="required">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-filter="add_proxy" lay-submit="">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form;
+
+            form.on('checkbox(apkAll)', function(data){
+                $("input[name='apk']").prop("checked" ,function () {
+                    return  data.elem.checked;
+                })
+                form.render();
+            });
+
+            //监听提交
+            form.on('submit(add_proxy)', function (obj) {
+                let postData = {
+                    account: $("input[name='account']").val(),
+                    nickname: $("input[name='nickname']").val(),
+                    qq: $("input[name='qq']").val(),
+                    wechat: $("input[name='wechat']").val(),
+                    phone: $("input[name='phone']").val(),
+                    weights: $("input[name='weights']").val(),
+                    recommend_label: $("select[name='recommend_label']").val(),
+                    state: $("select[name='state']").val(),
+                    number: $("input[name='number']").val(),
+                    name: $("input[name='name']").val(),
+                    Accound: $("input[name='Accound']").val(),
+                    Psd: $("input[name='Psd']").val(),
+                    GameNickname: $("input[name='GameNickname']").val(),
+                    //apk包id
+                    apkall: $('input[name="apkAll"]:checked').val(),
+                    apk: (function () {
+                        let carr = []
+                        $.each($('input[name="apk"]:checked'), function () {
+                            carr.push($(this).val())
+                        })
+                        return carr
+                    }())
+                }
+                $.post("{:U('configManagement/addProxy')}", postData, (response) => {
+                    if (response.code == 0) {
+                        layer.alert('添加成功', function (index) {
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    } else {
+                        layer.alert('添加失败')
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+</block>

@@ -1,0 +1,122 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家ID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="account" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                    <button class="layui-btn" data-type="execlExport">导出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:false,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'rank'}">名次</th>
+            <th lay-data="{field:'account'}">玩家ID</th>
+            <th lay-data="{field:'nickname'}">玩家昵称</th>
+            <th lay-data="{field:'yuebao'}">余额宝总金币</th>
+            <th lay-data="{field:'yuebao_'}">余额宝金币</th>
+            <th lay-data="{field:'seven'}">7日定存金币</th>
+            <th lay-data="{field:'seven_'}">7日定存份数</th>
+            <th lay-data="{field:'fifteen'}">15日定存金币</th>
+            <th lay-data="{field:'fifteen_'}">15日定存份数</th>
+            <th lay-data="{field:'thirty'}">30日定存金币</th>
+            <th lay-data="{field:'thirty_'}">30日定存份数</th>
+            <th lay-data="{field:'interest'}">总利息</th>
+        </tr>
+        </thead>
+    </table>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date',
+                format: 'yyyy-MM-dd'
+            });
+            laydate.render({
+                elem: '#e_date',
+                format: 'yyyy-MM-dd'
+            });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        account: (function () {
+                            let data_ = "";
+                            if ($('input[name="account"]').val() != "") {
+                                var reg = new RegExp(/^\d{7}$/);
+                                if ( reg.test($('input[name="account"]').val()) ) {
+                                    data_ = $('input[name="account"]').val();
+                                }
+                                else {
+                                    layer.alert('请输入正确的玩家ID');
+                                }
+                            }
+                            return data_;
+                        }())
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        // page: {
+                        //     curr: 1 //重新从第 1 页开始
+                        // },
+                        url: '{:U("Yuebao/yuebaoLeaderboard")}',
+                        // limits: [20,50,100],
+                        // limit: 20,
+                        done: function (data) {
+                            console.log(data)
+                        },
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("Yuebao/yuebaoLeaderboard")}'+active.formatSearchData() //iframe的url
+                    });
+                }
+            }
+
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

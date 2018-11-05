@@ -1,0 +1,138 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+          <div class="layui-form-item">
+              <div class="layui-inline days">
+                  <button class="layui-btn  layui-btn-sm layui-btn-primary" data-id="3" data-type="day">最近3日</button>
+                  <button class="layui-btn layui-btn-sm layui-btn-primary" data-id="7" data-type="day">最近7日</button>
+                  <button class="layui-btn layui-btn-sm layui-btn-primary" data-id="1" data-type="day">历史数据</button>
+              </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">开始日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">截止日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+          <div class="layui-inline">
+              <label class="layui-form-label">ID</label>
+              <div class="layui-input-inline">
+                  <input type="number" name="uid" lay-verify="required|phone" autocomplete="off" class="layui-input">
+              </div>
+          </div>
+              <button class="layui-btn" data-type="reload">搜索</button>
+          </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-col-md5">
+            <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:false, id:'datalist_yin',cellMinWidth: 120}" lay-filter="datalist_yin">
+                <thead>
+                    <tr>
+                        <th lay-data="{field:'num'}">排名</th>
+                        <th lay-data="{field:'id'}">ID</th>
+                        <th lay-data="{field:'name'}">昵称</th>
+                        <th lay-data="{field:'changevalue'}">赢分</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="layui-col-md2"> &nbsp&nbsp</div>
+        <div class="layui-col-md5">
+            <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:false, id:'datalist_shu',cellMinWidth: 120}" lay-filter="datalist_shu">
+                <thead>
+                    <tr>
+                        <th lay-data="{field:'num'}">排名</th>
+                        <th lay-data="{field:'id'}">ID</th>
+                        <th lay-data="{field:'name'}">昵称</th>
+                        <th lay-data="{field:'changevalue'}">赢分</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+            //日期
+                laydate.render({
+                    elem: '#s_date'
+                });
+                laydate.render({
+                    elem: '#e_date'
+                });
+            var active = {
+                reload: function() {
+                    table.reload('datalist_yin', {
+                        where: {
+                            start_time: $('input[name="s_date"]').val(),
+                            end_time: $('input[name="e_date"]').val(),
+                            platform: $('select[name="platform"]').val(),
+                            channe: $('select[name="channe"]').val(),
+                            yinshu: "yin",
+                            dayTime: $(".days .layui-btn-warm").data("id"),
+                            uid: $("input[name='uid']").val(),
+                            gameid: "{:I('get.gameid/d')}"
+                        },
+                        url: '{:U("gameOverview/realTimeWinLose")}',
+                        done: function (data) {
+                          //  console.log(data)
+                        }
+                     })
+                    table.reload('datalist_shu', {
+                        where: {
+                            start_time: $('input[name="s_date"]').val(),
+                            end_time: $('input[name="e_date"]').val(),
+                            platform: $('select[name="platform"]').val(),
+                            channe: $('select[name="channe"]').val(),
+                            yinshu: "shu",
+                            dayTime: $(".days .layui-btn-warm").data("id"),
+                            uid: $("input[name='uid']").val(),
+                            gameid: "{:I('get.gameid/d')}"
+                        },
+                        url: '{:U("gameOverview/realTimeWinLose")}',
+                        done: function (data) {
+                            //console.log(data)
+                        }
+                    })
+                },
+                buttionDayEvent: function () {
+                    $("button[data-type='day']").bind({
+                        click: function () {
+                            $("button[data-type='day']").removeClass("layui-btn-warm");
+                            $(this).addClass("layui-btn-warm");
+                            active.reload();
+                        }
+                    })
+                },
+                init: function () {
+                    active.reload();
+                    active.buttionDayEvent();
+                }
+            }
+            active.init();
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

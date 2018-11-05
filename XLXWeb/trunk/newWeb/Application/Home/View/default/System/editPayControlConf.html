@@ -1,0 +1,122 @@
+<extend name="Base/base" />
+<block name="cssStyle">
+    <style>
+        .layui-form-label {
+            width: 85px;
+        }
+    </style>
+</block>
+<block name="main">
+    <form class="layui-form" action="" lay-filter="example">
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">APK包</label>
+            <div class="layui-input-block">
+                <foreach name="apk_list" key="key" item="vo" >
+                    <input type="checkbox"  {:x_in_array($key, $row['bk_apkid'],'checked')} name="apk[]" value="{$key}"  lay-skin="primary" title="{$vo}" >
+                </foreach>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">支付类型名称</label>
+                <div class="layui-input-inline">
+                        <select name="PayTypeID" lay-filter="PayTypeID">
+                            <foreach name="pay_list" key="key" item="vo" >
+                                <option {:xeq($row['PayTypeID'],$key , 'selected')} value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">充值范围</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="number" value="{$row['bk_mincharge']}" name="MinCharge" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid">-</div>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="number" value="{$row['bk_maxcharge']}" name="MaxCharge" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">优先级权重</label>
+            <div class="layui-input-inline">
+                <input type="number" value="{$row['bk_weight']}" name="Weight"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">推荐金额</label>
+            <div class="layui-input-inline">
+                <input type="text" name="price_list"  value="{$row['bk_chargelist']}" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">小角标</label>
+            <div class="layui-input-block">
+                <input type="radio" name="IsHot" {:xeq($row['bk_ishot'],0,'checked')}  value="0" title="无" >
+                <input type="radio" name="IsHot" {:xeq($row['bk_ishot'],1,'checked')}  value="1" title="推荐">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <input type="checkbox" {:xeq($row['bk_state'], 1, 'checked')} name="State" value="1" lay-skin="switch" lay-filter="switchState" lay-text="开|关">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="LAY-menu-add-submit">更新</button>
+                <input type="hidden" value="{$row.bk_id}" name="id">
+            </div>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,laydate = layui.laydate
+                ,form = layui.form;
+
+            form.on('checkbox(PayTypeIDAll)', function(data){
+                $("input[name='PayTypeID[]']").prop("checked" ,function () {
+                    return  data.elem.checked;
+                })
+                form.render();
+            });
+
+            form.on('submit(LAY-menu-add-submit)', function(obj){
+                let postData = {};
+                let t = $('form').serializeArray();
+                t.forEach(function (key,val) {
+                    postData[key.name] = key.value
+                })
+
+                $.post("{:U('system/editPayControlConf')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('更新成功', function(index, layero){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert(response.message)
+                    }
+                })
+                return false
+            })
+        });
+    </script>
+</block>

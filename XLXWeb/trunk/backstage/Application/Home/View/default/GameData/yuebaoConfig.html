@@ -1,0 +1,368 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 88px;font-weight: bold;font-size: 16px">利率调整</label>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">日化利率万分比</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="rate" class="layui-input" type="text" id="rate" autocomplete="off"
+                                   placeholder="{$data_list.bk_rate}" lay-verify="">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">产品1利率占比</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="rate1" class="layui-input" type="text" id="rate1" autocomplete="off"
+                                   placeholder="{$data_list.bk_rate1}" lay-verify="">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">产品2利率占比</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="rate2" class="layui-input" type="text" id="rate2" autocomplete="off"
+                                   placeholder="{$data_list.bk_rate2}" lay-verify="">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">产品3利率占比</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="rate3" class="layui-input" type="text" id="rate3" autocomplete="off"
+                                   placeholder="{$data_list.bk_rate3}" lay-verify="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 265px;font-weight: bold;font-size: 16px">余额宝可支配金额占充值的百分比</label>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">余额宝(百分比)</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="yuebaoRate" class="layui-input" type="text" id="yuebaoRate" autocomplete="off"
+                                   placeholder="{$data_list.bk_yuebaorate}" lay-verify="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label"
+                           style="width: 235px;font-weight: bold;font-size: 16px">各产品可支配金额的分配占比</label>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">日化(百分比)</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="amountrate" class="layui-input" type="text" id="amountrate" autocomplete="off"
+                                   placeholder="{$data_list.bk_amountrate}" lay-verify="">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">产品1(百分比)</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="amountrate1" class="layui-input" type="text" id="amountrate1"
+                                   autocomplete="off" placeholder="{$data_list.bk_amountrate1}" lay-verify="">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">产品2(百分比)</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="amountrate2" class="layui-input" type="text" id="amountrate2"
+                                   autocomplete="off" placeholder="{$data_list.bk_amountrate2}" lay-verify="">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">产品3(百分比)</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="amountrate3" class="layui-input" type="text" id="amountrate3"
+                                   autocomplete="off" placeholder="{$data_list.bk_amountrate3}" lay-verify="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label"
+                           style="width: 155px;font-weight: bold;font-size: 16px">定存份数价格调整</label>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">产品1单价调整</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="price1" class="layui-input" type="text" id="price1" autocomplete="off"
+                                   placeholder="{$data_list.bk_price1}" lay-verify="">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">产品2单价调整</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="price2" class="layui-input" type="text" id="price2" autocomplete="off"
+                                   placeholder="{$data_list.bk_price2}" lay-verify="">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">产品3单价调整</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="price3" class="layui-input" type="text" id="price3" autocomplete="off"
+                                   placeholder="{$data_list.bk_price3}" lay-verify="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label"
+                           style="width: 125px;font-weight: bold;font-size: 16px">产品周期设定</label>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">日化周期(小时)</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="periodHour" class="layui-input" type="text" id="periodHour" autocomplete="off"
+                                   placeholder="{$data_list.bk_periodhour}" lay-verify="">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">产品1周期</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="period1" class="layui-input" type="text" id="period1" autocomplete="off"
+                                   placeholder="{$data_list.bk_period1}" lay-verify="">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">产品2周期</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="period2" class="layui-input" type="text" id="period2" autocomplete="off"
+                                   placeholder="{$data_list.bk_period2}" lay-verify="">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 120px;">产品3周期</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="period3" class="layui-input" type="text" id="period3" autocomplete="off"
+                                   placeholder="{$data_list.bk_period3}" lay-verify="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label"
+                           style="width: 175px;font-weight: bold;font-size: 16px">日化利率衰减百分比</label>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width: 160px;">日化利率衰减百分比</label>
+                        <div class="layui-input-inline" style="width: 120px;">
+                            <input name="attenuation" class="layui-input" type="text" id="attenuation"
+                                   autocomplete="off" placeholder="{$data_list.bk_attenuation}" lay-verify="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-filter="submit" lay-submit="">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form;
+
+            //监听提交
+            form.on('submit(submit)', function (obj) {
+                let postData = {
+                    rate: (function () {
+                        let data_ = "";
+                        if ($('input[name="rate"]').val() != "") {
+                            if ($('input[name="rate"]').val() > 0) {
+                                data_ = $('input[name="rate"]').val();
+                            }
+                        }
+                        return data_;
+                    }()), // 日化利率万分比
+                    rate1: (function () {
+                        let data_ = "";
+                        if ($('input[name="rate1"]').val() != "") {
+                            if ($('input[name="rate1"]').val() > 0) {
+                                data_ = $('input[name="rate1"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),  // 产品1利率占比
+                    rate2: (function () {
+                        let data_ = "";
+                        if ($('input[name="rate2"]').val() != "") {
+                            if ($('input[name="rate2"]').val() > 0) {
+                                data_ = $('input[name="rate2"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),  // 产品2利率占比
+                    rate3: (function () {
+                        let data_ = "";
+                        if ($('input[name="rate3"]').val() != "") {
+                            if ($('input[name="rate3"]').val() > 0) {
+                                data_ = $('input[name="rate3"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),  // 产品3利率占比
+                    yuebaoRate: (function () {
+                        let data_ = "";
+                        if ($('input[name="yuebaoRate"]').val() != "") {
+                            if ($('input[name="yuebaoRate"]').val() > 0) {
+                                data_ = $('input[name="yuebaoRate"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),    // 余额宝(百分比)
+                    amountrate: (function () {
+                        let data_ = "";
+                        if ($('input[name="amountrate"]').val() != "") {
+                            if ($('input[name="amountrate"]').val() > 0) {
+                                data_ = $('input[name="amountrate"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),    // 日化(百分比)
+                    amountrate1: (function () {
+                        let data_ = "";
+                        if ($('input[name="amountrate1"]').val() != "") {
+                            if ($('input[name="amountrate1"]').val() >= 0) {
+                                data_ = $('input[name="amountrate1"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),  // 产品1(百分比)
+                    amountrate2: (function () {
+                        let data_ = "";
+                        if ($('input[name="amountrate2"]').val() != "") {
+                            if ($('input[name="amountrate2"]').val() >= 0) {
+                                data_ = $('input[name="amountrate2"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),  // 产品2(百分比)
+                    amountrate3: (function () {
+                        let data_ = "";
+                        if ($('input[name="amountrate3"]').val() != "") {
+                            if ($('input[name="amountrate3"]').val() >= 0) {
+                                data_ = $('input[name="amountrate3"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),  // 产品3(百分比)
+                    price1: (function () {
+                        let data_ = "";
+                        if ($('input[name="price1"]').val() != "") {
+                            if ($('input[name="price1"]').val() >= 0) {
+                                data_ = $('input[name="price1"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),    // 产品1单价调整
+                    price2: (function () {
+                        let data_ = "";
+                        if ($('input[name="price2"]').val() != "") {
+                            if ($('input[name="price2"]').val() > 0) {
+                                data_ = $('input[name="price2"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),    // 产品2单价调整
+                    price3: (function () {
+                        let data_ = "";
+                        if ($('input[name="price3"]').val() != "") {
+                            if ($('input[name="price3"]').val() > 0) {
+                                data_ = $('input[name="price3"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),    // 产品3单价调整
+                    periodHour: (function () {
+                        let data_ = "";
+                        if ($('input[name="periodHour"]').val() != "") {
+                            if ($('input[name="periodHour"]').val() > 0) {
+                                data_ = $('input[name="periodHour"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),  // 日化周期(小时)
+                    period1: (function () {
+                        let data_ = "";
+                        if ($('input[name="period1"]').val() != "") {
+                            if ($('input[name="period1"]').val() > 0) {
+                                data_ = $('input[name="period1"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),  // 产品1周期
+                    period2: (function () {
+                        let data_ = "";
+                        if ($('input[name="period2"]').val() != "") {
+                            if ($('input[name="period2"]').val() > 0) {
+                                data_ = $('input[name="period2"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),  // 产品2周期
+                    period3: (function () {
+                        let data_ = "";
+                        if ($('input[name="period3"]').val() != "") {
+                            if ($('input[name="period3"]').val() > 0) {
+                                data_ = $('input[name="period3"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),  // 产品3周期
+                    attenuation: (function () {
+                        let data_ = "";
+                        if ($('input[name="attenuation"]').val() != "") {
+                            if ($('input[name="attenuation"]').val() > 0) {
+                                data_ = $('input[name="attenuation"]').val();
+                            }
+                        }
+                        return data_;
+                    }()),  // 日化利率衰减百分比
+                }
+                console.log(postData);
+                $.post("{:U('GameData/yuebaoConfig')}", postData, (response) => {
+                    if (response.code == 0) {
+                        layer.alert('更新成功', function (index) {
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    } else {
+                        layer.alert('更新失败', function (index) {
+                            location.reload()
+                        })
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+</block>

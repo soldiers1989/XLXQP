@@ -1,0 +1,285 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="font-weight: bold">权重</label>
+                    <div class="layui-input-inline">
+                        <input name="weights" class="layui-input" type="text" id="weights" autocomplete="off" lay-verify="required|number">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="font-weight: bold">游戏名字</label>
+                <div class="layui-input-block">
+                    <input name="game" title="跑得快" type="checkbox" value="13" checked>
+                    <input name="game" title="幸运转盘" type="checkbox" value="7">
+                    <input name="game" title="炸金花" type="checkbox" value="8">
+                    <input name="game" title="抢庄牛牛" type="checkbox" value="9">
+                    <input name="game" title="龙虎斗" type="checkbox" value="3">
+                    <input name="game" title="百人金花" type="checkbox" value="2">
+                    <input name="game" title="时时彩" type="checkbox" value="5">
+                    <input name="game" title="奔驰宝马" type="checkbox" value="6">
+                    <input name="game" title="红包接龙" type="checkbox" value="10">
+                    <input name="game" title="推筒子" type="checkbox" value="11">
+                    <input name="game" title="百家乐" type="checkbox" value="4">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="font-weight: bold">apk包渠道</label>
+                <div class="layui-input-block">
+                    <foreach name="apk_channel" key="key" item="vo">
+                        <input name="apkChannel" title="{$vo}" type="checkbox" value="{$key}">
+                    </foreach>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="font-weight: bold">状态</label>
+                <div class="layui-input-block">
+                    <input name="state" title="上架" type="radio" value="1" checked>
+                    <input name="state" title="下架" type="radio" value="0">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="font-weight: bold">标签</label>
+                <div class="layui-input-block">
+                    <input name="label" title="无" type="radio" value="0" checked>
+                    <input name="label" title="New" type="radio" value="1">
+                    <input name="label" title="HOT" type="radio" value="2">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="font-weight: bold">房间档次</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">初级 / 平民</label>
+                <div class="layui-input-block">
+                    <input name="room_primary" title="未选择" type="radio" value="0" checked>
+                    <input name="room_primary" title="敬请期待" type="radio" value="1">
+                    <input name="room_primary" title="上架" type="radio" value="2">
+                    <input name="room_primary" title="下架" type="radio" value="3">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">中级 / 小资</label>
+                <div class="layui-input-block">
+                    <input name="room_middle" title="未选择" type="radio" value="0" checked>
+                    <input name="room_middle" title="敬请期待" type="radio" value="1">
+                    <input name="room_middle" title="上架" type="radio" value="2">
+                    <input name="room_middle" title="下架" type="radio" value="3">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">高级 / 老板</label>
+                <div class="layui-input-block">
+                    <input name="room_high" title="未选择" type="radio" value="0" checked>
+                    <input name="room_high" title="敬请期待" type="radio" value="1">
+                    <input name="room_high" title="上架" type="radio" value="2">
+                    <input name="room_high" title="下架" type="radio" value="3">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">土豪</label>
+                <div class="layui-input-block">
+                    <input name="room_rich" title="未选择" type="radio" value="0" checked>
+                    <input name="room_rich" title="敬请期待" type="radio" value="1">
+                    <input name="room_rich" title="上架" type="radio" value="2">
+                    <input name="room_rich" title="下架" type="radio" value="3">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="font-weight: bold">档次标签</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">初级 / 平民</label>
+                <div class="layui-input-block">
+                    <input name="label_primary" title="未选择" type="radio" value="0" checked>
+                    <input name="label_primary" title="无" type="radio" value="1">
+                    <input name="label_primary" title="流畅" type="radio" value="2">
+                    <input name="label_primary" title="火爆" type="radio" value="3">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">中级 / 小资</label>
+                <div class="layui-input-block">
+                    <input name="label_middle" title="未选择" type="radio" value="0" checked>
+                    <input name="label_middle" title="无" type="radio" value="1">
+                    <input name="label_middle" title="流畅" type="radio" value="2">
+                    <input name="label_middle" title="火爆" type="radio" value="3">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">高级 / 老板</label>
+                <div class="layui-input-block">
+                    <input name="label_high" title="未选择" type="radio" value="0" checked>
+                    <input name="label_high" title="无" type="radio" value="1">
+                    <input name="label_high" title="流畅" type="radio" value="2">
+                    <input name="label_high" title="火爆" type="radio" value="3">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">土豪</label>
+                <div class="layui-input-block">
+                    <input name="label_rich" title="未选择" type="radio" value="0" checked>
+                    <input name="label_rich" title="无" type="radio" value="1">
+                    <input name="label_rich" title="流畅" type="radio" value="2">
+                    <input name="label_rich" title="火爆" type="radio" value="3">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-filter="game_state" lay-submit="">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form;
+
+            //监听提交
+            form.on('submit(game_state)', function (obj) {
+                let postData = {
+                    //权重
+                    weights: $("input[name='weights']").val(),
+                    //游戏名称
+                    game: (function () {
+                        let game_ = [];
+                        $("input[name='game']").each(function (index, val) {
+                            if( $(this).is(':checked') ) {
+                                game_.push( $(this).val() )
+                            }
+                        })
+                        return game_;
+                    }()),
+                    //apk包名渠道
+                    apkChannel: (function () {
+                        let apk_ = [];
+                        $("input[name='apkChannel']").each(function (index, val) {
+                            if( $(this).is(':checked') ) {
+                                apk_.push( $(this).val() )
+                            }
+                        })
+                        return apk_;
+                    }()),
+                    //状态
+                    state: (function () {
+                        let state_ ;
+                        $("input[name='state']").each(function (index, val) {
+                            if( $(this).is(':checked') ) {
+                                state_ = $(this).val()
+                            }
+                        })
+                        return state_;
+                    }()),
+                    //标签
+                    label: (function () {
+                        let label_;
+                        $("input[name='label']").each(function (index, val) {
+                            if( $(this).is(':checked') ) {
+                                label_ = $(this).val()
+                            }
+                        })
+                        return label_;
+                    }()),
+                    //房间档次
+                    room_primary: (function () {
+                        let room_primary_;
+                        $("input[name='room_primary']").each(function (index, val) {
+                            if( $(this).is(':checked') ) {
+                                room_primary_ = $(this).val()
+                            }
+                        })
+                        return room_primary_;
+                    }()),
+                    room_middle: (function () {
+                        let room_middle_;
+                        $("input[name='room_middle']").each(function (index, val) {
+                            if( $(this).is(':checked') ) {
+                                room_middle_ = $(this).val()
+                            }
+                        })
+                        return room_middle_;
+                    }()),
+                    room_high: (function () {
+                        let room_high_;
+                        $("input[name='room_high']").each(function (index, val) {
+                            if( $(this).is(':checked') ) {
+                                room_high_ = $(this).val()
+                            }
+                        })
+                        return room_high_;
+                    }()),
+                    room_rich: (function () {
+                        let room_rich_;
+                        $("input[name='room_rich']").each(function (index, val) {
+                            if( $(this).is(':checked') ) {
+                                room_rich_ = $(this).val()
+                            }
+                        })
+                        return room_rich_;
+                    }()),
+                    //档次标签
+                    label_primary: (function () {
+                        let label_primary_;
+                        $("input[name='label_primary']").each(function (index, val) {
+                            if( $(this).is(':checked') ) {
+                                label_primary_ = $(this).val()
+                            }
+                        })
+                        return label_primary_;
+                    }()),
+                    label_middle: (function () {
+                        let label_middle_;
+                        $("input[name='label_middle']").each(function (index, val) {
+                            if( $(this).is(':checked') ) {
+                                label_middle_ = $(this).val()
+                            }
+                        })
+                        return label_middle_;
+                    }()),
+                    label_high: (function () {
+                        let label_high_;
+                        $("input[name='label_high']").each(function (index, val) {
+                            if( $(this).is(':checked') ) {
+                                label_high_ = $(this).val()
+                            }
+                        })
+                        return label_high_;
+                    }()),
+                    label_rich: (function () {
+                        let label_rich_;
+                        $("input[name='label_rich']").each(function (index, val) {
+                            if( $(this).is(':checked') ) {
+                                label_rich_ = $(this).val()
+                            }
+                        })
+                        return label_rich_;
+                    }()),
+                }
+                console.log(postData)
+                $.post("{:U('configManagement/gameState')}", postData, (response) => {
+                    if (response.code == 0) {
+                        layer.alert('添加成功', function (index) {
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    } else {
+                        layer.alert(response.message)
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+</block>

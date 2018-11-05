@@ -1,0 +1,93 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <button class="layui-btn" data-type="addPromoterDomain">添加推广链接</button>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'url'}">推广链接</th>
+                <th lay-data="{field:'type'}">链接类型</th>
+                <th lay-data="{field:'time'}">修改时间</th>
+                <th lay-data="{field:'operator'}">修改人</th>
+                <th lay-data="{field:'apk', width:80, toolbar: '#bar'}">操作</th>
+            </tr>
+        </thead>
+    </table>
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-xs"  lay-event="edit">编辑</a>
+        <!--<a class="layui-btn layui-btn-danger layui-btn-xs"  lay-event="delete">删除</a>-->
+    </script>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+
+            //监听工具条
+            table.on('tool(datalist)', function(obj){
+                var data = obj.data;
+                if(obj.event === 'edit'){
+                    // layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                    //iframe层-父子操作
+                    layer.open({
+                        type: 2,
+                        title: '修改推广员链接',
+                        area: ['700px', '350px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        content: data.dataUrl
+                    });
+                }
+            });
+
+
+            var active = {
+                reload: function() {
+                    table.reload('datalist', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("configManagement/promoterDomain")}',
+                        limits: limits,
+                        limit:limit,
+                        done: function (data) {
+                            //console.log(data)
+                        }
+                    })
+                },
+                addPromoterDomain: function () {
+                    layer.open({
+                        type: 2,
+                        title: '添加支付入口',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['800px', '70%'],
+                        content: '{:U("configManagement/promoterDomainAdd")}' //iframe的url
+                    });
+                }
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+
+        });
+    </script>
+</block>

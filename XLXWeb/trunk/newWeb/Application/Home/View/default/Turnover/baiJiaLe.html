@@ -1,0 +1,207 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家ID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="account" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家昵称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="nickname" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">开始日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">截止日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                    <button class="layui-btn" data-type="execlExport">导出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>总变更数量：<span id="vary_gold_total"></span> 总押注：<span id="yazhu_total"></span> 总发奖：<span id="fajiang_total"></span></legend>
+    </fieldset>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'time', width:160, minWidth:160}">时间</th>
+            <th lay-data="{field:'account', width:100}">玩家ID</th>
+            <th lay-data="{field:'level', width:100}">房间</th>
+            <th lay-data="{field:'room_id', width:100}">桌子ID</th>
+            <th lay-data="{field:'vary_gold', width:100}">变更数量</th>
+            <th lay-data="{field:'result', minWidth:200, templet: '#resultColor'}">牌局记录</th>
+            <th lay-data="{field:'begin_gold', width:100}">变更前数量</th>
+            <th lay-data="{field:'end_gold', width:100}">变更后数量</th>
+            <th lay-data="{field:'z_amount', width:100, templet: '#zhuang'}">庄押注</th>
+            <th lay-data="{field:'x_amount', width:100, templet: '#xian'}">闲押注</th>
+            <th lay-data="{field:'h_amount', width:100, templet: '#he'}">和押注</th>
+            <th lay-data="{field:'zd_amount', width:100, templet: '#zhuangdui'}">庄对子押注</th>
+            <th lay-data="{field:'xd_amount', width:100, templet: '#xiandui'}">闲对子押注</th>
+            <th lay-data="{field:'nickname', width:150, minWidth:150}">昵称</th>
+        </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="zhuang">
+        {{#  if( d.flag1 == 2 && d.z_amount > 0 ){ }}
+        <span style="font-weight:bold;color:red">{{ d.z_amount }}</span>
+        {{#  } else { }}
+        <span>{{ d.z_amount }}</span>
+        {{#  } }}
+    </script>
+
+    <script type="text/html" id="xian">
+        {{#  if( d.flag1 == 1 && d.x_amount > 0 ){ }}
+        <span style="font-weight:bold;color:red">{{ d.x_amount }}</span>
+        {{#  } else { }}
+        <span>{{ d.x_amount }}</span>
+        {{#  } }}
+    </script>
+
+    <script type="text/html" id="he">
+        {{#  if( d.flag1 == 3 && d.h_amount > 0 ){ }}
+        <span style="font-weight:bold;color:red">{{ d.h_amount }}</span>
+        {{#  } else { }}
+        <span>{{ d.h_amount }}</span>
+        {{#  } }}
+    </script>
+
+    <script type="text/html" id="zhuangdui">
+        {{#  if( d.flag3 == 1 && d.zd_amount > 0 ){ }}
+        <span style="font-weight:bold;color:red">{{ d.zd_amount }}</span>
+        {{#  } else { }}
+        <span>{{ d.zd_amount }}</span>
+        {{#  } }}
+    </script>
+
+    <script type="text/html" id="xiandui">
+        {{#  if( d.flag2 == 1 && d.xd_amount > 0 ){ }}
+        <span style="font-weight:bold;color:red">{{ d.xd_amount }}</span>
+        {{#  } else { }}
+        <span>{{ d.xd_amount }}</span>
+        {{#  } }}
+    </script>
+
+    <script type="text/html" id="resultColor">
+        {{#  if( d.flag1 == 1 ){ }}
+        <span style="color:red">{{ d.result1 }}</span><span>,{{ d.result2 }}</span>
+        {{#  } else if( d.flag1 == 2 ){ }}
+        <span>{{ d.result1 }},</span><span style="color:red">{{ d.result2 }}</span>
+        {{#  } else { }}
+        <span>{{ d.result1 }},{{ d.result2 }}</span>
+        {{#  } }}
+    </script>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date',
+                format: 'yyyy-MM-dd HH:mm:ss'
+                ,type: 'datetime'
+            });
+            laydate.render({
+                elem: '#e_date',
+                format: 'yyyy-MM-dd HH:mm:ss'
+                ,type: 'datetime'
+            });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        account: (function () {
+                            let data_ = "";
+                            if ($('input[name="account"]').val() != "") {
+                                var reg = new RegExp(/^\d{7}$/);
+                                if ( reg.test($('input[name="account"]').val()) ) {
+                                    data_ = $('input[name="account"]').val();
+                                }
+                                else {
+                                    layer.alert('请输入正确的玩家ID');
+                                }
+                            }
+                            return data_;
+                        }()),
+                        nickname: $('input[name="nickname"]').val(),
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("turnover/baiJiaLe")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            $("#fajiang_total").html(data.fajiang_total)
+                            $("#yazhu_total").html(data.yazhu_total)
+                            $("#vary_gold_total").html(data.vary_gold_total)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("turnover/baiJiaLe")}'+active.formatSearchData() //iframe的url
+                    });
+                    // setTimeout(function(){
+                    //     layer.close(index);
+                    // },3000);
+                }
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

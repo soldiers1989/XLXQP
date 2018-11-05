@@ -1,0 +1,76 @@
+<extend name="Base/base"/>
+<block name="main">
+    <br>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">电话号码</label>
+            <div class="layui-input-inline">
+                <input value="{$row.bk_phone}" class="layui-input" type="text" autocomplete="off">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">银行名称</label>
+            <div class="layui-input-inline">
+                <input name="account" value="{$row.bk_bankname}" class="layui-input" type="text" autocomplete="off">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">银行卡号</label>
+            <div class="layui-input-inline">
+                <input value="{$row.bk_bankcard}" class="layui-input" type="text" autocomplete="off">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">持卡人姓名</label>
+            <div class="layui-input-inline">
+                <input value="{$row.bk_name}" class="layui-input" type="text" autocomplete="off">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">开户省份</label>
+            <div class="layui-input-inline">
+                <input value="{$row.bk_bankprovince}" class="layui-input" type="text" autocomplete="off">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">开户城市</label>
+            <div class="layui-input-inline">
+                <input value="{$row.bk_bankcity}" class="layui-input" type="text" autocomplete="off">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">开户支行</label>
+            <div class="layui-input-inline">
+                <input value="{$row.bk_banksubbranch}" class="layui-input" type="text" autocomplete="off">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">支付宝账号</label>
+            <div class="layui-input-inline">
+                <input value="{$row.bk_alipay}" class="layui-input" type="text" autocomplete="off">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">支付宝姓名</label>
+            <div class="layui-input-inline">
+                <input value="{$row.bk_alipayname}" class="layui-input" type="text" autocomplete="off">
+            </div>
+        </div>
+    </div>
+</block>

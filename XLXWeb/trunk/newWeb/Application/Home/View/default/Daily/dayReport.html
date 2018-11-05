@@ -1,0 +1,172 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+          <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">开始日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">截止日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">平台</label>
+                <div class="layui-input-inline">
+                    <select name="platform">
+                        <option value="">全平台</option>
+                        <foreach name="platform" key="key" item="vo" >
+                            <option value="{$key}">{$vo}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </div>
+
+              <div class="layui-inline">
+                  <label class="layui-form-label">apk包</label>
+                  <div class="layui-input-inline">
+                      <select name="apkid">
+                          <option value="">全部</option>
+                          <foreach name="apk" key="key" item="vo">
+                              <option value="{$key}">{$vo}</option>
+                          </foreach>
+                      </select>
+                  </div>
+              </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">渠道</label>
+                <div class="layui-input-inline">
+                    <select name="channe">
+                        <option value="">全渠道</option>
+                        <foreach name="channel_list" key="key" item="vo" >
+                            <option value="{$key}">{$vo}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </div>
+            <button class="layui-btn" data-type="reload">搜索</button>
+              <button class="layui-btn" data-type="execlExport">导出</button>
+        </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist',cellMinWidth: 120}" lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'bk_data'}">日期</th>
+            <th lay-data="{field:'bk_platform_id'}">平台</th>
+            <th lay-data="{field:'bk_apk_id'}">APK包名</th>
+            <th lay-data="{field:'bk_channel_id', templet: '#channeTpl'}">注册渠道</th>
+            <th lay-data="{field:'bk_new_device'}">设备新增</th>
+            <th lay-data="{field:'bk_reg_number'}">注册</th>
+            <th lay-data="{field:'bk_new_reg_number_rate'}">新增游戏率</th>
+            <th lay-data="{field:'bk_active_number'}">活跃人数</th>
+            <th lay-data="{field:'bk_payment_amount'}">充值金额</th>
+            <th lay-data="{field:'bk_payment_user_number'}">充值人数</th>
+            <th lay-data="{field:'bk_payment_number'}">充值次数</th>
+            <th lay-data="{field:'bk_arppu'}">ARPPU</th>
+            <th lay-data="{field:'bk_arpu'}">ARPU</th>
+            <th lay-data="{field:'bk_payment_rate'}">付费率</th>
+            <th lay-data="{field:'bk_new_payment_user_number'}">新增充值人数</th>
+            <th lay-data="{field:'bk_new_payment_amount'}">新增充值金额</th>
+
+            <th lay-data="{field:'bk_agent_payment_amount'}">线下充值金额</th>
+            <th lay-data="{field:'bk_agent_payment_user_number'}">线下充值人数</th>
+            <th lay-data="{field:'bk_new_agent_payment_amount'}">线下新增充值金额</th>
+            <th lay-data="{field:'bk_new_agent_payment_user_number'}">线下新增充值人数</th>
+            <th lay-data="{field:'bk_tixian_amount'}">提现金额</th>
+            <th lay-data="{field:'bk_tixian_user'}">提现人数</th>
+            <th lay-data="{field:'bk_new_tixian_amount'}">新增提现金额</th>
+            <th lay-data="{field:'bk_new_tixian_user'}">新增提现人数</th>
+
+            <th lay-data="{field:'bk_luichun1'}">次日留存率%</th>
+            <th lay-data="{field:'bk_luichun2'}">3日留存率%</th>
+            <th lay-data="{field:'bk_luichun6'}">7日留存率%</th>
+            <th lay-data="{field:'bk_acu'}">ACU</th>
+            <th lay-data="{field:'bk_pcu'}">PCU</th>
+        </tr>
+        </thead>
+    </table>
+    <script type="text/html" id="channeTpl">
+        <a href="{{d.day_all_reg_channe_url}}" class="layui-table-link" target="_blank">{{ d.bk_channel_id }}</a>
+    </script>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+            //日期
+                laydate.render({
+                    elem: '#s_date'
+                });
+                laydate.render({
+                    elem: '#e_date'
+                });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                        platform: $('select[name="platform"]').val(),
+                        channe: $('select[name="channe"]').val(),
+                        apkid: $('select[name="apkid"]').val()
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                         $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        url: '{:U("Daily/dayReport")}',
+                        limits: limits,
+                        limit:limit,
+                        done: function (data) {
+                            //console.log(data)
+                        }
+                     })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("Daily/dayReport")}'+active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function(){
+                        layer.close(index);
+                    },300000);
+                }
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

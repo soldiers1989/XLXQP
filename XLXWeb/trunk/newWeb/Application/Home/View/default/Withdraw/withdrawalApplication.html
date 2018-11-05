@@ -1,0 +1,349 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家ID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="account" autocomplete="off" class="layui-input" lay-verify="number">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家昵称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="nickname" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">订单号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="order" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">开始日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">截止日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">刷新时间</label>
+                    <div class="layui-input-inline">
+                        <select name="reload" id="reload_id">
+                            <option value="0">选择刷新时间</option>
+                            <option value="5">5秒</option>
+                            <option value="10">10秒</option>
+                            <option value="20">20秒</option>
+                            <option value="30">30秒</option>
+                            <option value="50">50秒</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                    <button class="layui-btn" data-type="execlExport">导出</button>
+                    <button class="layui-btn" id="countDown" data-text="0" >开始</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100, id:'datalist'}"  lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'number'}">序号</th>
+                <th lay-data="{field:'account',minWidth:150, templet: '#playerInfo'}">玩家ID</th>
+                <th lay-data="{field:'nickname', minWidth:150}">玩家昵称</th>
+                <th lay-data="{field:'charge_sum', minWidth:200}">总充值额 = 第三方 + 代理 + 官方扫码</th>
+                <th lay-data="{field:'ytx_sum'}">已提现金额</th>
+                <th lay-data="{field:'overage'}">余额</th>
+                <th lay-data="{field:'tx_type'}">提现类型</th>
+                <th lay-data="{field:'receiveaccount', templet: '#receiveaccountColor'}">领取状态</th>
+                <th lay-data="{field:'tx_amount', minWidth:150, templet: '#stateColor'}">本次提现金额</th>
+                <th lay-data="{field:'warning', minWidth:150}">预警标志</th>
+                <th lay-data="{field:'tx_rate', minWidth:150}">本次提现手续费</th>
+                <th lay-data="{field:'tx_real_amount', minWidth:150}">本次实际提现金额</th>
+                <th lay-data="{field:'time', minWidth:160}">提现申请时间</th>
+                <th lay-data="{field:'tx_class'}">提现分类</th>
+                <th lay-data="{field:'order', minWidth:230, templet: '#orderInfo'}">订单号</th>
+                <th lay-data="{fixed: 'right', width:230, align:'center', toolbar: '#bar'}">操作</th>
+            </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="receiveaccountColor">
+        {{#  if( d.receiveaccount != '未领取' ){ }}
+        <span style="font-weight:bold;color:#01AAED">{{ d.receiveaccount }}</span>
+        {{#  } else { }}
+        <span >{{ d.receiveaccount }}</span>
+        {{#  } }}
+    </script>
+
+    <script type="text/html" id="stateColor">
+        {{#  if( d.flag == 1 ){ }}
+        <span style="font-weight:bold;color:red">{{ d.tx_amount }}</span>
+        {{#  } else { }}
+        <span style="font-weight:bold;color:#393D49">{{ d.tx_amount }}</span>
+        {{#  } }}
+    </script>
+
+    <script type="text/html" id="orderInfo">
+        <a href="{{d.order_info}}" class="layui-table-link" target="_blank">{{ d.order }}</a>
+    </script>
+
+    <script type="text/html" id="playerInfo">
+        <a href="{{d.player_info}}" class="layui-table-link" target="_blank">{{ d.account }}</a>
+    </script>
+
+    <script type="text/html" id="bar">
+        {{#  if( d.receive_flag == true ){ }}
+        <a class="layui-btn layui-btn-xs layui-btn-normal"  lay-event="getOrder">领取</a>
+        <a class="layui-btn layui-btn-xs layui-btn-disabled"  lay-event="">通过</a>
+        <a class="layui-btn layui-btn-xs layui-btn-disabled"  lay-event="">不通过</a>
+        {{#  } else{ }}
+        <a class="layui-btn layui-btn-xs layui-btn-disabled"  lay-event="">领取</a>
+        <a class="layui-btn layui-btn-xs"  lay-event="allow">通过</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger"  lay-event="not_allow">不通过</a>
+        {{#  } }}
+    </script>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date',
+                format: 'yyyy-MM-dd'
+            });
+            laydate.render({
+                elem: '#e_date',
+                format: 'yyyy-MM-dd'
+            });
+
+            //监听工具条
+            table.on('tool(datalist)', function(obj){
+                var data = obj.data;
+                console.log(data);
+                if ( obj.event === 'allow' ) {
+                    layer.confirm('请选择打款方式', {
+                            btn: ['第三方打款', '人工打款']
+                        },
+                        function () {
+                            layer.confirm('确定选择第三方支付方式给游戏ID为：' + data.account + '（' + data.nickname + '）的玩家' + '提现' + data.tx_amount + '元', {
+                                    btn:['确认', '取消']
+                                },
+                                function () {
+                                    layer.msg('数据正在请求中,请勿重复点击');
+                                    $.post("{:U('withdraw/doAllowThirdPartyPayment')}", {id: data.id}, function(responseData) {
+                                        if (responseData.code == 0 ){
+                                            layer.msg(responseData.message, {icon: 1});
+                                            active.reload();
+                                            layer.close(index);
+                                        }
+                                        else {
+                                            if(typeof(responseData.message) == 'undefined') {
+                                                layer.msg('操作失败', {icon: 2});
+                                            }else{
+                                                layer.msg(responseData.message)
+                                            }
+                                        }
+                                    })
+                                })
+                        },
+                        function () {
+                            layer.confirm('确定选择人工打款方式给游戏ID为：' + data.account + '（' + data.nickname + '）的玩家' + '提现' + data.tx_amount + '元', {
+                                    btn:['确认', '取消']
+                                },
+                                function () {
+                                    $.post("{:U('withdraw/doAllowManualPayment')}", {id: data.id}, function(responseData){
+                                        if (responseData.code == 0 ){
+                                            layer.msg('操作成功', {icon: 1});
+                                            active.reload();
+                                            layer.close(index);
+                                        }
+                                        else {
+                                            if(typeof(responseData.message) == 'undefined') {
+                                                layer.msg('操作失败', {icon: 2});
+                                            }else{
+                                                layer.msg(responseData.message)
+                                            }
+                                        }
+                                    })
+                                })
+                        });
+                }
+                else if ( obj.event === 'not_allow' ) {
+                    layer.confirm('请选择不通过方式', {
+                            btn: ['退币', '不退币']
+                        },
+                        function () {
+                            layer.prompt({title: '确认给游戏ID为：' + data.account + '（' + data.nickname + '）的玩家' + '退币' + data.tx_amount + '元,并输入原因', formType: 0}, function(pass, index){
+                                $.post("{:U('withdraw/doNotAllowRefund')}", {id: data.id, reason: pass, amount: data.tx_amount, account: data.account}, function (response) {
+                                    if( response.code == 0 ){
+                                        layer.msg('操作成功', {icon: 1});
+                                        active.reload();
+                                        layer.close(index);
+                                    }else{
+                                        if(typeof(response.message) == 'undefined') {
+                                            layer.msg('操作失败', {icon: 2});
+                                        }else{
+                                            layer.msg(response.message)
+                                        }
+                                        layer.close(index);
+                                    }
+                                })
+                            });
+                        },
+                        function () {
+                            layer.prompt({title: '确认给游戏ID为：' + data.account + '（' + data.nickname + '）的玩家进行不退币操作,并输入原因', formType: 0}, function(pass, index){
+                                $.post("{:U('withdraw/doNotAllowNotRefund')}", {id: data.id, reason: pass}, function (response) {
+                                    if( response.code == 0 ){
+                                        layer.msg('操作成功', {icon: 1});
+                                        active.reload();
+                                        layer.close(index);
+                                    }else{
+                                        if(typeof(response.message) == 'undefined') {
+                                            layer.msg('操作失败', {icon: 2});
+                                        }else{
+                                            layer.msg(response.message)
+                                        }
+                                        layer.close(index);
+                                    }
+                                })
+                            });
+                        });
+                }
+                else if ( obj.event === 'getOrder' ) {
+                    $.post("{:U('Withdraw/getTixianOrder')}", {id: data.id}, function (re) {
+                        if( re.code == 0 ) {
+                            layer.msg('订单领取成功');
+                            obj.update({
+                                receiveaccount: re.name
+                            })
+                            active.reload();
+                        }else{
+                            layer.msg(re.message);
+                        }
+                    });
+                }
+            });
+
+            var curr = 1
+
+            var active = {
+                searchData: function() {
+                    return {
+                        account: (function () {
+                            let data_ = "";
+                            if ($('input[name="account"]').val() != "") {
+                                var reg = new RegExp(/^\d{7}$/);
+                                if ( reg.test($('input[name="account"]').val()) ) {
+                                    data_ = $('input[name="account"]').val();
+                                }
+                                else {
+                                    layer.alert('请输入正确的玩家ID');
+                                }
+                            }
+                            return data_;
+                        }()),
+                        nickname: $('input[name="nickname"]').val(),
+                        order: $('input[name="order"]').val(),
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        page: {
+                            curr: curr //重新从第 1 页开始
+                        },
+                        url: '{:U("withdraw/withdrawalApplication")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            curr = data.page
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("withdraw/withdrawalApplication")}'+active.formatSearchData() //iframe的url
+                    });
+                },
+                refresh: function () {
+                    active.reload();
+                },
+                countDown( timeNumber, text){
+                    let tn = timeNumber;
+                    this.timer = setInterval(function () {
+                        $("#countDown").html(tn + ' ' +  text)
+                        tn--;
+                        if( tn == 0 ){
+                            // active.stopCountDown()
+                            active.reload();
+                            tn = timeNumber;
+                        }
+                    }, 1000);
+                },
+                stopCountDown: function(){
+                    clearInterval(this.timer)
+                },
+                setTimeReLoad: function () {
+                    $('#countDown').click(function () {
+                        let timeNumber = $('#reload_id').val();
+                        if( $(this).data('text') == 0 && timeNumber > 0 ) {
+                            active.countDown(timeNumber, '暂停');
+                            $(this).data('text', 1);
+                        }else{
+                            $("#countDown").html('开始')
+                            $(this).data('text', 0);
+                            active.stopCountDown();
+                        }
+                    });
+                }
+            }
+
+            active.reload();
+            active.setTimeReLoad();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    type == "reload" && (curr = 1)
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

@@ -1,0 +1,131 @@
+<extend name="Base/base" />
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <button class="layui-btn" data-type="addRole">添加角色</button>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full-150',page:true,cellMinWidth:100, id:'datalist'}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'name'}">角色名称</th>
+                <th lay-data="{fixed: 'right',width: 260, align:'center', toolbar: '#bar'}">操作</th>
+            </tr>
+        </thead>
+    </table>
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn layui-btn-xs" lay-event="edit">名称修改</a>
+        <a class="layui-btn layui-btn layui-btn-xs" lay-event="authentication">身份验证</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="privilege">权限</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    </script>
+</block>
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+
+            active = {
+                addRole: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '添加角色',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['500px', '200px'],
+                        content:'{:U("system/roleAdd")}',
+                        end: function () {
+                            location.reload();
+                        }
+                    });
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        url: '{:U("system/roleManage")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                        }
+                    })
+                },
+                toolEvent: function() {
+                    table.on('tool(datalist)', function(obj){
+                        var data = obj.data;
+                        if (obj.event === 'edit'){
+                            layer.open({
+                                type: 2,
+                                title: '修改角色名称-' + data.name,
+                                area: ['500px', '250px'],
+                                fixed: false,
+                                maxmin: true,
+                                content: data.nameEditURL,
+                                end: function () {
+                                    location.reload();
+                                }
+                            });
+                        }
+                        if (obj.event === 'authentication') {
+                            $.post("{:U('system/getQRCodeGoogleUrl')}", {id: data.id}, function (response) {
+                                console.log(response);
+                                layer.open({
+                                    title: '身份验证-' + data.name,
+                                    type: 1,
+                                    area: ['250px', '290px'],
+                                    scrollbar: false,
+                                    shadeClose: true, //点击遮罩关闭
+                                    content: '\<\div style="padding:20px;"><img src='+response.path+'>\<\/div>',
+                                });
+                            })
+                        }
+                        if (obj.event === 'privilege') {
+                            layer.open({
+                                type: 2,
+                                title: '权限编辑-' + data.name,
+                                area: ['1000px', '650px'],
+                                fixed: false,
+                                maxmin: true,
+                                content: data.privilegeEditURL,
+                                end: function () {
+                                    location.reload();
+                                }
+                            });
+                        }
+                        if (obj.event === 'delete') {
+                            layer.confirm('删除角色-' + data.name, {
+                                btn: ['确认删除', '取消']
+                            }, function(){
+                                $.post('{:U("system/doRoleDelete")}',{id: data.id}, function (response) {
+                                    if( response.code == 0 ){
+                                        layer.msg('删除成功,请勿重复点击', {icon: 1}, function () {
+                                            location.reload();
+                                        });
+                                    }
+                                    else {
+                                        layer.msg('删除失败', {icon: 2});
+                                    }
+                                })
+                            })
+                        }
+                    })
+                },
+                init: function () {
+                    this.reload();
+                    this.toolEvent();
+                    $('.searchTable .layui-btn').bind({
+                        click: function () {
+                            var type = $(this).data('type')
+                            active[type] ? active[type].call(this) : ""
+                        }
+                    })
+                }
+            };
+            active.init();
+        });
+    </script>
+</block>

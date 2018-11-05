@@ -1,0 +1,219 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家ID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="account" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家昵称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="nickname" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">平台</label>
+                    <div class="layui-input-inline">
+                        <select name="platform">
+                            <option value="">全平台</option>
+                            <foreach name="platform" key="key" item="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">APK包名</label>
+                    <div class="layui-input-inline">
+                        <select name="apk">
+                            <option value="">全APK包</option>
+                            <foreach name="apk" key="key" item="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">渠道</label>
+                    <div class="layui-input-inline">
+                        <select name="channel">
+                            <option value="">全渠道</option>
+                            <foreach name="channel" key="key" item="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">余额宝类型</label>
+                    <div class="layui-input-inline">
+                        <select name="type">
+                            <option value="">全类型</option>
+                            <foreach name="type" key="key" item="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">变化类型</label>
+                    <div class="layui-input-inline">
+                        <select name="varyType">
+                            <option value="">全类型</option>
+                            <foreach name="varyType" key="key" item="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">开始日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">截止日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                    <button class="layui-btn" data-type="execlExport">导出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">-->
+        <!--<legend>-->
+            <!--存入总额:<span id="amount_total"></span> &nbsp&nbsp-->
+            <!--定存总额:<span id="ios_total"></span> &nbsp&nbsp-->
+            <!--IOS人数:<span id="android_total"></span> &nbsp&nbsp-->
+            <!--安卓人数:<span id="new_amount"></span> &nbsp&nbsp-->
+            <!--新增存入总额:<span id="new_ios"></span> &nbsp&nbsp-->
+            <!--新增定存总额:<span id="new_android"></span>-->
+            <!--新增IOS人数:<span id="android_total"></span> &nbsp&nbsp-->
+            <!--新增安卓人数:<span id="new_amount"></span> &nbsp&nbsp-->
+        <!--</legend>-->
+    <!--</fieldset>-->
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100,height:700, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'platform'}">平台</th>
+            <th lay-data="{field:'apk', minWidth:150}">APK包</th>
+            <th lay-data="{field:'channel'}">注册渠道</th>
+            <th lay-data="{field:'account', minWidth:150}">玩家ID</th>
+            <th lay-data="{field:'nickname', minWidth:150}">玩家昵称</th>
+            <th lay-data="{field:'gold'}">金币</th>
+            <th lay-data="{field:'interest'}">利息</th>
+            <th lay-data="{field:'time', minWidth:160}">时间</th>
+            <th lay-data="{field:'interestTime', minWidth:160}">利息产生时间</th>
+            <th lay-data="{field:'buyTime', minWidth:160}">购买时间</th>
+            <th lay-data="{field:'sellTime', minWidth:160}">卖出时间</th>
+            <th lay-data="{field:'rate'}">存入利率</th>
+            <th lay-data="{field:'copies'}">份数</th>
+            <th lay-data="{field:'stock'}">库存</th>
+            <th lay-data="{field:'type'}">余额宝类型</th>
+            <th lay-data="{field:'varyType', minWidth:160}">变化类型</th>
+        </tr>
+        </thead>
+    </table>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date',
+                format: 'yyyy-MM-dd'
+            });
+            laydate.render({
+                elem: '#e_date',
+                format: 'yyyy-MM-dd'
+            });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        account: (function () {
+                            let data_ = "";
+                            if ($('input[name="account"]').val() != "") {
+                                var reg = new RegExp(/^\d{7}$/);
+                                if ( reg.test($('input[name="account"]').val()) ) {
+                                    data_ = $('input[name="account"]').val();
+                                }
+                                else {
+                                    layer.alert('请输入正确的玩家ID');
+                                }
+                            }
+                            return data_;
+                        }()),
+                        nickname: $('input[name="nickname"]').val(),
+                        platform: $('select[name="platform"]').val(),
+                        apk: $('select[name="apk"]').val(),
+                        channel: $('select[name="channel"]').val(),
+                        type: $('select[name="type"]').val(),
+                        varyType: $('select[name="varyType"]').val(),
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("Yuebao/yuebaoDetail")}',
+                        limits: [20,50,100],
+                        limit: 20,
+                        done: function (data) {
+                            console.log(data)
+                        },
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("Yuebao/yuebaoDetail")}'+active.formatSearchData() //iframe的url
+                    });
+                }
+            }
+
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

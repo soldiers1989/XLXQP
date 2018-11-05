@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>后台管理系统</title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/admin/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/admin/css/admin.css"/>
+    <style >
+        .layui-tab-title li {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 14px;
+            transition: all .2s;
+            -webkit-transition: all .2s;
+            position: relative;
+            line-height: 40px;
+            min-width: 65px;
+            padding: 0 10px;
+            border-right: 1px solid #f6f6f6;
+        }
+
+        html {
+            background-color: #f2f2f2;
+            color: #666;
+        }
+
+        .logo{
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            color: #fff;
+            background-color: #20222A !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-layout" id='main-layout'>
+    <div class="main-layout-side">
+        <div class="logo">后台管理</div>
+        <ul class="layui-nav layui-nav-tree" lay-filter="leftNav">
+            <foreach name="menuList" item="vo" >
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;"><i class="iconfont">&#xe653;</i>{$vo.menuName}</a>
+                    <dl class="layui-nav-child">
+                        <foreach name="vo.child" item="voChild" >
+                            <dd><a href="javascript:;" data-url="{$voChild.menuURL}" data-id='{$voChild.menuID}' data-status="{$voChild.menuSubset}" data-text="{$voChild.menuName}"><span class="l-line"></span>{$voChild.menuName}</a></dd>
+                        </foreach>
+                    </dl>
+                </li>
+            </foreach>
+        </ul>
+    </div>
+    <div class="main-layout-container">
+        <div class="main-layout-header">
+            <div class="menu-btn" id="hideBtn">
+                <a href="javascript:;">
+                    <span class="iconfont">&#xe668;</span>
+                </a>
+            </div>
+            <ul class="layui-nav" lay-filter="rightNav">
+                <li class="layui-nav-item"><a href="javascript:" id="edit_admin_passwd" data-text="修改密码">修改密码</a></li>
+                <li class="layui-nav-item"><a href="{:U('index/logout')}">退出</a></li>
+            </ul>
+        </div>
+        <div class="main-layout-body">
+            <div class="layui-tab layui-tab-brief main-layout-tab" lay-filter="tab" lay-allowClose="true">
+                <ul class="layui-tab-title">
+                    <li class="layui-this welcome">后台主页</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show" style="background: #ccc;">
+                        <iframe src="{:U('index/welcome')}" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var scope={
+        link:'./welcome.html'
+    }
+
+    var getMenuChildsUrl = "{:U('index/getMenuChild')}"
+</script>
+<script src="__STATIC__/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/admin/js/main.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    layui.use(['jquery'], function () {
+        var $ = layui.jquery;
+        $("#edit_admin_passwd").bind({
+            click: function () {
+                layer.open({
+                    type: 2,
+                    title: '管理员密码修改',
+                    area: ['500px', '350px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: "{:U('index/editPassword')}"
+                });
+            }
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <table class="layui-table">
+        <colgroup>
+            <!--<col width="200">-->
+            <!--<col width="100">-->
+            <!--<col width="200">-->
+            <!--<col width="100">-->
+            <!--<col width="100">-->
+            <!--<col width="100">-->
+            <col width="200">
+            <col width="400">
+        </colgroup>
+        <tbody>
+        <!--<tr>-->
+        <!--<td>本次实际提现金额</td>-->
+        <!--<td>持卡人名称</td>-->
+        <!--<td>银行卡号</td>-->
+        <!--<td>银行名称</td>-->
+        <!--<td>ID</td>-->
+        <!--<td>提现类型</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td>{$data.tixianrmb}</td>-->
+        <!--<td>{$data.name}</td>-->
+        <!--<td>{$data.bankcard}</td>-->
+        <!--<td>{$data.bankName}</td>-->
+        <!--<td>{$data.account}</td>-->
+        <!--<td>{$data.type}</td>-->
+        <!--</tr>-->
+        <tr>
+            <td>本次实际提现金额</td>
+            <td>{$data.tixianrmb}</td>
+        </tr>
+        <tr>
+            <td>持卡人名称</td>
+            <td>{$data.name}</td>
+        </tr>
+        <tr>
+            <td>银行卡号</td>
+            <td>{$data.bankcard}</td>
+        </tr>
+        <tr>
+            <td>银行名称</td>
+            <td>{$data.bankName}</td>
+        </tr>
+        <tr>
+            <td>ID</td>
+            <td>{$data.account}</td>
+        </tr>
+        <tr>
+            <td>提现类型</td>
+            <td>{$data.type}</td>
+        </tr>
+        </tbody>
+    </table>
+</block>
+

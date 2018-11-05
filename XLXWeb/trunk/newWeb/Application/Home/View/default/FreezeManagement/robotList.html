@@ -1,0 +1,158 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+          <div class="layui-form-item">
+          <div class="layui-inline">
+              <label class="layui-form-label">机器人ID</label>
+              <div class="layui-input-inline" >
+                  <input type="text" name="uid" autocomplete="off" class="layui-input">
+              </div>
+          </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">机器人昵称</label>
+                  <div class="layui-input-inline" style="width: 100px;">
+                      <input type="text" name="name" autocomplete="off" class="layui-input">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label" >机器人账号</label>
+                  <div class="layui-input-inline" style="width: 100px;">
+                      <input type="number" name="bindAccount" autocomplete="off" class="layui-input">
+                  </div>
+              </div>
+              <!--<div class="layui-inline">-->
+                  <!--<label class="layui-form-label">最后登录IP</label>-->
+                  <!--<div class="layui-input-inline"  style="width: 100px;">-->
+                      <!--<input type="text" name="ip" autocomplete="off" class="layui-input">-->
+                  <!--</div>-->
+              <!--</div>-->
+            <button class="layui-btn" data-type="reload">搜索</button>
+        </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',page:true, id:'datalist', cellMinWidth: 140}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'robot'}">账号</th>
+                <th lay-data="{field:'robotid'}">机器人ID</th>
+                <th lay-data="{field:'name'}">机器人昵称</th>
+                <th lay-data="{field:'registertime', width: 180}">注册时间</th>
+                <th lay-data="{field:'Last_LoginTime',width: 180}">最后一次登录时间</th>
+                <th lay-data="{field:'Last_LoginArea'}">最后一次登录地域</th>
+                <th lay-data="{field:'Last_LoginIP', width: 180}">最后一次登录IP</th>
+                <th lay-data="{field:'Charge'}">历史充值金额</th>
+                <th lay-data="{field:'VIPLv'}">VIP</th>
+                <th lay-data="{field:'gold'}">金币</th>
+                <th lay-data="{field:'TotalOnlineTime'}">在线时长</th>
+                <th lay-data="{field:'dayShuYin'}">今日输赢</th>
+                <th lay-data="{field:'lishiShuYin'}">历史输赢</th>
+                <th lay-data="{field:'RobotState', event:'robotState'}">账号状态</th>
+                <th lay-data="{field:'OnlineState'}">是否在线</th>
+                <th lay-data="{field:'RobotType'}">账号类型</th>
+            </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="stateTemplet">
+        <!-- 这里的 checked 的状态只是演示 -->
+        <input type="checkbox" name="stop" value="{{d.id}}" lay-skin="switch" lay-text="开|禁" lay-filter="RobotState" {{ d.RobotState == 1 ? 'checked' : '' }}>
+    </script>
+
+    <script type="text/html" id="userGoldList">
+        <a href="{{d.robotGoldUrl}}" class="layui-table-link" target="_blank">{{ d.gold }}</a>
+    </script>
+
+    <script type="text/html" id="userTixianList">
+        <a href="{{d.userTixianList}}" class="layui-table-link" target="_blank">{{ d.LiShiTiXian }}</a>
+    </script>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+            //日期
+                laydate.render({
+                    elem: '#s_date'
+                });
+                laydate.render({
+                    elem: '#e_date'
+                });
+            var active = {
+                reload: function() {
+                    table.reload('datalist', {
+                        where: {
+                            uid: $('input[name="uid"]').val(),
+                            name: $('input[name="name"]').val(),
+                            bindAccount: $('input[name="bindAccount"]').val(),
+                            ip: $('input[name="ip"]').val()
+                        },
+                        page: {
+                            curr:1
+                        },
+                        url: '{:U("FreezeManagement/robotList")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                },
+                layToolEvent: function () {
+                    table.on('tool(datalist)', function(obj){
+                       let data = obj.data
+                        if( obj.event == 'robotState' ){
+                            //询问框
+                            $.post("{:U('FreezeManagement/getRobotStatus')}", {"robotid": data.robotid}, function (response) {
+                                message = (response.isUserLock == 0 )?"冻结帐号："+data.robotid:"解冻帐号："+data.robotid;
+                                layer.confirm(message, {
+                                    btn: ['再次确认', '取消'] //按钮
+                                }, function(){
+                                    $.post("{:U('FreezeManagement/updateRobotStatus')}", {"robotid": data.robotid, "nuLock": data.robot_state }, function(responseData){
+                                        if (responseData.code == 0 ){
+                                            obj.update({
+                                                RobotState: (response.isUserLock == 0 )?"冻结":"正常"
+                                            });
+                                            layer.msg('操作成功', {icon: 1});
+                                        }
+                                    })
+                                });
+                            })
+                        }
+                    })
+                },
+                init: function () {
+                    active.reload();
+                    active.layToolEvent()
+                }
+            }
+            active.init();
+            form.on('switch(RobotState)', function(data){
+                $.post("{:U('FreezeManagement/updateRobotStatus')}", {id: data.value, isStop: (function () {
+                        if( data.elem.checked )return 1
+                        if( !data.elem.checked ) return 0
+                    }()),
+                }, function (response) {
+                    if( response.code == 0 ) {
+                        layer.tips('更新成功', data.othis);
+                    }else{
+                        layer.tips( response.message , data.othis);
+                    }
+                })
+            });
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

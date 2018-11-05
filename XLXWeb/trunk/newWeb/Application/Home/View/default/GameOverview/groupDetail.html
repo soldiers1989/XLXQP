@@ -1,0 +1,79 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-inline">
+                <label class="layui-form-label">开始日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">截止日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">分组ID</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="sendid" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <button class="layui-btn" data-type="reload">搜索</button>
+        </div>
+    </div>
+
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist'}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'sendtime_day'}">日期</th>
+                <th lay-data="{field:'receiver_num'}">接收人数</th>
+                <th lay-data="{field:'SendGoldTotal'}">接收数量</th>
+                <th lay-data="{field:'newRenNum'}">新增接收人数</th>
+                <th lay-data="{field:'newGoldTotal'}">新增接收数量</th>
+            </tr>
+        </thead>
+    </table>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+
+            laydate.render({
+                elem: '#s_date'
+            });
+
+            var active = {
+                reload: function() {
+                    table.reload('datalist', {
+                        where: {
+                            start_time: $('input[name="s_date"]').val(),
+                        },
+                        url: '{:U("GameOverview/groupDetail")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                           // console.log(data)
+                        }
+                    })
+                }
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

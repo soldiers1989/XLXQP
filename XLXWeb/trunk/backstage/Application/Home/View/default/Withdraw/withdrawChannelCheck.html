@@ -1,0 +1,60 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+
+    <table class="layui-table"
+           lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'id'}">提现通道ID</th>
+            <th lay-data="{field:'apk', minWidth:330}">APK包名</th>
+            <th lay-data="{field:'pass', minWidth:150}">提现通道</th>
+            <th lay-data="{field:'limit',minWidth:150}">单笔限额</th>
+            <th lay-data="{field:'overage', minWidth:150}">当前余额</th>
+        </tr>
+        </thead>
+    </table>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+
+            var active = {
+                reload: function () {
+                    table.reload('datalist', {
+                        url: '{:U("withdraw/withdrawChannelCheck")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                }
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+
+        });
+    </script>
+</block>

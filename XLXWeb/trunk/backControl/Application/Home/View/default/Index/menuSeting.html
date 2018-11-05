@@ -1,0 +1,111 @@
+<extend name="Base/base" />
+
+<block name="mainBlock">
+    <div class="layui-card">
+    <div class="layui-card-body">
+        <div style="padding-bottom: 10px;">
+            <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="LAY-menu-add-submit">添加</button>
+        </div>
+        <table class="layui-table" lay-data="{loading:true,height:'full', cellMinWidth: 80 , page:true, id:'datalist'}" lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'name'}">菜单名称</th>
+            <th lay-data="{field:'parent'}">菜单父级</th>
+            <th lay-data="{field:'operator'}">操作人</th>
+            <th lay-data="{field:'sort', edit: 'text'}">排序</th>
+            <th lay-data="{field:'subset'}">子菜单</th>
+            <th lay-data="{field:'isdisplay',  templet: '#switchTpl',}">是否显示</th>
+            <th lay-data="{field:'addtime'}">操作时间</th>
+            <th lay-data="{fixed: 'right',align:'center', toolbar: '#bar'}"></th>
+        </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-primary layui-btn-xs"  lay-event="edit">修改</a>
+        <a class="layui-btn layui-btn-primary layui-btn-xs"  lay-event="del">删除</a>
+    </script>
+
+    <script type="text/html" id="switchTpl">
+        <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="显示|隐藏" lay-filter="isdisplay" {{ d.isdisplay == 1 ? 'checked' : '' }}>
+    </script>
+    </div>
+    </div>
+</block>
+
+<block name="scriptBlock">
+    <script>
+        layui.use(['jquery', 'table'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form;
+            table.reload('datalist', {
+                url: '{:U("index/menuSeting")}',
+                limits: [20,50,100],
+                limit: 20,
+                done: function (data) {
+                    console.log(data)
+                }
+            })
+
+            //监听单元格编辑
+            table.on('edit(datalist)', function(obj){
+                var value = obj.value //得到修改后的值
+                    ,data = obj.data //得到所在行所有键值
+                    ,field = obj.field; //得到字段
+                $.post("{:U('system/doMenuSortUpdate')}", {id: obj.data.id, msort: value}, function(reponse) {
+                    reponse.code == 0 && layer.msg('修改成功');
+                    reponse.code == 1 && layer.msg(reponse.message);
+                })
+            });
+
+            //监听是否显示操作
+            form.on('switch(isdisplay)', function(obj) {
+                let isdisplay = obj.elem.checked ? 1 : 0
+                $.post("{:U('index/doMenuIsDisplay')}", { id: this.value, isdisplay: isdisplay }, function ( response ) {
+                    response.code == 1 && layer.msg(response.message);
+                })
+               // layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+            });
+
+            form.on('submit(LAY-menu-add-submit)', function(obj){
+                layer.open({
+                    type: 2,
+                    title: '菜单添加',
+                    area: ['700px', '450px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: "{:U('index/menuAdd')}"
+                });
+            })
+
+
+            //监听工具条
+            table.on('tool(datalist)', function(obj){
+                var data = obj.data;
+               if(obj.event === 'del'){
+                    layer.confirm('真的删除行么', function(index){
+                        $.post("{:U('index/doMenuDel')}", {id: data.id}, function (response) {
+                            if( response.code == 0 ){
+                                obj.del();
+                                layer.close(index);
+                            }
+                        })
+
+                    });
+                } else if(obj.event === 'edit'){
+                   // layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                   //iframe层-父子操作
+                   layer.open({
+                       type: 2,
+                       title: '菜单修改',
+                       area: ['700px', '450px'],
+                       fixed: false, //不固定
+                       maxmin: true,
+                       content: data.editUrl
+                   });
+                }
+            });
+        });
+    </script>
+</block>

@@ -1,0 +1,167 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家ID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="account" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">道具类型</label>
+                    <div class="layui-input-inline">
+                        <select name="props_type">
+                            <option value="">请选择</option>
+                            <foreach name="props_type" key="key" item="vo" >
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">道具数量</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="amount" autocomplete="off" class="layui-input" lay-verify="number">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">增减原因</label>
+                    <div class="layui-input-inline">
+                        <select name="props_reason">
+                            <option value="">请选择</option>
+                            <foreach name="props_reason" key="key" item="vo" >
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline" id="reason_text" >
+                        <input type="text" name="reason_text" autocomplete="off" class="layui-input" placeholder="其他" lay-verify="">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">操作人</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="operator" autocomplete="off" class="layui-input" lay-verify="number">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">开始日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">截止日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">查询</button>
+                    <button class="layui-btn" data-type="execlExport">导出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'account', minWidth:150}">玩家ID</th>
+            <th lay-data="{field:'name', minWidth:150}">玩家昵称</th>
+            <th lay-data="{field:'props_type'}">道具类型</th>
+            <th lay-data="{field:'props_amount'}">数量</th>
+            <th lay-data="{field:'reason'}">原因</th>
+            <th lay-data="{field:'operator'}">操作人</th>
+            <th lay-data="{field:'time', minWidth:160}">操作时间</th>
+        </tr>
+        </thead>
+    </table>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.config({}).extend({
+            m: '/lib/m',
+            a: '/lib/a',
+            u: '/lib/u'
+        });
+
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        account: $('input[name="account"]').val(),
+                        props_type: $('select[name="props_type"]').val(),
+                        amount: $('input[name="amount"]').val(),
+                        props_reason: $('select[name="props_reason"]').val(),
+                        reason_text:$('input[name="reason_text"]').val(),
+                        operator:$('input[name="operator"]').val(),
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("propsChange/propsCheck")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("propsChange/propsCheck")}'+active.formatSearchData() //iframe的url
+                    });
+                },
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

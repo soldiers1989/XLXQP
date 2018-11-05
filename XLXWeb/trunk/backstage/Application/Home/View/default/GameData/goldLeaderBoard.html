@@ -1,0 +1,57 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <table class="layui-table"
+           lay-data="{loading:true,height:'full',even:true,page:false,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'rank'}">排名</th>
+            <th lay-data="{field:'account', minWidth:150}">ID</th>
+            <th lay-data="{field:'nickname', minWidth:150}">昵称</th>
+            <th lay-data="{field:'channel'}">注册渠道</th>
+            <th lay-data="{field:'time', minWidth:160}">最后一次登录时间</th>
+            <th lay-data="{field:'gold'}">携带金币</th>
+        </tr>
+        </thead>
+    </table>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+            var active = {
+                reload: function () {
+                    table.reload('datalist', {
+                        url: '{:U("GameData/goldLeaderBoard")}',
+                        done: function (data) {
+                            // console.log(data)
+                        }
+                    })
+                }
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+
+        });
+    </script>
+</block>

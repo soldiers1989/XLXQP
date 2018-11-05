@@ -1,0 +1,103 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <button class="layui-btn" data-type="reload">新建邮件</button>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full', cellMinWidth: 140, page:true, id:'datalist'}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'number'}">编号</th>
+                <th lay-data="{field:'type'}">邮件类型</th>
+                <th lay-data="{field:'channel'}">渠道</th>
+                <th lay-data="{field:'accountID'}">收件人</th>
+                <th lay-data="{field:'title'}">标题</th>
+                <th lay-data="{field:'content'}">内容</th>
+                <th lay-data="{field:'sendGold'}">发放道具</th>
+                <th lay-data="{field:'sendTime',width:180}">发送时间</th>
+                <th lay-data="{field:'effectiveTime', width:180}">失效时间</th>
+                <th lay-data="{field:'operateTime',width:180}">操作时间</th>
+                <th lay-data="{field:'operator'}">操作人</th>
+                <th lay-data="{fixed: 'right', width:130, align:'center', toolbar: '#barDemo'}">操作</th>
+            </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+
+            var active = {
+                reload: function() {
+                    table.reload('datalist', {
+                        where: {
+                            accountid: "{:I('get.accountid/d')}"
+                        },
+                        url: '{:U("FreezeManagement/emailList")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            //console.log(data)
+                        }
+                    })
+                }
+            }
+            active.reload();
+
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    layer.open({
+                        type: 2,
+                        title: '添加邮件',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['780px', '85%'],
+                        content: '{:U("FreezeManagement/addEmail")}'
+                    });
+                }
+            })
+
+            table.on('tool(datalist)', function(obj){
+                var data = obj.data;
+                if(obj.event === 'detail'){
+                } else if(obj.event === 'del'){
+                    layer.confirm('真的删除行么', function(index){
+                        $.post("{:U('FreezeManagement/delEmail')}", {id: data.id}, (response) => {
+                            if( response.code == 0 ){
+                                obj.del();
+                                layer.close(index);
+                                layer.alert('删除成功')
+                            }
+                        })
+                    });
+                } else if(obj.event === 'edit'){
+                    //iframe层-父子操作
+                    layer.open({
+                        type: 2,
+                        title: '公告修改',
+                        area: ['780px', '85%'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        content: data.editUrl
+                    });
+                }
+            });
+        });
+    </script>
+</block>

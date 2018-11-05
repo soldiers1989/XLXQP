@@ -1,0 +1,191 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家ID</label>
+                    <div class="layui-input-inline" >
+                        <input type="number" name="AccountID" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家昵称</label>
+                    <div class="layui-input-inline" style="width: 100px;">
+                        <input type="text" name="Name" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">金额</label>
+                    <div class="layui-input-inline" style="width: 200px;">
+                        <input type="text" name="PayAmount" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">开始时间</label>
+                    <div class="layui-input-inline" >
+                        <input type="text" name="s_date" id="s_date" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" >结束时间</label>
+                    <div class="layui-input-inline" >
+                        <input type="text" name="e_date" id="e_date" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" >充值方式</label>
+                    <div class="layui-input-inline" style="width: 100px;">
+                        <select name="bk_Type">
+                            <option value="0">请选择</option>
+                            <foreach name="qrPayList" key="key" item="vo" >
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <button class="layui-btn" data-type="reload">搜索</button>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist', cellMinWidth: 140}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'CreateTime'}">时间</th>
+                <th lay-data="{field:'MerchantOrder'}">订单号</th>
+                <th lay-data="{field:'AccountID'}">玩家ID</th>
+                <th lay-data="{field:'Name'}">玩家昵称</th>
+                <th lay-data="{field:'PayAmount'}">充值金额</th>
+                <th lay-data="{field:'channel'}">活动优惠</th>
+                <th lay-data="{field:'RealAmount'}">实际发放金额</th>
+                <th lay-data="{field:'Type'}">充值方式</th>
+                <th lay-data="{field:'Number'}">收款账号</th>
+                <th lay-data="{field:'Bank_Name'}">收款开户行</th>
+                <th lay-data="{field:'User_Name'}">持卡人姓名</th>
+                <th lay-data="{fixed: 'right', width:80, align:'center', toolbar: '#bar'}">操作</th>
+            </tr>
+        </thead>
+    </table>
+    <script type="text/html" id="bar">
+        {{#  if( d.ReceiveAccount == 0 ){ }}
+        <a class="layui-btn layui-btn-xs layui-btn-normal"  lay-event="getOrder">领取</a>
+        {{#  } else{ }}
+        <a class="layui-btn layui-btn-xs layui-btn-disabled"  lay-event="">领取</a>
+        {{#  } }}
+    </script>
+
+    <script type="text/html" id="userGoldList" >
+        <a href="{{d.userGoldList}}" class="layui-table-link" target="_blank">{{ d.gold }}</a>
+    </script>
+    <script type="text/html" id="userTixianList">
+        <a href="{{d.userTixianList}}" class="layui-table-link" target="_blank">{{ d.LiShiTiXian }}</a>
+    </script>
+    <div class="layui-hide"><input  id="copy" type="textarea"></div>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date'
+                ,type: 'datetime',
+                format: 'yyyy-MM-dd HH:mm:ss'
+            });
+            laydate.render({
+                elem: '#e_date'
+                ,type: 'datetime',
+                format: 'yyyy-MM-dd HH:mm:ss'
+            });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        AccountID: $('input[name="AccountID"]').val(),
+                        Name: $('input[name="Name"]').val(),
+                        PayAmount: $('input[name="PayAmount"]').val(),
+                        Type: $('select[name="bk_Type"]').val(),
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val()
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        page: {
+                            curr:1
+                        },
+                        url: '{:U("FreezeManagement/qrOrderApply")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("FreezeManagement/userInfo")}'+active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function(){
+                        //layer.close(index);
+                    }, 30000);
+                },
+                layToolEvent: function () {
+                    table.on('tool(datalist)', function(obj){
+                        let data = obj.data;
+                        if ( obj.event === 'getOrder' ) {
+                            $.post('{:U("FreezeManagement/getQrOrder")}',{ MerchantOrder: data.MerchantOrder }, function (response) {
+                                if( response.code == 0 ) {
+                                    layer.msg('领取成功!')
+                                    obj.del();
+                                    return false;
+                                }
+                                (response.code == 2) && obj.del();
+                                layer.msg(response.message)
+                            })
+                        }
+                    })
+                },
+                init: function () {
+                    active.reload();
+                    active.layToolEvent()
+                }
+            }
+            active.init();
+            $('.demoTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

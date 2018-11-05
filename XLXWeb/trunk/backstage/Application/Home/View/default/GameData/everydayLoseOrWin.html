@@ -1,0 +1,126 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+
+            <div class="layui-inline">
+                <label class="layui-form-label">游戏</label>
+                <div class="layui-input-inline">
+                    <select name="game_id">
+                        <option value="">请选择</option>
+                        <foreach name="games" key="key" item="vo">
+                            <option value="{$key}">{$vo}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">开始日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">截止日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">ID</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="accountid" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <button class="layui-btn" data-type="reload">搜索</button>
+        </div>
+    </div>
+
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'date'}">日期</th>
+            <th lay-data="{field:'uid'}">ID</th>
+            <th lay-data="{field:'name'}">昵称</th>
+            <th lay-data="{field:'changevalue'}">每日输赢</th>
+        </tr>
+        </thead>
+    </table>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+
+            var active = {
+                searchData: function () {
+                    return {
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                        accountid: $("input[name='accountid']").val(),
+                        SceneType: $("select[name='game_id']").val(),
+                    }
+                },
+                formatSearchData: function () {
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for (var $v in $d) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function () {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        url: '{:U("GameData/everydayLoseOrWin")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content: '{:U("GameData/emailDetail")}' + active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function () {
+                        layer.close(index);
+                    }, 3000);
+                }
+            }
+            active.reload();
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

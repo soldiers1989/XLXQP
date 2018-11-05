@@ -1,0 +1,327 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">订单号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="order" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">订单状态</label>
+                    <div class="layui-input-inline">
+                        <select name="state">
+                            <option value="">全状态</option>
+                            <foreach name="state" key="key" item="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家ID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="account" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家昵称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="nickname" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">平台</label>
+                    <div class="layui-input-inline">
+                        <select name="platform">
+                            <option value="">全平台</option>
+                            <foreach name="platform" key="key" item="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">APK包名</label>
+                    <div class="layui-input-inline">
+                        <select name="apk">
+                            <option value="">全APK包</option>
+                            <foreach name="apk" key="key" item="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">渠道</label>
+                    <div class="layui-input-inline">
+                        <select name="channel">
+                            <option value="">全渠道</option>
+                            <foreach name="channel" key="key" item="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">支付方式</label>
+                    <div class="layui-input-inline">
+                        <select name="pay">
+                            <option value="">全支付方式</option>
+                            <foreach name="pay" key="key" item="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">时间筛选</label>
+                    <div class="layui-input-inline">
+                        <select name="selectTime">
+                            <option value="CreateTime">创建时间</option>
+                            <option value="PayTime">更新时间</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">开始日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">截止日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">刷新时间</label>
+                    <div class="layui-input-inline">
+                        <select name="reload" id="reload_id">
+                            <option value="0">选择刷新时间</option>
+                            <option value="5">5秒</option>
+                            <option value="10">10秒</option>
+                            <option value="20">20秒</option>
+                            <option value="30">30秒</option>
+                            <option value="50">50秒</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                    <button class="layui-btn" data-type="execlExport">导出</button>
+                    <button class="layui-btn" id="countDown" data-text="0" >开始</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>
+            总充值金额:<span id="amount_total"></span> &nbsp&nbsp
+            IOS充值人数:<span id="ios_total"></span> &nbsp&nbsp
+            安卓充值人数:<span id="android_total"></span> &nbsp&nbsp
+            新增充值总金:<span id="new_amount"></span> &nbsp&nbsp
+            新增IOS充值人数:<span id="new_ios"></span> &nbsp&nbsp
+            新增安卓充值人数:<span id="new_android"></span>
+        </legend>
+    </fieldset>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'order', minWidth:260}">订单号</th>
+            <th lay-data="{field:'platform'}">平台</th>
+            <th lay-data="{field:'channel'}">注册渠道</th>
+            <th lay-data="{field:'pay'}">支付方式</th>
+            <th lay-data="{field:'appid', minWidth:150}">商户</th>
+            <th lay-data="{field:'account', minWidth:150}">玩家ID</th>
+            <th lay-data="{field:'nickname', minWidth:150}">玩家昵称</th>
+            <th lay-data="{field:'amount'}">购买金币</th>
+            <th lay-data="{field:'createTime', minWidth:160}">创建时间</th>
+            <th lay-data="{field:'updateTime', minWidth:160}">更新时间</th>
+            <th lay-data="{field:'state', templet: '#state'}">状态</th>
+            <th lay-data="{field:'begin'}">充值前金币</th>
+            <th lay-data="{field:'end'}">充值后金币</th>
+            <th lay-data="{field:'get'}">获得金币</th>
+            <th lay-data="{field:'remark', minWidth:600}">补发记录</th>
+            <th lay-data="{fixed: 'right', width:65, align:'center', toolbar: '#bar'}">操作</th>
+        </tr>
+        </thead>
+    </table>
+    <script type="text/html" id="state">
+         {{#  if(d.flag == 0){ }}
+         <button class="layui-btn layui-btn-primary layui-btn-xs" style="background-color: #d2d2d2">{{ d.state }}</button>
+         {{#  } else if(d.flag == 1) { }}
+         <button class="layui-btn layui-btn-normal layui-btn-xs">{{ d.state }}</button>
+         {{#  } else if(d.flag == 2) { }}
+         <button class="layui-btn layui-btn-xs">{{ d.state }}</button>
+         {{#  } else { }}
+         <button class="layui-btn layui-btn-warm layui-btn-xs">{{ d.state }}</button>
+         {{#  } }}
+    </script>
+
+    <script type="text/html" id="bar">
+        {{#  if( d.flag == 0 || d.flag == 1 || d.flag == 3 ){ }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs"  lay-event="reissue">补发</a>
+        {{#  } }}
+    </script>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date',
+                format: 'yyyy-MM-dd HH:mm:ss'
+                ,type: 'datetime'
+            });
+            laydate.render({
+                elem: '#e_date',
+                format: 'yyyy-MM-dd HH:mm:ss'
+                ,type: 'datetime'
+            });
+
+            //监听工具条
+            table.on('tool(datalist)', function(obj){
+                var data = obj.data;
+                console.log(data);
+                if ( obj.event === 'reissue' ) {
+                    layer.open({
+                        type: 2
+                        , title: '对充值订单:' + data.order + '进行补发'
+                        , area: ['650px', '460px']
+                        , shadeClose: true
+                        , shade: 0.8
+                        , maxmin: true
+                        , content: data.reissueURL
+                        , btn: ['关闭']
+                        , yes: function () {
+                            layer.closeAll();
+                        }
+                    });
+                }
+            });
+
+            var active = {
+                timer: null,
+                searchData: function() {
+                    return {
+                        order: $('input[name="order"]').val(),
+                        state: $('select[name="state"]').val(),
+                        account: (function () {
+                            let data_ = "";
+                            if ($('input[name="account"]').val() != "") {
+                                var reg = new RegExp(/^\d{7}$/);
+                                if ( reg.test($('input[name="account"]').val()) ) {
+                                    data_ = $('input[name="account"]').val();
+                                }
+                                else {
+                                    layer.alert('请输入正确的玩家ID');
+                                }
+                            }
+                            return data_;
+                        }()),
+                        nickname: $('input[name="nickname"]').val(),
+                        platform: $('select[name="platform"]').val(),
+                        channel: $('select[name="channel"]').val(),
+                        pay: $('select[name="pay"]').val(),
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                        apk: $('select[name="apk"]').val(),
+                        selectTime:  $('select[name="selectTime"]').val(),
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("recharge/rechargeList")}',
+                        limits: [10,20,50,100,500,2000],
+                        limit: limit,
+                        done: function (data) {
+                            $('#amount_total').html(data.total.amount)
+                            $('#ios_total').html(data.total.ios)
+                            $('#android_total').html(data.total.android)
+                            $('#new_amount').html(data.total.new_amount)
+                            $('#new_ios').html(data.total.new_ios)
+                            $('#new_android').html(data.total.new_android)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("recharge/rechargeList")}'+active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function(){
+                        layer.close(index);
+                    },300000);
+                },
+                countDown( timeNumber, text){
+                    let tn = timeNumber;
+                    this.timer = setInterval(function () {
+                        $("#countDown").html(tn + ' ' +  text)
+                        tn--;
+                        if( tn == 0 ){
+                           // active.stopCountDown()
+                            active.reload();
+                            tn = timeNumber;
+                        }
+                    }, 1000);
+                },
+                stopCountDown: function(){
+                    clearInterval(this.timer)
+                },
+                setTimeReLoad: function () {
+                    $('#countDown').click(function () {
+                        let timeNumber = $('#reload_id').val();
+                        if( $(this).data('text') == 0 && timeNumber > 0 ) {
+                            active.countDown(timeNumber, '暂停');
+                            $(this).data('text', 1);
+                        }else{
+                            $("#countDown").html('开始')
+                            $(this).data('text', 0);
+                            active.stopCountDown();
+                        }
+                    });
+                }
+            }
+            active.reload();
+            active.setTimeReLoad();
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

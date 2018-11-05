@@ -1,0 +1,137 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline days">
+                    <button class="layui-btn  layui-btn-sm layui-btn-primary" data-id="3" data-type="day">最近3日</button>
+                    <button class="layui-btn layui-btn-sm layui-btn-primary" data-id="7" data-type="day">最近7日</button>
+                    <button class="layui-btn layui-btn-sm layui-btn-primary" data-id="1" data-type="day">历史数据</button>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">玩家ID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="account" id="account" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">开始日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">截止日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <table class="layui-table"
+           lay-data="{loading:true,height:'full',even:true,page:false,height:750,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'order'}">排名</th>
+            <th lay-data="{field:'account', minWidth:150}">玩家ID</th>
+            <th lay-data="{field:'nickname', minWidth:150}">玩家昵称</th>
+            <th lay-data="{field:'channel', minWidth:150}">注册渠道</th>
+            <th lay-data="{field:'all_amount', minWidth:150}">充值总金额</th>
+            <th lay-data="{field:'xs_amount', minWidth:150}">统计线上充值金额</th>
+            <th lay-data="{field:'xs_count', minWidth:150}">统计线上充值次数</th>
+            <th lay-data="{field:'xx_amount', minWidth:150}">统计线下充值金额</th>
+            <th lay-data="{field:'xx_count', minWidth:150}">统计线下充值次数</th>
+            <th lay-data="{field:'h_xs_amount', minWidth:150}">历史线上充值金额</th>
+            <th lay-data="{field:'h_xs_count', minWidth:150}">历史线上充值次数</th>
+            <th lay-data="{field:'h_xx_amount', minWidth:150}">历史线下充值金额</th>
+            <th lay-data="{field:'h_xx_count', minWidth:150}">历史线下充值次数</th>
+            <th lay-data="{field:'tx_amount', minWidth:150}">统计提现金额</th>
+            <th lay-data="{field:'tx_count', minWidth:150}">统计提现次数</th>
+            <th lay-data="{field:'h_tx_amount', minWidth:150}">历史提现金额</th>
+            <th lay-data="{field:'h_tx_count', minWidth:150}">历史提现次数</th>
+        </tr>
+        </thead>
+    </table>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+
+            var active = {
+                reload: function () {
+                    table.reload('datalist', {
+                        where: {
+                            account: (function () {
+                                let data_ = "";
+                                if ($('input[name="account"]').val() != "") {
+                                    var reg = new RegExp(/^\d{7}$/);
+                                    if (reg.test($('input[name="account"]').val())) {
+                                        data_ = $('input[name="account"]').val();
+                                    }
+                                    else {
+                                        layer.alert('请输入正确的玩家ID');
+                                    }
+                                }
+                                return data_;
+                            }()),
+                            start_time: $('input[name="s_date"]').val(),
+                            end_time: $('input[name="e_date"]').val(),
+                            dayTime: $(".days .layui-btn-warm").data("id"),
+                        },
+                        url: '{:U("OperationalData/leaderBoard")}',
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                },
+                buttionDayEvent: function () {
+                    $("button[data-type='day']").bind({
+                        click: function () {
+                            $("button[data-type='day']").removeClass("layui-btn-warm");
+                            $(this).addClass("layui-btn-warm")
+                        }
+                    })
+                },
+                init: function () {
+                    active.reload();
+                    active.buttionDayEvent();
+                },
+
+            }
+            active.init();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+
+        });
+    </script>
+</block>

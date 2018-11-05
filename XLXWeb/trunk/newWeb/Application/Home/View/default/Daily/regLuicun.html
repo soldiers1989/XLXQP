@@ -1,0 +1,203 @@
+<extend name="Base/base" />
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+          <div class="layui-form-item">
+              <div class="layui-inline">
+                  <label class="layui-form-label">留存率类型</label>
+                  <div class="layui-input-inline">
+                      <select name="luicunType" lay-filter="luicunType">
+                          <option {:xeq(I('get.luicunType/d'), 1, 'selected')} value="1">注册留存率</option>
+                          <option {:xeq(I('get.luicunType/d'), 2, 'selected')} value="2" >活跃留存率</option>
+                          <option {:xeq(I('get.luicunType/d'), 3, 'selected')} value="3">支付留存率</option>
+                      </select>
+                  </div>
+              </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">开始日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">截止日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+              <div class="layui-inline">
+                  <label class="layui-form-label">平台</label>
+                  <div class="layui-input-inline">
+                      <select name="platform">
+                          <option value="">请选择</option>
+                          <foreach name="platform" key="key" item="vo" >
+                              <option value="{$key}">{$vo}</option>
+                          </foreach>
+                      </select>
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">apk包</label>
+                  <div class="layui-input-inline">
+                      <select name="apkid">
+                          <option value="">全部</option>
+                          <foreach name="apk" key="key" item="vo">
+                              <option value="{$key}">{$vo}</option>
+                          </foreach>
+                      </select>
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">渠道</label>
+                  <div class="layui-input-inline">
+                      <select name="channe">
+                          <option value="">请选择</option>
+                          <foreach name="channel_list" key="key" item="vo" >
+                              <option value="{$key}">{$vo}</option>
+                          </foreach>
+                      </select>
+                  </div>
+              </div>
+            <button class="layui-btn" data-type="reload">搜索</button>
+              <button class="layui-btn" data-type="execlExport">导出</button>
+        </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist',cellMinWidth: 110}" lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'log_time', width: 120}">日期 </th>
+            <th lay-data="{field:'platform'}">平台</th>
+            <th lay-data="{field:'apk'}">APK包名</th>
+            <th lay-data="{field:'channe'}">注册渠道</th>
+            <in name="luicunType" value="1">
+                <th lay-data="{field:'log_todayregister'}">注册人数 </th>
+            </in>
+            <in name="luicunType" value="3">
+                <th lay-data="{field:'log_todayregister'}">冲值人数 </th>
+            </in>
+            <th lay-data="{field:'log_todayactive'}">活跃人数</th>
+            <th lay-data="{field:'log_liucunlv1'}">次日留存率</th>
+            <th lay-data="{field:'log_liucunlv2'}">3日留存率</th>
+            <th lay-data="{field:'log_liucunlv3'}">4日留存率</th>
+            <th lay-data="{field:'log_liucunlv4'}">5日留存率</th>
+            <th lay-data="{field:'log_liucunlv5'}">6日留存率</th>
+            <th lay-data="{field:'log_liucunlv6'}">7日留存率</th>
+            <th lay-data="{field:'log_liucunlv7'}">8日留存率</th>
+            <th lay-data="{field:'log_liucunlv8'}">9日留存率</th>
+            <th lay-data="{field:'log_liucunlv9'}">10日留存率</th>
+            <th lay-data="{field:'log_liucunlv10'}">11日留存率</th>
+            <th lay-data="{field:'log_liucunlv11'}">12日留存率</th>
+            <th lay-data="{field:'log_liucunlv12'}">13日留存率</th>
+            <th lay-data="{field:'log_liucunlv13'}">14日留存率</th>
+            <th lay-data="{field:'log_liucunlv14'}">15日留存率</th>
+            <th lay-data="{field:'log_liucunlv15'}">16日留存率</th>
+            <th lay-data="{field:'log_liucunlv16'}">17日留存率</th>
+            <th lay-data="{field:'log_liucunlv17'}">18日留存率</th>
+            <th lay-data="{field:'log_liucunlv18'}">19日留存率</th>
+            <th lay-data="{field:'log_liucunlv19'}">20日留存率</th>
+            <th lay-data="{field:'log_liucunlv20'}">21日留存率</th>
+            <th lay-data="{field:'log_liucunlv21'}">22日留存率</th>
+            <th lay-data="{field:'log_liucunlv22'}">23日留存率</th>
+            <th lay-data="{field:'log_liucunlv23'}">24日留存率</th>
+            <th lay-data="{field:'log_liucunlv24'}">25日留存率</th>
+            <th lay-data="{field:'log_liucunlv25'}">26日留存率</th>
+            <th lay-data="{field:'log_liucunlv26'}">27日留存率</th>
+            <th lay-data="{field:'log_liucunlv27'}">28日留存率</th>
+            <th lay-data="{field:'log_liucunlv28'}">29日留存率</th>
+            <th lay-data="{field:'log_liucunlv29'}">30日留存率</th>
+        </tr>
+        </thead>
+    </table>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+            //日期
+                laydate.render({
+                    elem: '#s_date'
+                });
+                laydate.render({
+                    elem: '#e_date'
+                });
+
+            form.on('select(luicunType)', function(data){
+               if( data.value == 1 ) {
+                   location.href = '{:U("Daily/regLuicun", ["luicunType" => 1])}';
+               }
+                if( data.value == 2 ) {
+                    location.href = '{:U("Daily/regLuicun", ["luicunType" => 2])}';
+                }
+
+                if( data.value == 3 ) {
+                    location.href = '{:U("Daily/regLuicun", ["luicunType" => 3])}';
+                }
+            });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                        platform: $('select[name="platform"]').val(),
+                        channe: $('select[name="channe"]').val(),
+                        apkid: $('select[name="apkid"]').val(),
+                        luicunType: $('select[name="luicunType"]').val()
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        url: '{:U("Daily/regLuicun")}',
+                        page: {
+                            curr: 1
+                        },
+                        limits: limits,
+                        limit:limit,
+                        done: function (data) {
+                            //console.log(data)
+                        }
+                     })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("Daily/regLuicun")}'+active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function(){
+                        layer.close(index);
+                    }, 3000);
+                }
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+
+        });
+    </script>
+</block>

@@ -1,0 +1,131 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+
+                <div class="layui-inline rooms">
+                    <button class="layui-btn  layui-btn-sm layui-btn-primary" data-id="1" data-type="room">平民</button>
+                    <button class="layui-btn layui-btn-sm layui-btn-primary" data-id="2" data-type="room">小资</button>
+                    <button class="layui-btn layui-btn-sm layui-btn-primary" data-id="3" data-type="room">老板</button>
+                    <button class="layui-btn layui-btn-sm layui-btn-primary" data-id="4" data-type="room">土豪</button>
+                    <button class="layui-btn layui-btn-sm layui-btn-primary" data-id="0" data-type="room">所有</button>
+                </div>
+
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                    <button class="layui-btn" data-type="execlExport">导出</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'time', minWidth:105}">日期</th>
+            <th lay-data="{field:'room'}">房间</th>
+            <th lay-data="{field:'count_sum'}">总局数</th>
+            <th lay-data="{field:'count_cy', minWidth:150}">玩家参与局数</th>
+            <th lay-data="{field:'count_zb'}">作弊局数</th>
+            <th lay-data="{field:'count'}">游戏玩家</th>
+            <th lay-data="{field:'count_win'}">赢分玩家</th>
+            <th lay-data="{field:'count_win_'}">赢分玩家比</th>
+            <th lay-data="{field:'count_lose'}">输分玩家</th>
+            <th lay-data="{field:'count_lose_'}">输分玩家比</th>
+            <th lay-data="{field:'amount_yz'}">押注</th>
+            <th lay-data="{field:'amount_cs'}">抽水</th>
+            <th lay-data="{field:'amount_hs'}">系统回收</th>
+            <th lay-data="{field:'amount_fl'}">代理返利</th>
+        </tr>
+        </thead>
+    </table>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        start_time: "{:I('get.start_time')}",
+                        end_time: "{:I('get.end_time')}",
+                        room: $(".rooms .layui-btn-warm").data("id"),
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("gameOverview/niuNiuRoom")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("gameOverview/niuNiuRoom")}'+active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function(){
+                        layer.close(index);
+                    },3000);
+                },
+                buttionDayEvent: function () {
+                    $("button[data-type='room']").bind({
+                        click: function () {
+                            $("button[data-type='room']").removeClass("layui-btn-warm");
+                            $(this).addClass("layui-btn-warm")
+                        }
+                    })
+                },
+                init: function () {
+                    active.reload();
+                    active.buttionDayEvent();
+                },
+            }
+            active.init();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

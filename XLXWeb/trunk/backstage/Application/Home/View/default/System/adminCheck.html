@@ -1,0 +1,121 @@
+<extend name="Base/base" />
+<block name="main">
+    <br>
+    <table class="layui-table" lay-data="{loading:true,height:'full-100',even:true,page:true,minCellWidth:100, id:'datalist'}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'name'}">管理员账号</th>
+                <th lay-data="{field:'type'}">角色类型</th>
+                <th lay-data="{field:'qq'}">QQ</th>
+                <th lay-data="{field:'weChat'}">微信</th>
+                <th lay-data="{field:'phone'}">手机号码</th>
+                <th lay-data="{field:'isForbidden', templet: '#switchTpl',}">是否禁用</th>
+                <th lay-data="{fixed: 'right', width:260, align:'center', toolbar: '#bar'}">操作</th>
+            </tr>
+        </thead>
+    </table>
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn layui-btn-xs"  lay-event="infoEdit">信息编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs"  lay-event="privilegeEdit">权限</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs"  lay-event="passwordEdit">密码修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs"  lay-event="delete">删除</a>
+    </script>
+
+    <script type="text/html" id="switchTpl">
+        <input type="checkbox" name="isForbidden" value="{{d.id}}" lay-skin="switch" lay-text="正常|禁用" lay-filter="isForbidden" {{ d.isForbidden == 1 ? 'checked' : '' }}>
+    </script>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+
+            table.reload('datalist', {
+                url: '{:U("system/adminCheck")}',
+                limits: limits,
+                limit: limit,
+                done: function (data) {
+                    //console.log(data)
+                }
+            });
+
+            // 监听是否禁用
+            form.on('switch(isForbidden)', function(obj) {
+                let isForbidden = obj.elem.checked ? 1 : 0;
+                console.log(obj.value);
+                $.post("{:U('system/doAdminIsForbidden')}", { id: obj.value, isForbidden: isForbidden }, function (response) {
+                    if (response.code == 0) {
+                        layer.msg('更新成功', {icon: 1});
+                    }else {
+                        if (response.message == undefined || response.message == '') response.message == '更新失败';
+                        layer.msg('response.message', {icon: 2});
+                    }
+                })
+            });
+
+            // 监听工具条
+            table.on('tool(datalist)', function(obj){
+                var data = obj.data;
+                if(obj.event === 'infoEdit') {
+                    layer.open({
+                        type: 2,
+                        title: '管理员信息修改-' + data.name,
+                        area: ['1000px', '650px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        content: data.infoEditUrl,
+                        end: function () {
+                            location.reload();
+                        }
+                    });
+                }
+                if(obj.event === 'privilegeEdit') {
+                    layer.open({
+                        type: 2,
+                        title: '管理员权限修改-' + data.name,
+                        area: ['1000px', '650px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        content: data.privilegeEditURL,
+                        end: function () {
+                            location.reload();
+                        }
+                    });
+                }
+                if(obj.event === 'passwordEdit'){
+                    layer.open({
+                        type: 2,
+                        title: '管理员密码修改-' + data.name,
+                        area: ['500px', '350px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        content: data.passwordEditURL,
+                        end: function () {
+                            location.reload();
+                        }
+                    });
+                }
+                if (obj.event === 'delete') {
+                    layer.confirm('删除管理员-' + data.name, {
+                        btn: ['确认删除', '取消']
+                    }, function(){
+                        $.post('{:U("system/doAdminDelete")}',{id: data.id}, function (response) {
+                            if( response.code == 0 ){
+                                layer.msg('删除成功,请勿重复点击', {icon: 1}, function () {
+                                    location.reload();
+                                });
+                            }
+                            else {
+                                layer.msg('删除失败', {icon: 2});
+                            }
+                        })
+                    })
+                }
+            })
+        });
+    </script>
+</block>

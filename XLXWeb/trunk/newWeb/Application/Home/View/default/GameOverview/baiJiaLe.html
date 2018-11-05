@@ -1,0 +1,151 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">开始日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">截止日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline" id="room">
+                    <button class="layui-btn" data-method="roomDate">房间数据</button>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                    <button class="layui-btn" data-type="execlExport">导出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'time', minWidth:105}">日期</th>
+            <th lay-data="{field:'count'}">游戏玩家</th>
+            <th lay-data="{field:'count1'}">小于1分钟</th>
+            <th lay-data="{field:'count7', minWidth:105}">小于3分钟</th>
+            <th lay-data="{field:'count2', minWidth:105}">小于10分钟</th>
+            <th lay-data="{field:'count3', minWidth:105}">小于30分钟</th>
+            <th lay-data="{field:'count4', minWidth:105}">小于60分钟</th>
+            <th lay-data="{field:'count5', minWidth:120}">小于120分钟</th>
+            <th lay-data="{field:'count6', minWidth:120}">120分钟以上</th>
+            <th lay-data="{field:'count_win'}">赢分玩家</th>
+            <th lay-data="{field:'count_win_'}">赢分玩家比</th>
+            <th lay-data="{field:'count_lose'}">输分玩家</th>
+            <th lay-data="{field:'count_lose_'}">输分玩家比</th>
+            <th lay-data="{field:'choushui'}">抽水</th>
+            <th lay-data="{field:'recover'}">系统回收</th>
+            <th lay-data="{field:'sum_yazhu'}">总投注次数</th>
+            <th lay-data="{field:'sum_amount'}">总押注</th>
+            <th lay-data="{field:'sum_award'}">总发奖</th>
+            <th lay-data="{field:'proxy_rebate'}">推广员返利</th>
+        </tr>
+        </thead>
+    </table>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("gameOverview/baiJiaLe")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("gameOverview/baiJiaLe")}'+active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function(){
+                        layer.close(index);
+                    },3000);
+                },
+
+                roomDate: function(){
+                    var that = this;
+                    layer.open({
+                        type: 2
+                        ,title: '百家乐房间数据'
+                        ,area: ['1200px', '600px']
+                        ,shadeClose: true
+                        ,shade: 0.8
+                        ,maxmin: true
+                        ,content: '{:U("gameOverview/baiJiaLeRoom")}'+ "?start_time="+$('input[name="s_date"]').val()+"&end_time="+$('input[name="e_date"]').val()
+                        ,btn: ['关闭']
+                        ,yes: function(){
+                            layer.closeAll();
+                        }
+                    });
+                }
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            });
+
+            //房间数据
+            $('#room .layui-btn').on('click', function(){
+                var othis = $(this), method = othis.data('method');
+                active[method] ? active[method].call(this, othis) : '';
+            });
+        });
+    </script>
+</block>

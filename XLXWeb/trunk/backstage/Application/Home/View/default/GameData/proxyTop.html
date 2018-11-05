@@ -1,0 +1,128 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">推广员ID</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="proxyid" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <button class="layui-btn" data-type="reload">搜索</button>
+                <button class="layui-btn" data-type="execlExport">导出</button>
+            </div>
+        </div>
+    </div>
+
+    <table class="layui-table"
+           lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist',cellMinWidth: 140}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'Num'}">名次</th>
+            <th lay-data="{field:'ProxyId', templet: '#proxyTpl'}">推广员ID</th>
+            <th lay-data="{field:'Proxyname'}">推广员昵称</th>
+            <th lay-data="{field:'YongjinTotal'}">总佣金</th>
+            <th lay-data="{field:'ShengYuYongjinTotal'}">剩余佣金</th>
+            <th lay-data="{field:'XinZengYongjinTotal'}">新增会员佣金</th>
+            <th lay-data="{field:'ZhishuYongjinTotal'}">直属会员佣金</th>
+            <th lay-data="{field:'OtherYongjinTotal'}">其他会员佣金</th>
+            <th lay-data="{field:'XiazhuTotal'}">会员下注总额</th>
+            <th lay-data="{field:'XiazhuzhishuTotal'}">直属会员下注总额</th>
+            <th lay-data="{field:'XiazhuOtherTotal'}">其他会员下注总额</th>
+            <th lay-data="{field:'XiazhuNewUsdtTotal'}">新增会员下注总额</th>
+            <th lay-data="{field:'UserTotal'}">会员总数</th>
+            <th lay-data="{field:'ZhishuUserTotal'}">直属会员人数</th>
+            <th lay-data="{field:'OtherUserTotal'}">其他会员人数</th>
+            <th lay-data="{field:'NewUserTotal'}">新增会员人数</th>
+            <th lay-data="{field:'UserPayTotal'}">会员充值总人数</th>
+            <th lay-data="{field:'OneUserPayTotal'}">直属会员充值人数</th>
+            <th lay-data="{field:'OtherUserPayTotal'}">其他会员充值人数</th>
+            <th lay-data="{field:'NewUserPayTotal'}">新增会员充值人数</th>
+            <th lay-data="{field:'MoneyPayTotal'}">会员充值总金额</th>
+            <th lay-data="{field:'OneMoneyPayTotal'}">直属会员充值金额</th>
+            <th lay-data="{field:'OtheMoneyPayTotal'}">其他会员充值金额</th>
+            <th lay-data="{field:'NewMoneyPayTotal'}">新增会员充值金额</th>
+        </tr>
+        </thead>
+    </table>
+    <script type="text/html" id="proxyTpl">
+        <a href="{{d.url}}" class="layui-table-link" target="_blank">{{ d.ProxyId }}</a>
+    </script>
+
+    <script type="text/html" id="switchTpl">
+        <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="显示|隐藏" lay-filter="isdisplay" {{
+               d.isdisplay== 1 ? 'checked' : '' }}>
+    </script>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+            var active = {
+                searchData: function () {
+                    return {
+                        proxyid: $('input[name="proxyid"]').val(),
+                    }
+                },
+                formatSearchData: function () {
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for (var $v in $d) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function () {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        url: '{:U("GameData/proxyTop")}',
+                        limits: limits,
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        limit: limit,
+                        done: function (data) {
+                            //console.log(data)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content: '{:U("GameData/proxyTop")}' + active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function () {
+                        layer.close(index);
+                    }, 30000);
+                }
+            }
+            active.reload();
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

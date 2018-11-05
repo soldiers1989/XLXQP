@@ -1,0 +1,360 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+          <div class="layui-form-item">
+          <div class="layui-inline">
+              <label class="layui-form-label">玩家ID</label>
+              <div class="layui-input-inline" >
+                  <input type="text" name="uid" autocomplete="off" class="layui-input" value="{$uid}">
+              </div>
+          </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">玩家昵称</label>
+                  <div class="layui-input-inline" style="width: 100px;">
+                      <input type="text" name="name" autocomplete="off" class="layui-input">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label" >手机号</label>
+                  <div class="layui-input-inline" style="width: 100px;">
+                      <input type="number" name="bindAccount" autocomplete="off" class="layui-input">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">IP</label>
+                  <div class="layui-input-inline"  style="width: 100px;">
+                      <input type="text" name="ip" autocomplete="off" class="layui-input">
+                  </div>
+              </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label" >设备码</label>
+                  <div class="layui-input-inline" style="width: 100px;">
+                      <input type="text" name="devicecode" autocomplete="off" class="layui-input">
+                  </div>
+              </div>
+            <button class="layui-btn" data-type="reload">搜索</button>
+              <button class="layui-btn" data-type="execlExport">导出</button>
+        </div>
+        </div>
+    </div>
+    <div class="layui-btn-group demoTable">
+        <button class="layui-btn" data-type="batchUserLock">批量账号冻结</button>
+        <button class="layui-btn" data-type="batchUserUnLock">批量账号解冻</button>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist', cellMinWidth: 140}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+                <th lay-data="{field:'accountid'}">玩家ID</th>
+                <th lay-data="{field:'name'}">玩家昵称</th>
+                <th lay-data="{field:'bindAccount'}">手机号码</th>
+                <th lay-data="{field:'activeTime'}">注册时间</th>
+                <th lay-data="{field:'apk'}">APK包名</th>
+                <th lay-data="{field:'channel'}">注册渠道</th>
+                <th lay-data="{field:'registerip',style:'color:#01AAED', event: 'lockIp'}">注册IP</th>
+                <th lay-data="{field:'devicecode', minWidth: 330,style:'color:#01AAED', event: 'lockDeviceCode'}">设备码</th>
+                <th lay-data="{field:'logintime'}">最后一次登录时间</th>
+                <th lay-data="{field:'loginIP', style:'color:#01AAED', event: 'lockRegIp'}">最后一次登录IP</th>
+                <th lay-data="{field:'Last_LoginArea'}">最后一次登录地域</th>
+                <th lay-data="{field:'chongzhiTotal', width:230}">历史总充值( = 官 + 代 )</th>
+                <th lay-data="{field:'VIPLv', event: 'upVip'}">VIP</th>
+                <th lay-data="{field:'gold', templet: '#userGoldList'}">金币</th>
+                <th lay-data="{field:'totalonlinetime'}">在线时长</th>
+                <th lay-data="{field:'datShuYin', style:'color:#01AAED', event: 'dayShuYing'}">今日输赢</th>
+                <th lay-data="{field:'LiShiYaZhu'}">历史总押注</th>
+                <th lay-data="{field:'LiShiFaJiang'}">历史总发奖</th>
+                <th lay-data="{field:'lishiShuYin', style:'color:#01AAED', event: 'allShuYing'}">历史输赢</th>
+                <th lay-data="{field:'userState', style:'color:#01AAED', event: 'userLock'}">账号状态</th>
+                <th lay-data="{field:'LiShiTiXian',  templet: '#userTixianList'}">历史提现金额</th>
+                <th lay-data="{field:'userTotal'}">会员人数</th>
+                <th lay-data="{field:'onlinestate'}">是否在线</th>
+                <th lay-data="{field:'allcommission'}">总佣金</th>
+                <th lay-data="{field:'cantakecommission'}">可提取佣金</th>
+                <th lay-data="{field:'BankName'}">银行名称</th>
+                <th lay-data="{field:'CardNum'}">银行卡号</th>
+                <th lay-data="{field:'RealName'}">持卡人姓名</th>
+                <th lay-data="{field:'alipay'}">支付宝账号</th>
+                <th lay-data="{field:'alipayName'}">支付宝姓名</th>
+            </tr>
+        </thead>
+    </table>
+    <script type="text/html" id="userGoldList" >
+        <a href="{{d.userGoldList}}" class="layui-table-link" target="_blank">{{ d.gold }}</a>
+    </script>
+    <script type="text/html" id="userTixianList">
+        <a href="{{d.userTixianList}}" class="layui-table-link" target="_blank">{{ d.LiShiTiXian }}</a>
+    </script>
+    <div class="layui-hide"><input  id="copy" type="textarea"></div>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+            laydate.render({
+                elem: '#s_date'
+                ,type: 'datetime',
+                format: 'yyyy-MM-dd HH:mm:ss'
+
+            });
+            laydate.render({
+                elem: '#e_date'
+                ,type: 'datetime',
+                format: 'yyyy-MM-dd HH:mm:ss'
+
+            });
+
+
+            var active = {
+                searchData: function() {
+                    return {
+                        uid: $('input[name="uid"]').val(),
+                        name: $('input[name="name"]').val(),
+                        bindAccount: $('input[name="bindAccount"]').val(),
+                        ip: $('input[name="ip"]').val(),
+                        devicecode: $('input[name="devicecode"]').val(),
+
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        page: {
+                            curr:1
+                        },
+                        url: '{:U("FreezeManagement/userInfo")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("FreezeManagement/userInfo")}'+active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function(){
+                        //layer.close(index);
+                    }, 30000);
+                },
+                layToolEvent: function () {
+                    table.on('tool(datalist)', function(obj){
+                       let data = obj.data
+                        if( obj.event == 'lockIp' ){
+                            active.copy(data.d_registerip);
+                            //询问框
+                            $.post("{:U('FreezeManagement/getIpStatus')}", {"ip":data.d_registerip}, function (response) {
+                                message = (response.isIpLock == 0 )?"冻结IP："+data.d_registerip:"解冻IP："+data.d_registerip;
+                                layer.prompt({
+                                    formType: 2
+                                    ,title: message
+                                    ,value:'原因：'
+                                }, function(value, index){
+                                    layer.close(index);
+                                    console.log(value)
+                                    //这里一般是发送修改的Ajax请求
+                                    $.post("{:U('FreezeManagement/lockIp')}", {"ip": data.d_registerip, "nuLock": response.isIpLock, 'cause':value }, function(responseData){
+                                        if (responseData.code == 0 ){
+                                            let v = (response.isIpLock == 0)?'(冻结)'+data.d_registerip:data.d_registerip;
+                                            obj.update({
+                                                registerip:v
+                                            })
+                                            layer.msg('操作成功', {icon: 1});
+                                        }
+                                    })
+                                });
+                            });
+                        }
+                        if ( obj.event == 'lockRegIp' ){
+                           active.copy(data.d_loginIP);
+                            //询问框
+                            $.post("{:U('FreezeManagement/getIpStatus')}", {"ip":data.d_loginIP}, function (response) {
+                                message = (response.isIpLock == 0 )?"冻结IP："+data.d_loginIP:"解冻IP："+data.d_loginIP;
+                                layer.prompt({
+                                    formType: 2
+                                    ,title: message
+                                    ,value:'原因：'
+                                }, function(value, index){
+                                    layer.close(index);
+                                    console.log(value)
+                                    //这里一般是发送修改的Ajax请求
+                                    $.post("{:U('FreezeManagement/lockIp')}", {"ip": data.d_loginIP, "nuLock": response.isIpLock, 'cause':value }, function(responseData){
+                                        if (responseData.code == 0 ){
+                                            let v = (response.isIpLock == 0)?'(冻结)'+data.d_loginIP:data.d_loginIP;
+                                            obj.update({
+                                                loginIP:v
+                                            })
+                                            layer.msg('操作成功', {icon: 1});
+                                        }
+                                    })
+                                });
+                            });
+                        }
+                        if ( obj.event == 'userLock' ){
+                            $.post("{:U('FreezeManagement/getUserStatus')}", {"accountid":data.accountid}, function (response) {
+                                message = (response.isUserLock == 0 )?"冻结IP："+data.accountid:"解冻IP："+data.accountid;
+                                layer.prompt({
+                                    formType: 2
+                                    ,title: message
+                                    ,value:'原因：'
+                                }, function(value, index){
+                                    layer.close(index);
+                                    //这里一般是发送修改的Ajax请求
+                                    $.post("{:U('FreezeManagement/lockUser')}", {"accountid": data.accountid, "nuLock": response.isUserLock, 'cause':value }, function(responseData){
+                                        if (responseData.code == 0 ) {
+                                            obj.update({
+                                                userState: (response.isUserLock == 0 )? "冻结" : "正常"
+                                            })
+                                            layer.msg('操作成功', {icon: 1});
+                                        }
+                                    })
+                                });
+                            });
+                        }
+                        if ( obj.event == 'upVip' ){
+                            $.post("{:U('FreezeManagement/getUserVipClass')}", {"accountid": data.accountid}, function (response) {
+                                layer.prompt({title: '输入VIP等级，并确认', formType: 0}, function(pass, index){
+                                    var reg = new RegExp("^[0-9]*$");
+                                    if(!reg.test(pass)) {
+                                        layer.msg('请输入0到9的数字');
+                                        return false;
+                                    }
+                                    $.post("{:U('FreezeManagement/updateVipClass')}", {uid:  data.accountid, vipClass: pass}, function (response) {
+                                        if( response.code == 0 ){
+                                            obj.update({
+                                                VIPLv: pass
+                                            });
+                                            layer.close(index);
+                                            layer.msg('VIP等级修改成功');
+                                        }else{
+                                            layer.close(index);
+                                            layer.msg('修改失败，参数错误！');
+                                        }
+                                    })
+                                });
+                            })
+                        }
+                        if ( obj.event == 'lockDeviceCode' ) {
+                            $.post("{:U('FreezeManagement/getkDeviceCodeStatus')}", {"deviceCode":data.d_devicecode}, function (response) {
+                                message = (response.isDeviceCodeLock == 0 )?"冻结IP："+data.d_devicecode:"解冻IP："+data.d_devicecode;
+                                layer.prompt({
+                                    formType: 2
+                                    ,title: message
+                                    ,value:'原因：'
+                                }, function(value, index){
+                                    layer.close(index);
+                                    console.log(value)
+                                    //这里一般是发送修改的Ajax请求
+                                    $.post("{:U('FreezeManagement/lockDeviceCode')}", {"deviceCode": data.d_devicecode, "nuLock": response.isDeviceCodeLock, 'cause':value }, function(responseData){
+                                        if (responseData.code == 0 ){
+                                            let v = (response.isDeviceCodeLock == 0)?'(冻结)'+data.d_devicecode:data.d_devicecode;
+                                            obj.update({
+                                                devicecode:v
+                                            })
+                                            layer.msg('操作成功', {icon: 1});
+                                        }
+                                    })
+                                });
+                            });
+                        }
+                        if ( obj.event == 'dayShuYing' ||  obj.event == 'allShuYing'  ){
+                           $.post("{:U('FreezeManagement/getUserGamesShuYing')}", {uid: data.accountid, event: obj.event}, function (response) {
+                               strHtml = "<table class='layui-table'>"
+                               response.data.forEach(function (val) {
+                                   strHtml += "<tr><td>"+val.gameName+"</td><td >"+val.changevalue+"</td></tr>"
+                               })
+                               strHtml += "</table>"
+                               if ( response.data.length == 0 ){
+                                   layer.msg('没有数据');
+                                   return
+                               }
+                               layer.open({
+                                   title: (obj.event == 'dayShuYing')?"今日输赢":"历史输赢",
+                                   type: 1,
+                                   content: strHtml //注意，如果str是object，那么需要字符拼接。
+                               });
+                           })
+                        }
+                    })
+                },
+                checkboxSelectEvent: function() {
+                    $('.layui-table-body input[type="checkbox"]').click(function () {
+                        $('.layui-table-body input[type="checkbox"]').each(function (val) {
+                            console.log(val)
+                        })
+                    })
+                },
+                batchPost: function(postData) {
+                    postData.uids = (function () {
+                        let uids = []
+                        checkStatus = table.checkStatus('datalist');
+                        checkStatus.data.forEach(function (val) {
+                            uids.push(val.accountid);
+                        })
+                        return uids;
+                    }());
+                    message = (postData.isLock == 0 )?"批量冻结帐户!":"批量解冻帐户!";
+                    layer.confirm(message, {
+                        btn: ['再次确认', '取消'] //按钮
+                    }, function(){
+                        $.post("{:U('FreezeManagement/batchUserLock')}", postData, function(responseData){
+                            if (responseData.code == 0 ){
+                                layer.msg('操作成功', {icon: 1});
+                                active.reload();
+                            }
+                        })
+                    });
+                },
+                batchUserLock: function(){
+                    active.batchPost({ isLock: 0})
+                },
+                batchUserUnLock: function() {
+                    active.batchPost({ isLock: 1})
+                },
+                copy: function( text) {
+                    document.execCommand("Copy");
+                },
+                init: function () {
+                    active.reload();
+                    active.layToolEvent()
+                    active.checkboxSelectEvent();
+                }
+            }
+            active.init();
+            $('.demoTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

@@ -1,0 +1,116 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <form class="layui-form">
+
+            <div class="layui-form-item">
+                <submit  class="layui-btn" data-type="addAPK">新建apk包名</submit>
+                <submit  class="layui-btn" data-type="addChannel">新建渠道名</submit>
+            </div>
+            <hr>
+            <br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">apk包名</label>
+                <div class="layui-input-inline">
+                    <select name="apk">
+                        <option value="">请选择</option>
+                        <foreach name="apk" key="key" item="vo" >
+                            <option value="{$key}">{$vo}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">渠道名</label>
+                <div class="layui-input-inline">
+                    <select name="channel">
+                        <option value="">请选择</option>
+                        <foreach name="channel" key="key" item="vo" >
+                            <option value="{$key}">{$vo}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-filter="config" lay-submit="">提交</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <hr>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+
+            //监听提交
+            form.on('submit(config)', function (obj) {
+                let postData = {
+                    //apk包名
+                    apk: $("select[name='apk']").val(),
+                    //新增渠道名
+                    channel: $('select[name="channel"]').val()
+                }
+                console.log(postData)
+                $.post("{:U('configManagement/gameStateConf')}", postData, (response) => {
+                    if (response.code == 0) {
+                        layer.alert('添加成功', function (index) {
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    } else {
+                        layer.alert('添加失败');
+                    }
+                })
+                return false;
+            });
+
+            //新建apk包名
+
+            var active = {
+                addAPK: function(){
+                    layer.open({
+                        type: 2
+                        ,title: '新建apk包名'
+                        ,area: ['500px', '285px']
+                        , shadeClose: true
+                        , shade: 0.8
+                        ,maxmin: true
+                        ,content: '{:U("configManagement/addApk")}'
+                    });
+                },
+                addChannel: function(){
+                    layer.open({
+                        type: 2
+                        ,title: '新建渠道'
+                        ,area: ['500px', '285px']
+                        , shadeClose: true
+                        , shade: 0.8
+                        ,maxmin: true
+                        ,content: '{:U("configManagement/addChannel")}'
+                    });
+                },
+            }
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                   // return false;
+                }
+            })
+
+        });
+    </script>
+</block>

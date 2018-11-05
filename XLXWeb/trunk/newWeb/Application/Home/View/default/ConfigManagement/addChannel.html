@@ -1,0 +1,62 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <form class="layui-form">
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">渠道</label>
+                    <div class="layui-input-inline">
+                        <input name="channel" class="layui-input" type="text" id="channel" autocomplete="off" lay-verify="required">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">渠道id</label>
+                    <div class="layui-input-inline">
+                        <input name="channel_id" class="layui-input" type="text" id="channel_id" autocomplete="off" lay-verify="required|number">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-filter="addChannel" lay-submit="">新建</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form;
+            //监听提交
+            form.on('submit(addChannel)', function(obj){
+                let postData = {
+                    channel: $("input[name='channel']").val(),
+                    channel_id: $('input[name="channel_id"]').val()
+                }
+                $.post("{:U('configManagement/addChannel')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('添加成功', function(index){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert(response.message)
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+</block>

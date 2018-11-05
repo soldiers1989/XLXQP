@@ -1,0 +1,21 @@
+<extend name="Base/base" />
+<block name="cssBlock">
+	<style>
+	</style>
+</block>
+
+<block name="mainBlock">
+	<div style="text-align: center; width: 100%; ">
+		<img alt="" src="/Public/static/images/welcome.png" style="margin: 100px 0 0 0;" />
+	</div>
+</block>
+
+<block name="scriptBlock">
+	<script>
+        layui.use(['jquery', 'table', 'form'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form;
+        });
+	</script>
+</block>

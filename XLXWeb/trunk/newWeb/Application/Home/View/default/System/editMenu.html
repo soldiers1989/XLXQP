@@ -1,0 +1,108 @@
+<extend name="Base/base" />
+<block name="main">
+    <br>
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单URL</label>
+            <div class="layui-input-block">
+                <input type="text" name="m_url" value="{$menu_row.menu_url}" lay-verify="m_url" autocomplete="off" placeholder="请输入菜单URL" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单名称</label>
+            <div class="layui-input-block">
+                <div class="layui-input-inline">
+                <input type="text" name="m_name" value="{$menu_row.menu_name}" lay-verify="m_name" autocomplete="off" placeholder="请输入菜单名称" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">上级分类</label>
+            <div class="layui-input-block">
+                <div class="layui-input-inline">
+                <select name="m_parentid" lay-filter="m_parentid">
+                    <option value=""></option>
+                    <foreach name="menu_list" item="vo" >
+                        <option  {:xeq($vo['menu_id'], $menu_row['menu_parentid'], 'selected')} value="{$vo.menu_id}">{$vo.menu_name}</option>
+                        <foreach name="vo.childs" item="twoVo" >
+                            <option {:xeq($twoVo['menu_id'], $menu_row['menu_parentid'], 'selected')} value="{$twoVo.menu_id}"> &nbsp;&nbsp;- {$twoVo.menu_name}</option>
+                            <!--<foreach name="twoVo.childs" item="threeVo" >-->
+                                <!--<option value="{$threeVo.menu_id}"> &nbsp;&nbsp;&nbsp;&nbsp;- {$threeVo.menu_name}</option>-->
+                            <!--</foreach>-->
+                        </foreach>
+                    </foreach>
+                </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否显示</label>
+            <div class="layui-input-block">
+                <input type="radio" name="m_isdisplay" value="1" title="显示" checked="">
+                <input type="radio" name="m_isdisplay" value="0" title="隐藏">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">左右显示</label>
+            <div class="layui-input-block">
+                <input type="radio" name="m_leftorright" value="0" title="左" checked="">
+                <input type="radio" name="m_leftorright" value="1" title="右">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-block">
+                <div class="layui-input-inline">
+                <input type="text" name="m_sort" value="{$menu_row.menu_sort}" lay-verify="m_sort" autocomplete="off" placeholder="请输入排序" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="hidden" name="id" value="{$menu_row.menu_id}">
+                <button class="layui-btn " lay-submit lay-filter="LAY-menu-add-submit">修改</button>
+            </div>
+        </div>
+
+    </form>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form;
+
+            form.on('submit(LAY-menu-add-submit)', function(obj){
+                let postData = {
+                    m_url: $("input[name='m_url']").val(),
+                    m_name: $("input[name='m_name']").val(),
+                    m_parentid: $("select[name='m_parentid']").val(),
+                    m_isdisplay: $('input[name="m_isdisplay"]:checked ').val(),
+                    menu_leftorright: $('input[name="m_leftorright"]:checked ').val(),
+                    m_sort: $("input[name='m_sort']").val(),
+                    id: $('input[name="id"]').val()
+                }
+
+                $.post("{:U('system/doMenuUpdate')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('更新成功', function(index, layero){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert('更新失败')
+                    }
+                })
+                return false
+            })
+        });
+    </script>
+</block>

@@ -1,0 +1,102 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">开始时间</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">结束时间</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">类别查询</label>
+                    <div class="layui-input-inline">
+                        <select name="reason" lay-filter="reason">
+                            <option value="0">请选择 </option>
+                            <option value="1">线上冲值 </option>
+                            <option value="2">线下冲值</option>
+                            <option value="3">玩家提现</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="layui-btn" data-type="reload">搜索</button>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist'}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'accountid'}">玩家ID</th>
+                <th lay-data="{field:'name'}">玩家昵称</th>
+                <th lay-data="{field:'ChangeValue'}">变更数量</th>
+                <th lay-data="{field:'beginValue'}">变更前数量</th>
+                <th lay-data="{field:'value'}">变更后数量</th>
+                <th lay-data="{field:'daojuname'}">道具名称</th>
+                <th lay-data="{field:'text'}">描述</th>
+                <th lay-data="{field:'time'}">时间</th>
+            </tr>
+        </thead>
+    </table>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+
+            laydate.render({
+                elem: '#s_date'
+                ,type: 'datetime',
+                format: 'yyyy-MM-dd HH:mm:ss'
+
+            });
+            laydate.render({
+                elem: '#e_date'
+                ,type: 'datetime',
+                format: 'yyyy-MM-dd HH:mm:ss'
+
+            });
+
+            var active = {
+                reload: function() {
+                    table.reload('datalist', {
+                        where: {
+                            accountid: "{:I('get.accountid/d')}",
+                            start_time: $('input[name="s_date"]').val(),
+                            end_time: $('input[name="e_date"]').val(),
+                            reason: $('select[name="reason"]').val()
+                        },
+                        url: '{:U("FreezeManagement/userGoldList")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                }
+            }
+            active.reload();
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

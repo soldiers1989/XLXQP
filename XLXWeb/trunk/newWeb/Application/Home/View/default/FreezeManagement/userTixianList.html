@@ -1,0 +1,53 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist'}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'accountid'}">玩家ID</th>
+                <th lay-data="{field:'name'}">玩家昵称</th>
+                <th lay-data="{field:'OrderNum'}">订单号</th>
+                <th lay-data="{field:'ChangeValue'}">变更数量</th>
+                <th lay-data="{field:'daojuname'}">道具名称</th>
+                <th lay-data="{field:'text'}">描述</th>
+                <th lay-data="{field:'time'}">时间</th>
+            </tr>
+        </thead>
+    </table>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+
+            var active = {
+                reload: function() {
+                    table.reload('datalist', {
+                        where: {
+                            accountid: "{:I('get.accountid/d')}"
+                        },
+                        url: '{:U("FreezeManagement/userTixianList")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                }
+            }
+            active.reload();
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

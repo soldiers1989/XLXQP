@@ -1,0 +1,57 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <form class="layui-form">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">支付宝账号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="alipay" lay-verify="Bankcard" autocomplete="off" placeholder="银行卡号,多个用逗号分隔" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">冻结原因</label>
+                <div class="layui-input-block">
+                    <input type="text" name="FreezeReason" lay-verify="FreezeReason" autocomplete="off" placeholder="冻结原因" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-filter="lockAlipayAdd" lay-submit="">新建</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form;
+            //监听提交
+            form.on('submit(lockAlipayAdd)', function(obj){
+                let postData = {
+                    alipay: $("input[name='alipay']").val(),
+                    FreezeReason: $("input[name='FreezeReason']").val(),
+                }
+                $.post("{:U('FreezeManagement/lockAlipayAdd')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('添加成功', function(index){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert(response.message)
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+</block>

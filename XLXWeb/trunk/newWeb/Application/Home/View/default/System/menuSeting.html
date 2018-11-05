@@ -1,0 +1,87 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist'}" lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'name'}">菜单名称</th>
+            <th lay-data="{field:'menu_parent'}">菜单父级</th>
+            <th lay-data="{field:'leftorright'}">左右</th>
+            <th lay-data="{field:'operator'}">操作人</th>
+            <th lay-data="{field:'sort', edit: 'text', width: 60}">排序</th>
+            <th lay-data="{field:'subset', width: 60}">子菜单</th>
+            <th lay-data="{field:'isdisplay',  templet: '#switchTpl',}">是否显示</th>
+            <th lay-data="{field:'addtime', width: 160}">操作时间</th>
+            <th lay-data="{fixed: 'right', width:80, align:'center', toolbar: '#bar'}"></th>
+        </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-primary layui-btn-xs"  lay-event="edit">修改</a>
+    </script>
+
+    <script type="text/html" id="switchTpl">
+        <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="显示|隐藏" lay-filter="isdisplay" {{ d.isdisplay == 1 ? 'checked' : '' }}>
+    </script>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form;
+            table.reload('datalist', {
+                url: '{:U("system/menuSeting")}',
+                limits: limits,
+                limit: limit,
+                done: function (data) {
+                    console.log(data)
+                }
+            })
+
+            //监听单元格编辑
+            table.on('edit(datalist)', function(obj){
+                var value = obj.value //得到修改后的值
+                    ,data = obj.data //得到所在行所有键值
+                    ,field = obj.field; //得到字段
+                $.post("{:U('system/doMenuSortUpdate')}", {id: obj.data.id, msort: value}, function(reponse) {
+                    reponse.code == 0 && layer.msg('修改成功');
+                    reponse.code == 1 && layer.msg(reponse.message);
+                })
+            });
+
+            //监听是否显示操作
+            form.on('switch(isdisplay)', function(obj) {
+                let isdisplay = obj.elem.checked ? 1 : 0
+                $.post("{:U('system/doMenuIsDisplay')}", { id: this.value, isdisplay: isdisplay }, function ( response ) {
+                    response.code == 1 && layer.msg(response.message);
+                })
+               // layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+            });
+
+            //监听工具条
+            table.on('tool(datalist)', function(obj){
+                var data = obj.data;
+               if(obj.event === 'del'){
+                    layer.confirm('真的删除行么', function(index){
+                        obj.del();
+                        layer.close(index);
+                    });
+                } else if(obj.event === 'edit'){
+                   // layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                   //iframe层-父子操作
+                   layer.open({
+                       type: 2,
+                       title: '菜单修改',
+                       area: ['500px', '500px'],
+                       fixed: false, //不固定
+                       maxmin: true,
+                       content: data.editUrl
+                   });
+                }
+            });
+        });
+    </script>
+</block>

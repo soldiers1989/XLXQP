@@ -1,0 +1,84 @@
+<extend name="Base/base"/>
+<block name="main">
+    <br>
+    <form class="layui-form" action="" lay-filter="">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">玩家ID</label>
+            <div class="layui-input-inline">
+                <input value="{$order.bk_accountid}" class="layui-input" type="text" autocomplete="off">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">订单号</label>
+            <div class="layui-input-inline">
+                <input value="{$order.bk_merchantorder}" class="layui-input" type="text" autocomplete="off" style="width: 330px">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">金额</label>
+            <div class="layui-input-inline">
+                <input name="amount" class="layui-input" disabled type="text" value="{$order.bk_payamount}" autocomplete="off" required  lay-verify="required|number">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">补发原因</label>
+            <div class="layui-input-inline">
+                <input name="reason" class="layui-input" type="text" autocomplete="off" style="width: 330px" lay-verify="required">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <input type="hidden" name="order" value="{$order.bk_merchantorder}">
+            <input type="hidden" name="desc" value="{$order.bk_desc}">
+            <input type="hidden" name="id" value="{$order.bk_accountid}">
+            <input type="hidden" name="ip" value="{$order.bk_accountip}">
+            <input type="hidden" name="pass_id" value="{$order.bk_passid}">
+            <button class="layui-btn " lay-submit lay-filter="reissue">确定</button>
+        </div>
+    </div>
+    </form>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form;
+
+            form.on('submit(reissue)', function(obj){
+                let postData = {
+                    order: $("input[name='order']").val(),
+                    desc: $("input[name='desc']").val(),
+                    id: $("input[name='id']").val(),
+                    ip: $("input[name='ip']").val(),
+                    pass_id: $("input[name='pass_id']").val(),
+                    amount: $("input[name='amount']").val(),
+                    reason: $("input[name='reason']").val(),
+                }
+
+                $.post("{:U('recharge/doOrderReissue')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('补发成功',{closeBtn: 0}, function () {
+                            parent.location.reload();
+                        });
+                    }
+                    else {
+                        layer.alert('补发失败',{closeBtn: 0}, function () {
+                            parent.location.reload();
+                        });
+                    }
+                })
+                return false
+            })
+        });
+    </script>
+</block>

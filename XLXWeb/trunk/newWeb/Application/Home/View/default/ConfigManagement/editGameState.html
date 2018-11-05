@@ -1,0 +1,198 @@
+<extend name="Base/base"/>
+<block name="main">
+    <br>
+    <form class="layui-form" action="" lay-filter="gameState">
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">权重</label>
+                <div class="layui-input-inline">
+                    <input name="weights" value="{$row.bk_weights}" class="layui-input" type="text" id="weights"
+                           autocomplete="off" lay-verify="required|number">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">游戏状态</label>
+                <div class="layui-input-inline">
+                    <select name="state" lay-verify="required">
+                        <option {:xeq($row['bk_state'], 1, 'selected')} value="1">上架</option>
+                        <option {:xeq($row['bk_state'], 0, 'selected')} value="0">下架</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">游戏标签</label>
+                <div class="layui-input-inline">
+                    <select name="label" lay-verify="required">
+                        <option {:xeq($row['bk_label'], 0, 'selected')} value="0">无</option>
+                        <option {:xeq($row['bk_label'], 1, 'selected')} value="1">New</option>
+                        <option {:xeq($row['bk_label'], 2, 'selected')} value="2">HOT</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">初级 / 平民</label>
+                <div class="layui-input-inline">
+                    <select name="room_primary" lay-verify="required">
+                        <option {:xeq($row['bk_room1'], 0, 'selected')} value="0">未选择</option>
+                        <option {:xeq($row['bk_room1'], 1, 'selected')} value="1">敬请期待</option>
+                        <option {:xeq($row['bk_room1'], 2, 'selected')} value="2">上架</option>
+                        <option {:xeq($row['bk_room1'], 3, 'selected')} value="3">下架</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">档次标签</label>
+                <div class="layui-input-inline">
+                    <select name="label_primary" lay-verify="required">
+                        <option {:xeq($row['bk_label1'], 0, 'selected')} value="0">未选择</option>
+                        <option {:xeq($row['bk_label1'], 1, 'selected')} value="1">无</option>
+                        <option {:xeq($row['bk_label1'], 2, 'selected')} value="2">流畅</option>
+                        <option {:xeq($row['bk_label1'], 3, 'selected')} value="3">火爆</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">中级 / 小资</label>
+                <div class="layui-input-inline">
+                    <select name="room_middle" lay-verify="required">
+                        <option {:xeq($row['bk_room2'], 0, 'selected')} value="0">未选择</option>
+                        <option {:xeq($row['bk_room2'], 1, 'selected')} value="1">敬请期待</option>
+                        <option {:xeq($row['bk_room2'], 2, 'selected')} value="2">上架</option>
+                        <option {:xeq($row['bk_room2'], 3, 'selected')} value="3">下架</option>
+                        <option {:xeq($row['bk_room2'], 4, 'selected')} value="4">该游戏没有此房间类型</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">档次标签</label>
+                <div class="layui-input-inline">
+                    <select name="label_middle" lay-verify="required">
+                        <option {:xeq($row['bk_label2'], 0, 'selected')} value="0">未选择</option>
+                        <option {:xeq($row['bk_label2'], 1, 'selected')} value="1">无</option>
+                        <option {:xeq($row['bk_label2'], 2, 'selected')} value="2">流畅</option>
+                        <option {:xeq($row['bk_label2'], 3, 'selected')} value="3">火爆</option>
+                        <option {:xeq($row['bk_label2'], 4, 'selected')} value="4">该游戏没有此房间类型</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">高级 / 老板</label>
+                <div class="layui-input-inline">
+                    <select name="room_high" lay-verify="required">
+                        <option {:xeq($row['bk_room3'], 0, 'selected')} value="0">未选择</option>
+                        <option {:xeq($row['bk_room3'], 1, 'selected')} value="1">敬请期待</option>
+                        <option {:xeq($row['bk_room3'], 2, 'selected')} value="2">上架</option>
+                        <option {:xeq($row['bk_room3'], 3, 'selected')} value="3">下架</option>
+                        <option {:xeq($row['bk_room3'], 4, 'selected')} value="4">该游戏没有此房间类型</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">档次标签</label>
+                <div class="layui-input-inline">
+                    <select name="label_high" lay-verify="required">
+                        <option {:xeq($row['bk_label3'], 0, 'selected')} value="0">未选择</option>
+                        <option {:xeq($row['bk_label3'], 1, 'selected')} value="1">无</option>
+                        <option {:xeq($row['bk_label3'], 2, 'selected')} value="2">流畅</option>
+                        <option {:xeq($row['bk_label3'], 3, 'selected')} value="3">火爆</option>
+                        <option {:xeq($row['bk_label3'], 4, 'selected')} value="4">该游戏没有此房间类型</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">土豪</label>
+                <div class="layui-input-inline">
+                    <select name="room_rich" lay-verify="required">
+                        <option {:xeq($row['bk_room4'], 0, 'selected')} value="0">未选择</option>
+                        <option {:xeq($row['bk_room4'], 1, 'selected')} value="1">敬请期待</option>
+                        <option {:xeq($row['bk_room4'], 2, 'selected')} value="2">上架</option>
+                        <option {:xeq($row['bk_room4'], 3, 'selected')} value="3">下架</option>
+                        <option {:xeq($row['bk_room4'], 4, 'selected')} value="4">该游戏没有此房间类型</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">档次标签</label>
+                <div class="layui-input-inline">
+                    <select name="label_rich" lay-verify="required">
+                        <option {:xeq($row['bk_label4'], 0, 'selected')} value="0">未选择</option>
+                        <option {:xeq($row['bk_label4'], 1, 'selected')} value="1">无</option>
+                        <option {:xeq($row['bk_label4'], 2, 'selected')} value="2">流畅</option>
+                        <option {:xeq($row['bk_label4'], 3, 'selected')} value="3">火爆</option>
+                        <option {:xeq($row['bk_label4'], 4, 'selected')} value="4">该游戏没有此房间类型</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="hidden" name="roomType" value="{$row.bk_roomtype}">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="hidden" name="id" value="{$row.bk_id}">
+                <button class="layui-btn " lay-submit lay-filter="edit">修改</button>
+            </div>
+        </div>
+
+    </form>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form;
+
+            form.on('submit(edit)', function(obj){
+                let postData = {
+                    id: $("input[name='id']").val(),
+                    roomType: $("input[name='roomType']").val(),
+                    weights: $("input[name='weights']").val(),
+                    state: $("select[name='state']").val(),
+                    label: $("select[name='label']").val(),
+                    room_primary: $("select[name='room_primary']").val(),
+                    label_primary: $("select[name='label_primary']").val(),
+                    room_middle: $("select[name='room_middle']").val(),
+                    label_middle: $("select[name='label_middle']").val(),
+                    room_high: $("select[name='room_high']").val(),
+                    label_high: $("select[name='label_high']").val(),
+                    room_rich: $("select[name='room_rich']").val(),
+                    label_rich: $("select[name='label_rich']").val(),
+                }
+
+                $.post("{:U('configManagement/doGameStateUpdate')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('更新成功', function(index, layero){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert(response.message)
+                    }
+                })
+                return false
+            })
+        });
+    </script>
+</block>

@@ -1,0 +1,1 @@
+a:5:{i:0;s:5:"bk_ID";i:1;s:12:"bk_ChannelID";i:2;s:10:"bk_Channel";s:3:"_pk";s:5:"bk_ID";s:5:"_type";a:3:{s:5:"bk_ID";s:16:"int(11) unsigned";s:12:"bk_ChannelID";s:7:"int(11)";s:10:"bk_Channel";s:11:"varchar(32)";}}

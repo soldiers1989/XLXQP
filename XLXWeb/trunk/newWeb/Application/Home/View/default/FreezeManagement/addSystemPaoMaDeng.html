@@ -1,0 +1,171 @@
+<extend name="Base/base" />
+<block name="main">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>添加跑马灯</legend>
+    </fieldset>
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">上架时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="onlineTime" name="onlineTime"  ay-verify="date" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">下架时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="offlineTime" name="offlineTime"  ay-verify="date" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">播报类型</label>
+                <div class="layui-input-inline">
+                    <select name="type" lay-filter="m_parentid">
+                        <option value="1">后台发放</option>
+                        <option value="2">提现发放</option>
+                        <option value="3">中奖发放</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">优先级</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="YouXianJi"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">标题</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="title"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">播报间隔</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="boBaoJianGe"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">APK包</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="apkAll" value="all" lay-filter="apkAll" lay-skin="primary" title="全部" >
+                    <foreach name="apk_list" key="key" item="vo" >
+                        <input type="checkbox" name="apk" value="{$key}" lay-skin="primary" title="{$vo}" >
+                    </foreach>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">渠道</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="qudaoAll" value="all" lay-filter="qudaoAll" lay-skin="primary" title="全部" >
+                    <foreach name="channel_list" key="key" item="vo" >
+                        <input type="checkbox" name="qudao" value="{$key}" lay-skin="primary" title="{$vo}" >
+                    </foreach>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">内容</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" name="content" class="layui-textarea"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn " lay-submit lay-filter="LAY-menu-add-submit">添加</button>
+            </div>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,laydate = layui.laydate
+                ,form = layui.form;
+
+            //日期
+            laydate.render({
+                elem: '#onlineTime'
+                ,type: 'datetime'
+            });
+            laydate.render({
+                elem: '#offlineTime'
+                ,type: 'datetime'
+            });
+
+            form.on('checkbox(apkAll)', function(data){
+                $("input[name='apk']").prop("checked" ,function () {
+                    return  data.elem.checked;
+                })
+                form.render();
+            });
+
+            form.on('checkbox(qudaoAll)', function(data){
+                $("input[name='qudao']").prop("checked" ,function () {
+                    return  data.elem.checked;
+                })
+                form.render();
+            });
+
+            form.on('submit(LAY-menu-add-submit)', function(obj){
+                let postData = {
+                    onlineTime: $("input[name='onlineTime']").val(),
+                    offlineTime: $("input[name='offlineTime']").val(),
+                    type: $("select[name='type']").val(),
+                    YouXianJi: $('input[name="YouXianJi"] ').val(),
+                    title: $('input[name="title"] ').val(),
+                    content: $("textarea[name='content']").val(),
+                    channelall: $('input[name="qudaoAll"]:checked').val(),
+                    boBaoJianGe: $('input[name="boBaoJianGe"]').val(),
+                    channel: (function () {
+                        let carr = []
+                        $.each($('input[name="qudao"]:checked'), function () {
+                            carr.push($(this).val())
+                        })
+                        return carr
+                    }()),
+                    apkall: $('input[name="apkAll"]:checked').val(),
+                    apk: (function () {
+                        let carr = []
+                        $.each($('input[name="apk"]:checked'), function () {
+                            carr.push($(this).val())
+                        })
+                        return carr
+                    }())
+                }
+
+                $.post("{:U('FreezeManagement/doAddSystemPaoMaDeng')}", postData , (response) => {
+                    console.log(response)
+                    if ( response.code == 0 ) {
+                        layer.alert('添加成功', function(index, layero){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert(response.message)
+                    }
+                })
+                return false
+            })
+        });
+    </script>
+</block>

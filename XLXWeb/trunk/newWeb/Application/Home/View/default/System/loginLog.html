@@ -1,0 +1,42 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist'}" lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'account'}">账号ID</th>
+            <th lay-data="{field:'ip'}">ip</th>
+            <th lay-data="{field:'log'}">登录/出</th>
+            <th lay-data="{field:'time'}">时间</th>
+        </tr>
+        </thead>
+    </table>
+
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+
+            var active = {
+                reload: function() {
+                    table.reload('datalist', {
+                        url: '{:U("System/loginLog")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                     })
+                }
+            }
+            active.reload();
+        });
+    </script>
+</block>

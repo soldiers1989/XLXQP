@@ -1,0 +1,125 @@
+<extend name="Base/base"/>
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <form class="layui-form" action="javascript:" lay-filter="example">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">玩家ID</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="account" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">1.不输入玩家ID则为所有玩家发送道具 2.为多个玩家ID发送道具，请用' , '分割(英文逗号)</div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">道具类型</label>
+                        <div class="layui-input-inline">
+                            <select name="props_type" lay-verify="required">
+                                <option value="">请选择</option>
+                                <foreach name="props_type" key="key" item="vo" >
+                                    <option value="{$key}">{$vo}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">增加/减少</label>
+                        <div class="layui-input-inline">
+                            <select name="add_reduce" lay-verify="required">
+                                <option value="">请选择</option>
+                                <option value="1">增加道具</option>
+                                <option value="2">减少道具</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">道具数量</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="props_amount" autocomplete="off" class="layui-input" lay-verify="required|number">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">增减原因</label>
+                        <div class="layui-input-inline">
+                            <select name="reason"  lay-verify="required" lay-filter="reason">
+                                <option value="">请选择</option>
+                                    <option value="游戏数值测试">游戏数值测试 </option>
+                                    <option value="异常补发">异常补发</option>
+                                    <option value="代理充值">代理充值</option>
+                                    <option value="人工充值">人工充值</option>
+                                    <option value="活动">活动</option>
+                                    <option value="补单">补单</option>
+                                    <option value="show">其他</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline layui-hide" id="reason_text" >
+                            <input type="text" name="reason_text" autocomplete="off" class="layui-input" lay-verify="">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-filter="propsAdd" type="submit" lay-submit="">确定</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.config({}).extend({
+            m: '/lib/m',
+            a: '/lib/a',
+            u: '/lib/u'
+        });
+
+        layui.use([ 'form','a', 'u'], function () {
+            var   f = layui.form
+                , a = layui.a
+                , $ = layui.$
+                , d = function () {
+                    let t =$('form').serializeArray(), s = {};
+                    t.forEach(function (key) {
+                        s[key.name] = key.value;
+                    })
+                    return s;
+                };
+            a.ss('reason', 'show', $('#reason_text')) ;
+            a.s('propsAdd', d, "{:U('propsChange/propsList')}");
+           // 监听提交
+           //  form.on('submit(propsAdd)', function (obj) {
+           //      let postData = {
+           //          account: $('input[name="account"]').val(),
+           //          props_type: $('select[name="props_type"]').val(),
+           //          props_amount: $('input[name="amount"]').val(),
+           //          reason: $('input[name="reason"]').val(),
+           //      }
+           //
+           //      $.post("{:U('propsChange/propsList')}", postData, (response) => {
+           //          if (response.code == 0) {
+           //              layer.alert('添加成功', function (index) {
+           //                  location.reload()
+           //                  //按钮【按钮一】的回调
+           //              })
+           //          } else {
+           //              layer.alert(response.message)
+           //          }
+           //      })
+           //      return false;
+           //  });
+        });
+
+    </script>
+</block>

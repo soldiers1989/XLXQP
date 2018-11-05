@@ -1,0 +1,47 @@
+<extend name="Base/base" />
+<block name="main">
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色名称</label>
+            <div class="layui-input-block">
+                <div class="layui-input-inline">
+                    <input type="text" name="name" lay-verify="name" autocomplete="off" placeholder="角色名称" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn " lay-submit lay-filter="LAY-add-submit">添加</button>
+            </div>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form;
+
+            form.on('submit(LAY-add-submit)', function(obj){
+                let postData = {
+                    name: $("input[name='name']").val()
+                }
+
+                $.post("{:U('admin/doAddRole')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('添加成功', function(index, layero){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert( response.message )
+                    }
+                })
+                return false
+            })
+        });
+    </script>
+</block>

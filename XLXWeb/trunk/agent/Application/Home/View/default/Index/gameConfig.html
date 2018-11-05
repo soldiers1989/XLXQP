@@ -1,0 +1,329 @@
+<extend name="Base/base" />
+<block name="cssBlock">
+    <style>
+        .layui-form-label {
+            width: 100px;
+        }
+
+        .layui-input, .layui-textarea {
+            display: block;
+            width: 91%;
+            padding-left: 10px;
+        }
+
+        .layadmin-dataview {
+            height: 411px!important;
+        }
+
+    </style>
+</block>
+
+<block name="mainBlock">
+    <div class="layui-card">
+        <div class="layui-form" lay-filter="layuiadmin-app-form-list" id="layuiadmin-app-form-list" style="padding: 20px 30px ">
+            <div style="padding-bottom: 10px;">
+                <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="game_config_list">调控记录</button>
+            </div>
+          <table class="layui-table" lay-data="{loading:true,height:'full', page:false, id:'datalist'}" lay-filter="datalist">
+              <thead>
+              <tr>
+                  <th lay-data="{field:'amount_init'}">初始奖池</th>
+                  <th lay-data="{field:'amount_now'}">当前奖池</th>
+                  <th lay-data="{field:'pool_increase'}">奖池涨幅</th>
+                  <th lay-data="{field:'transition'}">过度值M</th>
+                  <th lay-data="{field:'segmenting_line'}">放吸分临界</th>
+                  <th lay-data="{field:'force_out_part'}">强制放分</th>
+                  <th lay-data="{field:'out_part_lower_limit'}">放分下限</th>
+                  <th lay-data="{field:'force_in_part'}">强制吸分</th>
+                  <th lay-data="{field:'out_part_upper_limit'}">吸分上限</th>
+              </tr>
+              </thead>
+                </table>
+        </div>
+    </div>
+
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">奖池增加</div>
+                    <div class="layui-card-body">
+
+                        <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-normline">
+                            <form class="layui-form" action="" name="add-form" lay-filter="add-form">
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">增加频率：</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="rate" value="{$add_row.rate}" id="rate" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">增加万分比：</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="ratio" value="{$add_row.ratio}"  id="ratio" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                <div class="layui-col-lg6">
+                                    <label class="layui-form-label">增加时长：</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="stime" value="{$add_row.stime}" id="stime" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">执行时长：</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="run_time" value="{$add_row.run_time}" id="run_time" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">期望增加金额：</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="expect_amount" value="{$add_row.expect_amount}" id="expect_amount" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">本次增加总额：</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="now_amount" value="{$add_row.now_amount}" id="now_amount" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">增加原因：</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="add_text" value="{$add_row.add_text}" id="add_text" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label"></label>
+                                        <div class="layui-input-block">
+                                            <input type="hidden" name="type" value="0">
+                                            <button class="layui-btn" lay-submit lay-filter="add-form-btn">开始</button>
+                                            <button class="layui-btn" lay-submit lay-filter="stop-form-btn">停止</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">奖池减少</div>
+                    <div class="layui-card-body">
+                        <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-heaparea">
+                            <form class="layui-form" action="" name="reduce-form"  lay-filter="reduce-form">
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">减少频率：</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="rate" value="{$reduce_row.rate}" id="rate" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">减少万分比：</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="ratio" value="{$reduce_row.ratio}" id="ratio" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">减少时长：</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="stime" value="{$reduce_row.stime}" id="stime" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">执行时长：</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="run_time" value="{$reduce_row.run_time}"  id="run_time" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">期望减少金额：</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="expect_amount" value="{$reduce_row.expect_amount}" id="expect_amount" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">本次减少总额：</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="now_amount" value="{$reduce_row.now_amount}" id="now_amount" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label">减少原因：</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="add_text" value="{$reduce_row.add_text}" id="add_text" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-row layui-col-space10 layui-form-item">
+                                    <div class="layui-col-lg6">
+                                        <label class="layui-form-label"></label>
+                                        <div class="layui-input-block">
+                                            <button class="layui-btn" lay-submit lay-filter="reduce-form-btn">立即提交</button>
+                                            <button class="layui-btn" lay-submit lay-filter="stop-form-btn">停止</button>
+                                            <input type="hidden" name="type" value="1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="scriptBlock">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form;
+            table.reload('datalist', {
+                where: {
+                    gid : "{:I('get.gid/d')}",
+                    cid : "{:I('get.cid/d')}"
+                },
+                url: '{:U("index/gameConfigRow")}',
+                limits: [20, 50, 100],
+                limit:20,
+                done: function (data) {
+                    //console.log(data)
+                }
+            })
+
+            $.fn.serializeJson=function(){
+                var serializeObj={};
+                var array=this.serializeArray();
+                var str=this.serialize();
+                $(array).each(function(){
+                    if(serializeObj[this.name]){
+                        if($.isArray(serializeObj[this.name])){
+                            serializeObj[this.name].push(this.value);
+                        }else{
+                            serializeObj[this.name]=[serializeObj[this.name],this.value];
+                        }
+                    }else{
+                        serializeObj[this.name]=this.value;
+                    }
+                });
+                return serializeObj;
+            };
+
+            form.on('submit(reduce-form-btn)', function(obj){
+                let postData = $("form[name='reduce-form']").serializeJson()
+                postData.is_stop = 0;
+                postData.gid = "{:I('get.gid/d')}"
+                postData.cid = "{:I('get.cid/d')}"
+                $.post("{:U('index/doGameConfigAdd')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('添加成功', function(index, layero){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert( response.message )
+                    }
+                })
+                return false
+            })
+
+            let stopForm = function(){
+                const postData = {
+                    gid :"{:I('get.gid/d')}",
+                    cid : "{:I('get.cid/d')}"
+                }
+                $.post("{:U('index/doGameConfigStop')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('停止成功', function(index, layero){
+                             location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert( response.message )
+                    }
+                })
+            };
+
+            form.on('submit(add-form-btn)', function(obj){
+                let postData = $("form[name='add-form']").serializeJson()
+                postData.is_stop = 0;
+                postData.gid = "{:I('get.gid/d')}"
+                postData.cid = "{:I('get.cid/d')}"
+                $.post("{:U('index/doGameConfigAdd')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('添加成功', function(index, layero){
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        // setTimeout(function () {
+                        //     stopForm();
+                        // }, 5000);
+                        layer.alert( response.message )
+                    }
+                })
+                return false
+            })
+
+
+
+            form.on('submit(stop-form-btn)', function(obj){
+                stopForm()
+            })
+
+            form.on('submit(game_config_list)', function (obj) {
+                layer.open({
+                    type: 2,
+                    title: '调控记录',
+                    area: ['90%', '90%'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: "{$gameConfigList}"
+                });
+            })
+
+            let automatic = function () {
+                $('input[name="rate"]').val("1111");
+                $('input[name="ratio"]').val("10000");
+                $('input[name="stime"]').val("20000");
+                $('input[name="run_time"]').val("0");
+                $('input[name="expect_amount"]').val("30000");
+                $('input[name="now_amount"]').val("0");
+                $('input[name="add_text"]').val("增加原因");
+                $('button[lay-filter="add-form-btn"]').trigger("click");
+            };
+           // automatic();
+        });
+    </script>
+</block>

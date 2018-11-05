@@ -1,0 +1,95 @@
+<extend name="Base/base"/>
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 124px;">1、单次提现额,超过</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="condition1" autocomplete="off" class="layui-input"
+                           placeholder="{$default_data.condition1}">
+                </div>
+                <div class="layui-form-mid">元，进行预警。</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 124px;">2、未充值用户,达到</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="condition2" autocomplete="off" class="layui-input"
+                           placeholder="{$default_data.condition2}">
+                </div>
+                <div class="layui-form-mid">次提现及以上，进行预警。</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 290px;">3、未充值用户，【本次提现额+已提现总额】≥</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="condition3" autocomplete="off" class="layui-input"
+                           placeholder="{$default_data.condition3}">
+                </div>
+                <div class="layui-form-mid">元，进行预警。</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 441px;">4、1000元以下充值用户，【本次提现额+已提现总额+余额】≥充值总额</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="condition4" autocomplete="off" class="layui-input"
+                           placeholder="{$default_data.condition4}">
+                </div>
+                <div class="layui-form-mid">元，进行预警。</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 455px;">5、1000元及以上充值用户，【本次提现额+已提现总额+余额】≥充值总额</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="condition5" autocomplete="off" class="layui-input"
+                           placeholder="{$default_data.condition5}">
+                </div>
+                <div class="layui-form-mid">倍，进行预警。</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 218px;">6、连续提现（期间无充值），超过</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="condition6" autocomplete="off" class="layui-input"
+                           placeholder="{$default_data.condition6}">
+                </div>
+                <div class="layui-form-mid">次，进行预警。</div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn " lay-submit lay-filter="submit_">确定</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form;
+
+            //监听提交
+            form.on('submit(submit_)', function (obj) {
+                let postData = {
+                    condition1: $("input[name='condition1']").val(),
+                    condition2: $("input[name='condition2']").val(),
+                    condition3: $("input[name='condition3']").val(),
+                    condition4: $("input[name='condition4']").val(),
+                    condition5: $("input[name='condition5']").val(),
+                    condition6: $("input[name='condition6']").val(),
+                }
+                console.log(postData)
+                $.post("{:U('withdraw/earlyWarningConfig')}", postData, (response) => {
+                    if (response.code == 0) {
+                        layer.alert('设置预警配置成功', function (index) {
+                            location.reload()
+                            //按钮【按钮一】的回调
+                        })
+                    } else {
+                        layer.alert('设置预警配置失败')
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+</block>

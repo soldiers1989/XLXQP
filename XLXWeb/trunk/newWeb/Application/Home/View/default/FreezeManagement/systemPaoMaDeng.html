@@ -1,0 +1,122 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <button class="layui-btn" data-type="reload">添加系统跑马灯</button>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist'}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'id'}">编号</th>
+                <th lay-data="{field:'youxianji'}">优先级</th>
+                <th lay-data="{field:'title'}">标题</th>
+                <th lay-data="{field:'onlineTime'}">上架时间</th>
+                <th lay-data="{field:'offlinetime'}">下架时间</th>
+                <th lay-data="{field:'apk'}">apk包</th>
+                <th lay-data="{field:'boBaoJianGe'}">间隔</th>
+                <th lay-data="{field:'channe'}">渠道</th>
+                <th lay-data="{field:'content'}">内容</th>
+                <th lay-data="{field:'status'}">状态</th>
+                <th lay-data="{field:'time'}">操作时间</th>
+                <th lay-data="{field:'Operator'}">操作人</th>
+                <!--<th lay-data="{field:'Operator', templet: '#stopTemplet'}">暂停</th>-->
+                <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}">操作</th>
+            </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="stopTemplet">
+        <!-- 这里的 checked 的状态只是演示 -->
+        <input type="checkbox" name="stop" value="{{d.id}}" lay-skin="switch" lay-text="开|停" lay-filter="stopSwitch" {{ d.IsStop == 1 ? 'checked' : '' }}>
+    </script>
+
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+
+            var active = {
+                reload: function() {
+                    table.reload('datalist', {
+                        where: {
+                            accountid: "{:I('get.accountid/d')}"
+                        },
+                        url: '{:U("FreezeManagement/systemPaoMaDeng")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                }
+            }
+            active.reload();
+
+            form.on('switch(stopSwitch)', function(data){
+                $.post("{:U('FreezeManagement/stopSystemPaoMaDeng')}", {id: data.value, isStop: (function () {
+                        if( data.elem.checked )return 1
+                        if( !data.elem.checked ) return 0
+                    }()),
+                }, function (response) {
+                    if( response.code == 0 ) {
+                        layer.tips('更新成功', data.othis);
+                    }else{
+                        layer.tips( response.message , data.othis);
+                    }
+                })
+            });
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    layer.open({
+                        type: 2,
+                        title: '添加系统跑马灯',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['780px', '80%'],
+                        content: '{:U("FreezeManagement/addSystemPaoMaDeng")}' //iframe的url
+                    });
+                }
+            })
+
+            table.on('tool(datalist)', function(obj){
+                var data = obj.data;
+              if(obj.event === 'del'){
+                    layer.confirm('真的删除行么', function(index){
+                        $.post("{:U('FreezeManagement/delSystemPaoMaDeng')}", {id: data.id}, (response) => {
+                            if( response.code == 0 ){
+                                obj.del();
+                                layer.close(index);
+                                layer.alert('删除成功')
+                            }
+                        })
+                    });
+                } else if(obj.event === 'edit'){
+                    //iframe层-父子操作
+                    layer.open({
+                        type: 2,
+                        title: '公告修改',
+                        area: ['700px', '650px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        content: data.editUrl
+                    });
+                }
+            });
+        });
+    </script>
+</block>

@@ -1,0 +1,132 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+          <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">开始日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">截止日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+          <div class="layui-inline">
+              <label class="layui-form-label">推广员ID</label>
+              <div class="layui-input-inline">
+                  <input type="number" name="proxyid" autocomplete="off" class="layui-input">
+              </div>
+          </div>
+              <div class="layui-inline">
+                  <label class="layui-form-label">会员ID</label>
+                  <div class="layui-input-inline">
+                      <input type="number" name="uid" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                  </div>
+              </div>
+            <button class="layui-btn" data-type="reload">搜索</button>
+              <button class="layui-btn" data-type="execlExport">导出</button>
+        </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist'}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'accountid'}">推广员ID</th>
+                <th lay-data="{field:'proxyname'}">推广员昵称</th>
+                <th lay-data="{field:'type'}">类型</th>
+                <th lay-data="{field:'userid'}">会员ID</th>
+                <th lay-data="{field:'userName'}">会员昵称</th>
+                <th lay-data="{field:'userRegTime', width: 180}">会员注册时间</th>
+                <th lay-data="{field:'BindTime', width: 180}">绑定时间</th>
+                <th lay-data="{field:'NTotalBet'}">会员总投注</th>
+                <th lay-data="{field:'VaryYongJin'}">贡献佣金</th>
+                <th lay-data="{field:'DayTotalOutMoney'}">会员今日投注</th>
+                <th lay-data="{field:'DayOfferYingjin'}">今日贡献佣金</th>
+            </tr>
+        </thead>
+    </table>
+    <script type="text/html" id="switchTpl">
+        <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="显示|隐藏" lay-filter="isdisplay" {{ d.isdisplay == 1 ? 'checked' : '' }}>
+    </script>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date',
+                format: 'yyyy-MM-dd HH:mm:ss'
+                ,type: 'datetime'
+            });
+            laydate.render({
+                elem: '#e_date',
+                format: 'yyyy-MM-dd HH:mm:ss'
+                ,type: 'datetime'
+            });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                        proxyid: $('input[name="proxyid"]').val(),
+                        uid: $('input[name="uid"]').val()
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        url: '{:U("GameOverview/proxyList")}',
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        limits: [10,20,50,100,500,2000],
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("GameOverview/proxyList")}'+active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function(){
+                        layer.close(index);
+                    }, 3000);
+                }
+            }
+            active.reload();
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

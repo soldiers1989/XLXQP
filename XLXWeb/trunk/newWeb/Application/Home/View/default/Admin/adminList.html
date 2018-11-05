@@ -1,0 +1,107 @@
+<extend name="Base/base" />
+<block name="main">
+    <br>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist'}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'name'}">管理员账号</th>
+                <th lay-data="{field:'type'}">角色</th>
+                <th lay-data="{field:'qq'}">QQ</th>
+                <th lay-data="{field:'wechat'}">微信</th>
+                <th lay-data="{field:'phone'}">手机号码</th>
+                <th lay-data="{field:'isdisplay',  templet: '#switchTpl',}">是否禁用</th>
+                <th lay-data="{fixed: 'right', width:230, align:'center', toolbar: '#bar'}"></th>
+            </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-primary layui-btn-xs"  lay-event="adminEdit">编辑</a>
+        <a class="layui-btn layui-btn-primary layui-btn-xs"  lay-event="powerEdit">权限</a>
+        <a class="layui-btn layui-btn-primary layui-btn-xs"  lay-event="passwdEdit">改密</a>
+        <a class="layui-btn layui-btn-primary layui-btn-xs"  lay-event="googleAuthenticator">身份验证</a>
+    </script>
+
+    <script type="text/html" id="switchTpl">
+        <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="forbidden" {{ d.forbidden == 1 ? 'checked' : '' }}>
+    </script>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+
+            table.reload('datalist', {
+                url: '{:U("admin/adminList")}',
+                limits: limits,
+                limit: limit,
+                done: function (data) {
+                    //console.log(data)
+                }
+            })
+
+            //监听是否显示操作
+            form.on('switch(forbidden)', function(obj) {
+                let forbidden = obj.elem.checked ? 1 : 0
+                console.log(obj.value)
+                $.post("{:U('admin/doAdminForbidden')}", { id: obj.value, forbidden: forbidden }, function ( response ) {
+                    response.code == 1 && layer.msg(response.message);
+                })
+                // layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+            });
+
+            table.on('tool(datalist)', function(obj){
+                var data = obj.data;
+
+                if(obj.event === 'adminEdit'){
+                    layer.open({
+                        type: 2,
+                        title: '管理员修改',
+                        area: ['1000px', '650px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        content: data.adminEditUrl
+                    });
+                }
+
+                if(obj.event === 'powerEdit'){
+                    layer.open({
+                        type: 2,
+                        title: '权限修改',
+                        area: ['1000px', '650px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        content: data.powereditUrl
+                    });
+                }
+                if( obj.event === 'passwdEdit' ){
+                    layer.open({
+                        type: 2,
+                        title: '修改管理员密码',
+                        area: ['500px', '350px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        content: data.adminPasswdEditUrl
+                    });
+                }
+                if( obj.event == "googleAuthenticator" ) {
+                    $.post("{:U('admin/getQRCodeGoogleUrl')}", {id: data.id}, function (response) {
+                        console.log(response);
+                        layer.open({
+                            title: 'google验证码',
+                            type: 1,
+                            area: ['250px', '290px'],
+                            scrollbar: false,
+                            shadeClose: true, //点击遮罩关闭
+                            content: '\<\div style="padding:20px;"><img src='+response.path+'>\<\/div>'
+                        });
+                    })
+                }
+            })
+        });
+    </script>
+</block>

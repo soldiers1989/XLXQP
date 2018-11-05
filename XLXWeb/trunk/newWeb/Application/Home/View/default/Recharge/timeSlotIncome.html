@@ -1,0 +1,95 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">对比时间1</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">对比时间2</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:false, id:'datalist'}" lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{align:'center'}" colspan="2">时间（0~24点）</th>
+            <th lay-data="{align:'center'}" colspan="4">昨天（对比时间1）</th>
+            <th lay-data="{align:'center'}" colspan="4">今天（对比时间2）</th>
+        </tr>
+        <tr>
+            <th lay-data="{field:'order', minWidth:80}">序号</th>
+            <th lay-data="{field:'timeSlot', minWidth:100}">时间段</th>
+            <th lay-data="{field:'amount1', minWidth:100}">充值金额</th>
+            <th lay-data="{field:'count1', minWidth:100}">充值次数</th>
+            <th lay-data="{field:'count2', minWidth:130}">时段充值人数</th>
+            <th lay-data="{field:'sum1', minWidth:130}">时段充值总人数</th>
+            <th lay-data="{field:'amount2', minWidth:100}">充值金额</th>
+            <th lay-data="{field:'count3', minWidth:100}">充值次数</th>
+            <th lay-data="{field:'count4', minWidth:130}">时段充值人数</th>
+            <th lay-data="{field:'sum2', minWidth:130}">时段充值总人数</th>
+        </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="switchTpl">
+        <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="显示|隐藏" lay-filter="isdisplay" {{ d.isdisplay == 1 ? 'checked' : '' }}>
+    </script>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+
+            var active = {
+                reload: function () {
+                    table.reload('datalist', {
+                        where: {
+                            start_time: $('input[name="s_date"]').val(),
+                            end_time: $('input[name="e_date"]').val(),
+                        },
+                        url: '{:U("recharge/timeSlotIncome")}',
+                        done: function (res) {
+                            console.log(res)
+                        }
+                    })
+                }
+            }
+
+            active.reload();
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+
+        });
+    </script>
+</block>

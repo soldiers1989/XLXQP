@@ -1,0 +1,263 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">ID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="account" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="nickname" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">电话</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="phone" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">QQ</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="qq" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">微信</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="wechat" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">分组编号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="number" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">开始日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">截止日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                    <button class="layui-btn" data-type="execlExport">导出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true,cellMinWidth:100, id:'datalist'}"
+           lay-filter="datalist">
+        <thead>
+        <tr>
+            <th lay-data="{field:'id_'}">编号</th>
+            <th lay-data="{field:'weights'}">权重</th>
+            <th lay-data="{field:'recommend'}">推荐标识</th>
+            <th lay-data="{field:'number'}">分组编号</th>
+            <th lay-data="{field:'apk', minWidth:330}">APK包</th>
+            <th lay-data="{field:'account', minWidth:150}">代理游戏ID</th>
+            <th lay-data="{field:'gameNickname', minWidth:150}">代理游戏名</th>
+            <th lay-data="{field:'nickname', minWidth:150}">代理名称</th>
+            <th lay-data="{field:'qq', minWidth:150}">代理QQ</th>
+            <th lay-data="{field:'wechat', minWidth:150}">代理微信</th>
+            <th lay-data="{field:'phone', minWidth:150}">代理电话</th>
+            <th lay-data="{field:'name'}">代理姓名</th>
+            <th lay-data="{field:'state', templet: '#stateColor'}">状态</th>
+            <th lay-data="{field:'bk_account'}">代理用户名</th>
+            <th lay-data="{field:'tj_time', minWidth:160}">添加时间</th>
+            <th lay-data="{field:'tj_operator'}">添加人</th>
+            <th lay-data="{field:'time', minWidth:160}">操作时间</th>
+            <th lay-data="{field:'operator'}">操作人</th>
+            <th lay-data="{fixed: 'right', width:130, align:'center', toolbar: '#bar'}">操作</th>
+        </tr>
+        </thead>
+    </table>
+
+    <script type="text/html" id="stateColor">
+        {{#  if(d.state === '上架中'){ }}
+        <span style="color: #009688;font-weight: bold">{{ d.state }}</span>
+        {{#  } else { }}
+        <span style="color: #393D49;font-weight: bold">{{ d.state }}</span>
+        {{#  } }}
+    </script>
+
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-xs"  lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs"  lay-event="delete">删除</a>
+    </script>
+
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function () {
+            var table = layui.table
+                , $ = layui.jquery
+                , form = layui.form
+                , laydate = layui.laydate;
+
+            //监听工具条
+            table.on('tool(datalist)', function(obj){
+                var data = obj.data;
+                if ( obj.event === 'delete' ) {
+                    layer.confirm('真的要删除本条代理记录么', function(index){
+                        $.post("{:U('configManagement/doProxyDel')}", {id: data.id, account: data.account}, (response) => {
+                            if ( response.code == 0 ) {
+                                layer.msg('操作成功', {icon: 1});
+                                active.reload();
+                                layer.close(index);
+                            }
+                            else {
+                                layer.msg('删除失败', {icon: 2});
+                            }
+                        })
+                    });
+                }
+                else if( obj.event === 'edit' ) {
+                    layer.open({
+                        type: 2
+                        ,title: '代理配置编辑-' + data.account + '(' + data.gameNickname + ')-' + data.id_
+                        ,area: ['800px', '580px']
+                        ,shadeClose: true
+                        ,shade: 0.8
+                        ,maxmin: true
+                        ,content: data.editUrl
+                        ,btn: ['关闭']
+                        ,yes: function(){
+                            layer.closeAll();
+                        }
+                    });
+                }
+            });
+
+            //日期
+            laydate.render({
+                elem: '#s_date'
+            });
+            laydate.render({
+                elem: '#e_date'
+            });
+            var active = {
+                searchData: function() {
+                    return {
+                        account: (function () {
+                            let data_ = "";
+                            if ($('input[name="account"]').val() != "") {
+                                var reg = new RegExp(/^\d{7}$/);
+                                if ( reg.test($('input[name="account"]').val()) ) {
+                                    data_ = $('input[name="account"]').val();
+                                }
+                                else {
+                                    layer.alert('请输入正确的代理游戏ID');
+                                }
+                            }
+                            return data_;
+                        }()),
+                        nickname: $('input[name="nickname"]').val(),
+                        phone: (function () {
+                            let data_ = "";
+                            if ($('input[name="phone"]').val() != "") {
+                                var reg = new RegExp(/^\d{11}$/);
+                                if ( reg.test($('input[name="phone"]').val()) ) {
+                                    data_ = $('input[name="phone"]').val();
+                                }
+                                else {
+                                    layer.alert('请输入正确的代理电话');
+                                }
+                            }
+                            return data_;
+                        }()),
+                        qq: (function () {
+                            let data_ = "";
+                            if ($('input[name="qq"]').val() != "") {
+                                var reg = new RegExp(/^\d{5,10}$/);
+                                if ( reg.test($('input[name="qq"]').val()) ) {
+                                    data_ = $('input[name="qq"]').val();
+                                }
+                                else {
+                                    layer.alert('请输入正确的代理QQ');
+                                }
+                            }
+                            return data_;
+                        }()),
+                        wechat: $('input[name="wechat"]').val(),
+                        number: (function () {
+                            let data_ = "";
+                            if ($('input[name="number"]').val() != "") {
+                                var reg = new RegExp(/^\d{1,}$/);
+                                if ( reg.test($('input[name="number"]').val()) ) {
+                                    data_ = $('input[name="number"]').val();
+                                }
+                                else {
+                                    layer.alert('请输入正确的代理分组编号');
+                                }
+                            }
+                            return data_;
+                        }()),
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                        where: active.searchData(),
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        url: '{:U("configManagement/proxyConfig")}',
+                        limits: limits,
+                        limit: limit,
+                        done: function (data) {
+                            console.log(data)
+                        }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("configManagement/proxyConfig")}'+active.formatSearchData() //iframe的url
+                    });
+                }
+            }
+            active.reload();
+
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+
+        });
+    </script>
+</block>

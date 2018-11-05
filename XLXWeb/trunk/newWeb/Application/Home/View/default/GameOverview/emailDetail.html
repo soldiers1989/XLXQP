@@ -1,0 +1,132 @@
+<extend name="Base/base" />
+
+<block name="main">
+    <br>
+    <div class="searchTable">
+        <div class="layui-form">
+            <div class="layui-inline">
+                <label class="layui-form-label">发送ID</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="sendid" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">接受ID</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="receiverid" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">开始日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="s_date" id="s_date" lay-verify="date" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">截止日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="e_date" id="e_date" lay-verify="date" placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <button class="layui-btn" data-type="reload">搜索</button>
+            <button class="layui-btn" data-type="execlExport">导出</button>
+        </div>
+    </div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>变更总量：<span id="TotalMoney"></span></legend>
+    </fieldset>
+
+    <table class="layui-table" lay-data="{loading:true,height:'full',even:true,page:true, id:'datalist'}" lay-filter="datalist">
+        <thead>
+            <tr>
+                <th lay-data="{field:'id'}">序号</th>
+                <th lay-data="{field:'DailiID'}">发送方ID</th>
+                <th lay-data="{field:'DailiName'}">发送方昵称</th>
+                <th lay-data="{field:'DailiBefore'}">发送前金币</th>
+                <th lay-data="{field:'DailiEnd'}">发送后金币</th>
+                <th lay-data="{field:'ChargeTime', width: 180}">发送时间</th>
+                <th lay-data="{field:'PlayerID'}">接收方ID</th>
+                <th lay-data="{field:'PlayerName'}">接收昵称</th>
+                <th lay-data="{field:'PlayerBefore'}">接收前金币</th>
+                <th lay-data="{field:'PlayerEnd'}">接收后金币</th>
+                <th lay-data="{field:'RecieveTime', width: 180}">接收时间</th>
+                <th lay-data="{field:'ChangeGold'}">本次变更金币</th>
+            </tr>
+        </thead>
+    </table>
+</block>
+
+<block name="script">
+    <script>
+        layui.use(['jquery', 'table', 'laydate'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form
+                ,laydate = layui.laydate;
+
+            laydate.render({
+                elem: '#s_date'
+                ,type: 'datetime',
+                format: 'yyyy-MM-dd HH:mm:ss'
+            });
+            laydate.render({
+                elem: '#e_date'
+                ,type: 'datetime',
+                format: 'yyyy-MM-dd HH:mm:ss'
+            });
+
+            var active = {
+                searchData: function() {
+                    return {
+                        start_time: $('input[name="s_date"]').val(),
+                        end_time: $('input[name="e_date"]').val(),
+                        sendid: $("input[name='sendid']").val(),
+                        receiverid: $("input[name='receiverid']").val(),
+                    }
+                },
+                formatSearchData: function(){
+                    let $d = this.searchData(),
+                        $s = '?';
+                    $d.isExecl = 1;
+                    for ( var $v in $d ) {
+                        $s += $v + "=" + $d[$v] + "&";
+                    }
+                    return $s;
+                },
+                reload: function() {
+                    table.reload('datalist', {
+                            where: active.searchData() ,
+                            url: '{:U("GameOverview/emailDetail")}',
+                            limits: [10,20,50,100,500,2000],
+                            limit: limit,
+                            done: function (data) {
+                                $("#TotalMoney").html(data.TotalMoney)
+                            }
+                    })
+                },
+                execlExport: function () {
+                    let index = layer.open({
+                        type: 2,
+                        title: '导出',
+                        shadeClose: true,
+                        shade: 0.8,
+                        area: ['100px', '100px'],
+                        content:'{:U("GameOverview/emailDetail")}'+active.formatSearchData() //iframe的url
+                    });
+                    setTimeout(function(){
+                        layer.close(index);
+                    }, 300000);
+                }
+            }
+            active.reload();
+            $('.searchTable .layui-btn').bind({
+                click: function () {
+                    var type = $(this).data('type')
+                    active[type] ? active[type].call(this) : ""
+                }
+            })
+        });
+    </script>
+</block>

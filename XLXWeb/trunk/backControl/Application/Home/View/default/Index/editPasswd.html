@@ -1,0 +1,62 @@
+<extend name="Base/base" />
+<block name="mainBlock">
+    <div class="layui-card">
+    <div class="layui-form" lay-filter="layuiadmin-app-form-list" id="layuiadmin-app-form-list" style="padding: 20px 30px ">
+        <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">管理员名称</label>
+            <div class="layui-input-block">
+                <div class="layui-input-inline">
+                    <input type="text" name="name" lay-verify="name" disabled value="{$admin.name}" autocomplete="off" placeholder="管理员名称" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label"> 设置密码</label>
+            <div class="layui-input-block">
+                <div class="layui-input-inline">
+                    <input type="text" name="password"  lay-verify="password" autocomplete="off" placeholder="设置密码" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn " lay-submit lay-filter="LAY-menu-add-submit">修改密码</button>
+                <input value="{$admin.id}" type="hidden" name="id">
+            </div>
+        </div>
+    </form>
+
+    </div>
+    </div>
+</block>
+
+<block name="scriptBlock">
+    <script>
+        layui.use(['jquery', 'table', 'form'], function(){
+            var table = layui.table
+                ,$ = layui.jquery
+                ,form = layui.form;
+            form.on('submit(LAY-menu-add-submit)', function(obj){
+                let postData = {
+                    id: $("input[name='id']").val(),
+                    password: $("input[name='password']").val()
+                }
+
+                $.post("{:U('index/doEditPasswd')}", postData , (response) => {
+                    if ( response.code == 0 ) {
+                        layer.alert('修改成功', function(index, layero){
+                            parent.location.href = '/'
+                            //按钮【按钮一】的回调
+                        })
+                    }else{
+                        layer.alert( response.message )
+                    }
+                })
+                return false
+            })
+        });
+    </script>
+</block>

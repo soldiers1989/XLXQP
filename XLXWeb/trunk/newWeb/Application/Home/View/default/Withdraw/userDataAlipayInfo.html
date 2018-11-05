@@ -1,0 +1,39 @@
+<extend name="Base/base"/>
+
+<block name="main">
+    <br>
+    <table class="layui-table">
+        <colgroup>
+            <!--<col width="200">-->
+            <!--<col width="100">-->
+            <!--<col width="200">-->
+            <!--<col width="100">-->
+            <!--<col width="100">-->
+            <col width="200">
+            <col width="400">
+        </colgroup>
+        <tbody>
+        <!--<tr>-->
+            <!--<td>本次实际提现金额</td>-->
+            <!--<td>支付宝姓名</td>-->
+            <!--<td>支付宝账号</td>-->
+            <!--<td>ID</td>-->
+            <!--<td>提现类型</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td>{$data.tixianrmb}</td>-->
+            <!--<td>{$data.name}</td>-->
+            <!--<td>{$data.alipay}</td>-->
+            <!--<td>{$data.account}</td>-->
+            <!--<td>{$data.type}</td>-->
+        <!--</tr>-->
+        <tr> <td>本次实际提现金额</td> <td>{$data.tixianrmb}</td> </tr>
+        <tr> <td>支付宝姓名</td>       <td>{$data.name}</td>      </tr>
+        <tr> <td>支付宝账号</td>       <td>{$data.alipay}</td>    </tr>
+        <tr> <td>ID</td>               <td>{$data.account}</td>   </tr>
+        <tr> <td>提现类型</td>         <td>{$data.type}</td>      </tr>
+        </tbody>
+        </tbody>
+    </table>
+</block>
+
