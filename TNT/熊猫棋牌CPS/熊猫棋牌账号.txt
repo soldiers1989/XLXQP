@@ -1,0 +1,34 @@
+=======================================
+IOS 企业账号:
+账号: apps@thehandicraftsgallery.com
+密码: Xiaolongxia%518XLX
+
+=======================================
+openinstall
+登录账号： asd4996189@gmail.com
+登录密码： hlkk001310.
+
+=======================================
+激光
+登录账号：asd4996189@gmail.com
+登录密码：HLKK8989hlkk..
+
+=======================================
+百度统计	
+地址:  https://mtj.baidu.com/web/welcome/login
+账号:  熊猫游戏123
+密码:  xiaolongxia518
+
+=======================================
+微信开发者:
+3111888615@qq.com
+MWyQI5hy
+
+微信应用: 9527掌上电玩==》修改为: 熊猫棋牌888
+AppKey:    wx8d13ea72c1154daa
+AppSecret: 7c2fa41ca4e7b9d9eaea3de81dfcac24
+
+BundleID: 
+IOS    :  com.888.pandaqp
+Android:  com.panda.gamehall
+应用签名： 140c2a8ba2a1fe76746ff22432696610
