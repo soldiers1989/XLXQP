@@ -575,8 +575,8 @@ function Awake()
     this.transform:Find('Canvas/RoleInfo/ShareButton'):GetComponent('Button').onClick:AddListener(OpenWindowOfficialWebsite)
 
     -- 子游戏节点相关
-    mGameScrollRect = this.transform:Find('Canvas/ScrollViewGame'):GetComponent("ScrollRectExtend")
-    mGameScrollRect.MoveSpace = 3;
+    mGameScrollRect = this.transform:Find('Canvas/ScrollViewGame'):GetComponent("ScrollRectHall")
+    mGameScrollRect.MoveSpace = 6;
     mGameContentDisableParent = this.transform:Find('Canvas/ScrollViewGame/Viewport/ContentDisable')
     mGameContentEnableParent = this.transform:Find('Canvas/ScrollViewGame/Viewport/ContentEnable')
     for posIndex = 2, 13, 1 do

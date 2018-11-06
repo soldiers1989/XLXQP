@@ -2073,7 +2073,7 @@ function ButtonCaiDan_OnClick()
         this.transform:Find('Canvas/Buttons/ButtonCaiDan1').gameObject:SetActive(false)
         this.transform:Find('Canvas/Buttons/ButtonCaiDan2').gameObject:SetActive(true)
         ReturnCaiDanShow(true)
-        this.transform:Find('Canvas/ReturnCaiDan/ButtonExit'):GetComponent("Button").interactable = CheckCanQuitGame()
+        --this.transform:Find('Canvas/ReturnCaiDan/ButtonExit'):GetComponent("Button").interactable = CheckCanQuitGame()
     end
 end
 

@@ -1,6 +1,7 @@
-data = {};
+data = { };
 
-GameConfig = {
+GameConfig =
+{
     -- ==========================================================
     -- ==========================================================
     -- 开发测试阶段可开启 *****正式版本一定要记住关闭该功能*****
@@ -15,11 +16,13 @@ GameConfig = {
     -- ==========================================================
     -- ========================服务器域名相关=====================
     -- ==========================================================
+
     -- 连接的HubServerURL 域名:
     -- 正式  服务器:9527.hub.9527youxi.com          39.106.126.15
     -- 苹果审核域名:xlx168.v101hub.sylyedu.com      47.254.64.25
     -- 外网测  试服:xlx168.hub.out.sylyedu.com      47.75.241.60
     -- 本地服  务器:192.168.50.101
+    
     HubServerURL = "192.168.50.102",
     -- HubServerURL = "47.75.241.60",
     -- HubServerURL = "9527.hub.9527youxi.com",
@@ -82,7 +85,8 @@ function data.GetString(strKey)
 end
 
 -- 未处理事件参数
-UuHandleFlagEventArgs = {
+UuHandleFlagEventArgs =
+{
     -- 是否包含未处理
     ContainsUnHandle = false,
     -- 未处理的数量
@@ -90,13 +94,14 @@ UuHandleFlagEventArgs = {
 }
 
 -- 搓牌进度事件参数
-HandlePokerEventArgs = {
+HandlePokerEventArgs =
+{
     HandlerID = 0,
     PokerIndex = 0,
     IsRotate = false,
     FlipMode = 0,
-    MoveX = 0,
-    MoveY = 0,
+    MoveX = 0.0,
+    MoveY = 0.0,
 }
 
 function GameConfig.Init()
@@ -122,16 +127,16 @@ function GameConfig.Init()
     require 'Base/Config/LBSAreaConfig'
     require 'Base/Config/HallLayoutConfig'
     require 'Base/Config/BankConfig'
-
+    
     GameConfig.InitChipValueByConfig()
     print('Inited game configs')
 end
 
 function GameConfig.InitChipValueByConfig()
     if data.PublicConfig ~= nil and data.PublicConfig.CHIP_VALUE ~= nil then
-        CHIP_VALUE = {}
+        CHIP_VALUE = { }
         for k, value in ipairs(data.PublicConfig.CHIP_VALUE) do
-            CHIP_VALUE[k] = value * 10000
+            CHIP_VALUE[k] = value*10000
         end
     end
 end
@@ -157,8 +162,8 @@ end
 --@levelParam:
 --@return PublicroomConfig
 --==============================--
-function GameConfig.GetPublicRoomConfigDataByTypeLevel(typeParam, levelParam)
-    local tmpData = {}
+function GameConfig.GetPublicRoomConfigDataByTypeLevel(typeParam,levelParam)
+    local tmpData = { }
     for key, config in pairs(data.PublicroomConfig) do
         if config.Type == typeParam and config.Level == levelParam then
             tmpData = config
@@ -201,8 +206,8 @@ end
 --@levelParam:
 --@return HongbaoroomConfig
 --==============================--
-function GameConfig.HongbaoroomConfigDataByTypeLevel(typeParam, levelParam)
-    local tmpData = {}
+function GameConfig.HongbaoroomConfigDataByTypeLevel(typeParam,levelParam)
+    local tmpData = { }
     for key, config in pairs(data.HongbaoroomConfig) do
         if config.Type == typeParam and config.RoomLevel == levelParam then
             tmpData = config
@@ -213,7 +218,7 @@ function GameConfig.HongbaoroomConfigDataByTypeLevel(typeParam, levelParam)
 end
 
 -- 美国IP检测
-function GameConfig.ReqIPAddress()
+function  GameConfig.ReqIPAddress()
     print("=====111============IP Address Time1:", CS.UnityEngine.Time.time)
     GameConfig.IPHandle = false
     local paramTable = {}
@@ -224,7 +229,7 @@ function GameConfig.ReqIPAddress()
 end
 
 -- IP位置校验
-function GameConfig.CallUSIPCheck(paramResult)
+function GameConfig.CallUSIPCheck( paramResult )
     print("=====222============IP Address Time2:", CS.UnityEngine.Time.time, paramResult)
     if nil == paramResult then
         GameConfig.IPHandle = false
@@ -232,7 +237,7 @@ function GameConfig.CallUSIPCheck(paramResult)
         GameConfig.IPHandle = true
         local tPos = string.find(paramResult, 'ip=')
         if tPos ~= nil and tPos == 1 then
-            GameConfig.IPAddress = string.sub(paramResult, tPos + 3)
+            GameConfig.IPAddress = string.sub(paramResult, tPos+3)
         else
             GameConfig.IPHandle = false
         end
@@ -241,9 +246,9 @@ end
 
 -- 检测是否SH or 特殊地址
 function GameConfig.IsSpecial()
-
+    
     if GameConfig.IsShenHeiVision or GameData.IsOpenApplePay == 1 then
-        return true
+        return  true
     else
         return false
     end
@@ -258,7 +263,7 @@ function GameConfig.OpenStoreUI()
         return
     end
 
-    local tUINode = CS.WindowManager.Instance:FindWindowNodeByName(UIName)
+    local tUINode= CS.WindowManager.Instance:FindWindowNodeByName(UIName)
     if tUINode == nil then
         CS.WindowManager.Instance:OpenWindow(UIName)
     end
@@ -275,7 +280,7 @@ function GameConfig.OpenCreateRoomUI(roomType, openType)
     GameConfig.CreateRoomUIOpenType = openType
     local openparam = CS.WindowNodeInitParam("CreateRoomUI")
     openparam.NodeType = 0
-    openparam.WindowData = { RoomType = roomType, OpenType = openType }
+    openparam.WindowData = {RoomType = roomType, OpenType = openType}
     CS.WindowManager.Instance:OpenWindow(openparam)
 end
 
@@ -290,7 +295,7 @@ function GameConfig.UpdateIPAddress(ipAddress)
     end
 end
 
-function GameConfig.HandleMoblieIPLocation()
+function  GameConfig.HandleMoblieIPLocation()
     if GameData.RoleInfo.IPSend2Server >= 3 and not GameData.RoleInfo.IPAddressIsChange then
         -- IP 地址并未发生变化 并且已经上传当前地理位置
         return
@@ -313,7 +318,7 @@ function GameConfig.CallMobileIPLocation(paramResult)
         tISCN = false
     else
         local index1 = string.find(paramResult, 'ipinfo=')
-        if index1 == 0 or index1 == nil then
+        if index1 == 0 or index1 == nil  then
             tIPLocation = "未知区域..."
             tISCN = false
         else
@@ -328,8 +333,8 @@ function GameConfig.CallMobileIPLocation(paramResult)
             -- 0,99887765412,130.153.0.0,       日本,XX,XX,XX,JP
             -- 0,99887765412,203.79.132.0,      台湾,台湾,XX,XX,TW
             -- 0,99887765412,192.168.0.1,       XX,XX,内网IP,内网IP,xx
-            local ipinfo = string.sub(paramResult, index1 + 7)
-            local tLocation = lua_string_split(ipinfo, ',')
+            local ipinfo = string.sub(paramResult, index1+7)
+            local tLocation = lua_string_split(ipinfo,',')
             if #tLocation ~= 8 then
                 tIPLocation = "未知区域..."
                 tISCN = false
@@ -339,9 +344,9 @@ function GameConfig.CallMobileIPLocation(paramResult)
                 elseif tLocation[5] == "xx" or tLocation[5] == "XX" then
                     tIPLocation = tLocation[4]
                 elseif tLocation[6] == "xx" or tLocation[6] == "XX" then
-                    tIPLocation = string.format("%s.%s", tLocation[4], tLocation[5])
+                    tIPLocation = string.format( "%s.%s",  tLocation[4], tLocation[5])
                 elseif tLocation[7] == "xx" or tLocation[7] == "XX" then
-                    tIPLocation = string.format("%s.%s", tLocation[5], tLocation[6])
+                    tIPLocation = string.format( "%s.%s",  tLocation[5], tLocation[6])
                 else
                     tIPLocation = "未知区域..."
                 end

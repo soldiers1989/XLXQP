@@ -145,7 +145,7 @@ local exitBtn = nil;
 -- 初始化玩家信息
 function PlayerPositionInfo()
     mRoomData = GameData.RoomInfo.CurrentRoom
-    --PrintTable(GameData.RoomInfo.CurrentRoom, "GameData.RoomInfo.CurrentRoom");
+    PrintTable(GameData.RoomInfo.CurrentRoom, "GameData.RoomInfo.CurrentRoom");
     for position=1,MAX_HBZUJU_ROOM_PLAYER do
         SetPlayerSitdownState(position)
         SetPlayerBaseInfo(position)

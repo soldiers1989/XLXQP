@@ -3,9 +3,11 @@ local HomepageGameObject = nil      		-- 主页界面
 local DetailedGameObject = nil				-- 明细界面
 local PutForwardGameObject = nil			-- 提现界面
 local BindingBankCardGameObject = nil		-- 绑定界面
-local BindingBankType = {}                 -- 绑定类型(1银行卡 2支付宝)
+local BindingZFBGameObject = nil            -- 绑定支付宝界面
 local NamePromptText = nil					-- 绑定名字提示
 local AccountPromptText = nil				-- 绑定账号提示
+local NamePromptTextZFB = nil			    -- 支付宝绑定名字提示
+local AccountPromptTextZFB = nil		    -- 支付宝绑定账号提示
 local PromptText = nil 						-- 绑定界面温馨提示
 local IsBindingBankCardGameObject = nil		-- 提现界面未绑定组件
 local BillInfoTemplateGameObject = nil      -- 账单信息模板
@@ -146,6 +148,7 @@ function ResetStoreUI()
     this.transform:Find('Canvas/StoreWindow/PutForward/Rule/Count3/Checkmark').gameObject:SetActive(false)
 
     BindingBankCardGameObject = this.transform:Find('Canvas/StoreWindow/BindingBankCard').gameObject
+    BindingZFBGameObject = this.transform:Find('Canvas/StoreWindow/BindingZFB').gameObject
 
     --this.transform:Find('Canvas/StoreWindow/Homepage/Yuebao').gameObject:SetActive(false)
 
@@ -157,22 +160,22 @@ function ResetStoreUI()
     BillInfoTemplateGameObject = DetailedGameObject.transform:Find('Content/RankList/Viewport/RankItem').gameObject
     BillInfoTemplatePrintGameObject = DetailedGameObject.transform:Find('Content/RankList/Viewport/Content').gameObject
 
-    BindingBankType[1] = BindingBankCardGameObject.transform:Find("TypeName1").gameObject
-    BindingBankType[2] = BindingBankCardGameObject.transform:Find("TypeName2").gameObject
     NamePromptText = BindingBankCardGameObject.transform:Find("Required/Name/InputFieldName/Placeholder"):GetComponent("Text")
     AccountPromptText = BindingBankCardGameObject.transform:Find("Required/Account/InputFieldAccount/Placeholder"):GetComponent("Text")
     PromptText = BindingBankCardGameObject.transform:Find("Required/Prompt"):GetComponent("Text")
+
+    NamePromptTextZFB = BindingZFBGameObject.transform:Find("Required/Name/InputFieldName/Placeholder"):GetComponent("Text")
+    AccountPromptTextZFB = BindingZFBGameObject.transform:Find("Required/Account/InputFieldAccount/Placeholder"):GetComponent("Text")
 
     BankNameIntem = BindingBankCardGameObject.transform:Find('Required/BankName/RankList/Viewport/Content/BankItem').gameObject
     BankNamePater = BindingBankCardGameObject.transform:Find('Required/BankName/RankList/Viewport/Content').gameObject
 
     IsBindingBankCardGameObject = this.transform:Find('Canvas/StoreWindow/PutForward/Rule/Count3/Prompt').gameObject
 
-    GameObjectSetActive(BindingBankType[1], false)
-    GameObjectSetActive(BindingBankType[2], false)
     DetailedGameObject:SetActive(false)
     PutForwardGameObject:SetActive(false)
     BindingBankCardGameObject:SetActive(false)
+    GameObjectSetActive(BindingZFB,false)
     if GameData.Exit_MoneyNotEnough == true then
         GameData.Exit_MoneyNotEnough = false;
         HomepageGameObject:SetActive(false);
@@ -192,6 +195,7 @@ function AddButtonHandlers()
     this.transform:Find('Canvas/StoreWindow/Homepage/Title/Close'):GetComponent("Button").onClick:AddListener(CloseStoreButtonOnClick)
     this.transform:Find('Canvas/StoreWindow/Detailed/Title/Close'):GetComponent("Button").onClick:AddListener(function() BackToHome(DetailedGameObject) end)
     this.transform:Find('Canvas/StoreWindow/BindingBankCard/Close'):GetComponent("Button").onClick:AddListener(function() BackToHome(BindingBankCardGameObject) end)
+    this.transform:Find('Canvas/StoreWindow/BindingZFB/Close'):GetComponent("Button").onClick:AddListener(function() BackToHome(BindingZFBGameObject) end)
     this.transform:Find('Canvas/StoreWindow/Homepage/Quota/PutForwardButton'):GetComponent("Button").onClick:AddListener(RequestOpenPutForwardInterface)
     this.transform:Find('Canvas/StoreWindow/Homepage/Quota/YueBaoButton'):GetComponent("Button").onClick:AddListener(YueebaoButtonOnClick)
     
@@ -209,9 +213,12 @@ function AddButtonHandlers()
     this.transform:Find('Canvas/StoreWindow/Homepage/GoldOption/Content/WeiXi/Button'):GetComponent("Button").onClick:AddListener(function() RequestOpenBindingBankCardInterface(3) end)
     this.transform:Find('Canvas/StoreWindow/Homepage/MingXi'):GetComponent("Button").onClick:AddListener(OpenDetailedInterface)
     this.transform:Find('Canvas/StoreWindow/BindingBankCard/Button'):GetComponent("Button").onClick:AddListener(ConfirmBindingButtonOnClick)
+    this.transform:Find('Canvas/StoreWindow/BindingZFB/Button'):GetComponent("Button").onClick:AddListener(ConfirmBindingButtonOnClick)
 
     this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/Name/InputFieldName'):GetComponent("InputField").onValueChanged:AddListener(GetBindingName) --绑定人名字
     this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/BankName/InputField1BankName'):GetComponent("InputField").onValueChanged:AddListener(GetBingdingCardName) --绑定人卡号名称
+    this.transform:Find('Canvas/StoreWindow/BindingZFB/Required/Name/InputFieldName'):GetComponent("InputField").onValueChanged:AddListener(GetBindingName) --绑定人名字
+    this.transform:Find('Canvas/StoreWindow/BindingZFB/Required/Account/InputFieldAccount'):GetComponent("InputField").onValueChanged:AddListener(GetBindingCardNumber) --绑定人卡号名称
     this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/Account/InputFieldAccount'):GetComponent("InputField").onValueChanged:AddListener(GetBindingCardNumber) --绑定人名字
 
     this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/BankName/Button'):GetComponent('Button').onClick:AddListener(ClickBaindBankInterfaceBankButton)
@@ -449,17 +456,18 @@ end
 function OpenBindingBankCardInterface(mIndex)
     HomepageGameObject:SetActive(false)
     PutForwardGameObject:SetActive(false)
+    if mIndex == 2 then
+        OpenBindingZFBInterface(mIndex)
+        return
+    end
     BindingBankCardGameObject:SetActive(true)
     GameObjectSetActive(BankNameSelect,false)
     GameObjectSetActive(BankNameImage1,true)
     GameObjectSetActive(BankNameImage2,false)
-    BindingBankCardGameObject.transform:Find("Required/BankName").gameObject:SetActive(false)
     if mIndex == 1 then
         this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/Account/InputFieldAccount'):GetComponent("InputField").contentType = 2;
         BindingBankCardGameObject.transform:Find("Required/Account/CardNumer"):GetComponent("Text").text="卡号："
         BindingBankCardGameObject.transform:Find("Required/BankName").gameObject:SetActive(true)
-        GameObjectSetActive(BindingBankType[1], true)
-        GameObjectSetActive(BindingBankType[2], false)
         if GameData.RoleInfo.IsBindBank == false then
             NamePromptText.text = "持卡人姓名"
             AccountPromptText.text = "银行卡号"
@@ -471,9 +479,9 @@ function OpenBindingBankCardInterface(mIndex)
             this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/Account/InputFieldAccount'):GetComponent("InputField").enabled=true
             this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/Name/InputFieldName'):GetComponent("InputField").enabled=true
             this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/BankName/InputField1BankName'):GetComponent("InputField").enabled=false
-            GameObjectSetActive(MobilePhoneObject,true)
-            BindMobilePhoneText.enabled = true
-            BindVerificationCode.enabled = true
+            --GameObjectSetActive(MobilePhoneObject,true)
+            --BindMobilePhoneText.enabled = true
+            --BindVerificationCode.enabled = true
             BankNameButton.interactable = true
         else
             NamePromptText.text = ""
@@ -482,51 +490,50 @@ function OpenBindingBankCardInterface(mIndex)
             this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/Account/InputFieldAccount'):GetComponent("InputField").text=GameData.BankInformation.BankCardNumber
             this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/Name/InputFieldName'):GetComponent("InputField").text=GameData.BankInformation.BankPlayerName
             this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/BankName/InputField1BankName'):GetComponent("InputField").text=GameData.BankInformation.BankName
-            GameObjectSetActive(MobilePhoneObject,false)
+            --GameObjectSetActive(MobilePhoneObject,false)
             BankNameButton.enabled = false
             BindMobilePhoneText.enabled = false
             BindVerificationCode.enabled = false
         end
     elseif mIndex == 2 then
-        GameObjectSetActive(BindingBankType[1], false)
-        GameObjectSetActive(BindingBankType[2], false)
         this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/Account/InputFieldAccount'):GetComponent("InputField").contentType = 0;
         BindingBankCardGameObject.transform:Find("Required/Account/CardNumer"):GetComponent("Text").text="账号："
         ZhiFuBaoBindingInfoDisplay()
     elseif mIndex == 3 then
-        GameObjectSetActive(BindingBankType[1], false)
-        GameObjectSetActive(BindingBankType[2], true)
         NamePromptText.text = "微信账号实名制姓名"
         AccountPromptText.text = "微信账号信息"
         PromptText.text = "请输入正确的微信账号信息，否则会导致兑换失败哦~~"
     end
 
     --如果没有绑定手机号才显示手机验证
-    if GameData.RoleInfo.IsBindAccount == false then
+    --[[if GameData.RoleInfo.IsBindAccount == false then
         MobilePhoneObject:SetActive(true)
     else
         MobilePhoneObject:SetActive(false)
-    end
+    end--]]
+end
+
+function OpenBindingZFBInterface(mIndex)
+    GameObjectSetActive(BindingZFBGameObject,true)
+    this.transform:Find('Canvas/StoreWindow/BindingZFB/Required/Account/InputFieldAccount'):GetComponent("InputField").contentType = 0;
+    BindingBankCardGameObject.transform:Find("Required/Account/CardNumer"):GetComponent("Text").text="账号："
+    ZhiFuBaoBindingInfoDisplay()
 end
 
 -- 支付宝绑定界面显示信息
 function ZhiFuBaoBindingInfoDisplay()
-    GameObjectSetActive(BindingBankType[1], false)
-    GameObjectSetActive(BindingBankType[2], true)
     if GameData.BankInformation.ZhiFuBaoIsBinding == 0 then
-        NamePromptText.text = "支付宝账号实名制姓名"
+        NamePromptTextZFB.text = "支付宝账号实名制姓名"
         AccountPromptText.text = "支付宝账号信息"
-        PromptText.text = "请输入正确的支付宝账号信息，否则会提现失败!"
-        this.transform:Find('Canvas/StoreWindow/BindingBankCard/Button/Text'):GetComponent("Text").text="绑定"
-        this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/Account/InputFieldAccount'):GetComponent("InputField").text=""
-        this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/Name/InputFieldName'):GetComponent("InputField").text=""
+        this.transform:Find('Canvas/StoreWindow/BindingZFB/Button/Text'):GetComponent("Text").text="绑定"
+        this.transform:Find('Canvas/StoreWindow/BindingZFB/Required/Account/InputFieldAccount'):GetComponent("InputField").text=""
+        this.transform:Find('Canvas/StoreWindow/BindingZFB/Required/Name/InputFieldName'):GetComponent("InputField").text=""
     else
-        NamePromptText.text = ""
+        NamePromptTextZFB.text = ""
         AccountPromptText.text = ""
-        PromptText.text = ""
         --this.transform:Find('Canvas/StoreWindow/BindingBankCard/Button/Text'):GetComponent("Text").text="更换支付宝"
-        this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/Account/InputFieldAccount'):GetComponent("InputField").text=""..GameData.BankInformation.ZhiFuBaoAccount
-        this.transform:Find('Canvas/StoreWindow/BindingBankCard/Required/Name/InputFieldName'):GetComponent("InputField").text=""..GameData.BankInformation.ZhiFuBaoName
+        this.transform:Find('Canvas/StoreWindow/BindingZFB/Required/Account/InputFieldAccount'):GetComponent("InputField").text=""..GameData.BankInformation.ZhiFuBaoAccount
+        this.transform:Find('Canvas/StoreWindow/BindingZFB/Required/Name/InputFieldName'):GetComponent("InputField").text=""..GameData.BankInformation.ZhiFuBaoName
     end
 end
 
@@ -534,6 +541,7 @@ end
 function CloseBindingBankCardInterface(resultType)
     if resultType == 0 then
         BackToHome(BindingBankCardGameObject)
+        BackToHome(BindingZFBGameObject)
         CS.BubblePrompt.Show(data.GetString("BindingBankError_"..resultType),"UIExtract")
     elseif resultType ~=6 and resultType ~= 7 then
         GameObjectSetActive(BindError,true)
@@ -663,26 +671,26 @@ function ConfirmBindingButtonOnClick()
             return
         end
 
-        if tmpLength ~= 11 then
+        --[[if tmpLength ~= 11 then
             CS.BubblePrompt.Show('请输入正确的手机号码', "UIExtract")
             return
-        end
+        end--]]
 
         -- TODO 验证码效验
-        local codeText = BindVerificationCode.text
+        --[[local codeText = BindVerificationCode.text
         tmpLength = SubStringGetTotalCount(codeText)
         if  codeText =="" or tmpLength ~= 6 or
                 CS.SMSManager.Instance().LastSendSMSErrorCode ~= "OK" or
                 CS.SMSManager.Instance().LastSMSCode ~= codeText then
             CS.BubblePrompt.Show('验证码无效!', "UIExtract")
             return
-        end
+        end--]]
 
         -- 当前号码是否是接受验证码的手机好吗
-        if accountText ~= CS.SMSManager.Instance().LastPhoneNumber then
+        --[[if accountText ~= CS.SMSManager.Instance().LastPhoneNumber then
             CS.BubblePrompt.Show('前后输入的手机号不一致...', "UIExtract")
             return
-        end
+        end--]]
 
         NetMsgHandler.Send_CS_Player_BindingBankCardok(BindingName,BindingCardNumber,BingdingCardName,
                 BingdingOpenAnAccountProvince,BingdingOpenAnAccountCity,BindingOpenAnAccountSubbranch,accountText)
@@ -695,27 +703,26 @@ function ConfirmBindingButtonOnClick()
         if GameData.RoleInfo.IsBindAccount == true then
             NetMsgHandler.Send_CS_Player_BindingZhiFuBao(BindingName, BindingCardNumber, "")
         else
-            if tmpLength ~= 11 then
+            --[[if tmpLength ~= 11 then
                 CS.BubblePrompt.Show('请输入正确的手机号码', "UIExtract")
                 return
-            end
+            end--]]
             -- TODO 验证码效验
-            local codeText = BindVerificationCode.text
+            --[[local codeText = BindVerificationCode.text
             tmpLength = SubStringGetTotalCount(codeText)
             if  codeText =="" or tmpLength ~= 6 or
                     CS.SMSManager.Instance().LastSendSMSErrorCode ~= "OK" or
                     CS.SMSManager.Instance().LastSMSCode ~= codeText then
                 CS.BubblePrompt.Show('验证码无效!', "UIExtract")
                 return
-            end
+            end--]]
 
             -- 当前号码是否是接受验证码的手机好吗
-            if accountText ~= CS.SMSManager.Instance().LastPhoneNumber then
+            --[[if accountText ~= CS.SMSManager.Instance().LastPhoneNumber then
                 CS.BubblePrompt.Show('前后输入的手机号不一致...', "UIExtract")
                 return
-            end
-
-            NetMsgHandler.Send_CS_Player_BindingZhiFuBao(BindingName, BindingCardNumber, accountText)
+            end--]]
+            NetMsgHandler.Send_CS_Player_BindingZhiFuBao(BindingName, BindingCardNumber)
         end
     end
 end

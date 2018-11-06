@@ -10,16 +10,13 @@
 local primaryIndex = 0;
 local intermediateIndex = 0;
 local SeniorIndex = 0;
-
 local currentRoomType = 0;
-
 local templateItem = nil        -- 实例化的Item模板
 local parentTF = nil;           -- Item父节点
 local noticeObj = nil;          -- 跑马灯
 local allItem = {};
 local allRoomInfo = {};
 local isFirstOpen = true;
-
 local Buttons = {
     -- 该局部数组说明如下:
     -- 数组.x 为第x个游戏类型的按钮
@@ -463,6 +460,8 @@ end
 -- Unity MonoBehavior Start 时调用此方法
 function Start()
 end
+
+--endregion
 
 local function dump_value_(v)
     if type(v) == "string" then
