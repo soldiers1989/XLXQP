@@ -68,6 +68,12 @@ IphoneX 手机号码: +852 5621 3577
 mob账号：  asd4996189@gmail.com
 mob密码：  qwe232300qwe
 
+========新浪微博
+网址: http://open.weibo.com
+账号: 13239101447
+密码: gu1234567@
+
+
 ===================================================================
 ========熊猫棋牌CPS
 腾讯云
@@ -94,5 +100,13 @@ mob密码：  qwe232300qwe
 网址: godaddy.com
 账号: 200264408
 密码： 6NVmr3hOXYSPMAPj.!
+
+DNSPod:
+网址: https://www.dnspod.cn/
+账号: ybing1097@gmail.com
+域名: ggds575700.
+
+域名注册网址:  http://www.xz.com/
+域名检测网址:   http://wx.03426.com/
 
 
